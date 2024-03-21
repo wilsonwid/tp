@@ -206,11 +206,12 @@ public class ImportCommand extends Command {
      * @param file A File.
      * @return The file format of the {@code file}. | null if the file format is not found.
      */
-    private String getFileFormat(File file) {
+    private String getFileFormat(File file) throws IllegalValueException {
         String fileName = file.getName();
         int index = fileName.lastIndexOf(".");
-        assert index != -1;
-
+        if (index == -1) {
+            throw new IllegalValueException(MESSAGE_INVALID_FILE);
+        }
         return fileName.substring(index + 1);
     }
 
