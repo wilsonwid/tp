@@ -30,6 +30,9 @@ public class ImportCommandTest {
     private static final String UNKNOWN_FILE_NAME = "./src/test/data/ImportCommandTest/abcdefgh_abcdefgh.json";
     private static final String ADDRESS_BOOK_PATH = "./src/test/data/ImportCommandTest/addressbook.json";
     private static final String TEST_CSV_FILE_PATH = "./src/test/data/ImportCommandTest/contacts.csv";
+    private static final String UNKNOWN_FILE_EXTENSION = "./src/test/data/ImportCommandTest/contacts.xyz";
+    private static final String NO_FILE_EXTENSION = "./src/test/data/ImportCommandTest/contacts";
+    private static final String UNKNOWN_CSV_FILE = "./src/test/data/ImportCommandTest/abcdefg.csv";
     private static final String ADDRESS_BOOK_CSV_PATH = "./src/test/data/ImportCommandTest/addressbook.csv";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -63,6 +66,57 @@ public class ImportCommandTest {
         expectedModel.addPerson(JAMES);
 
         assertEquals(testModel, expectedModel);
+    }
+
+
+    @Test
+    public void retrievePersonsFromFile_validJsonFile_success() throws CommandException {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(ADDRESS_BOOK_PATH));
+
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        importCommand.execute(testModel);
+
+        assert true;
+    }
+
+    @Test
+    public void retrievePersonsFromFile_validCsvFile_success() throws CommandException {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(ADDRESS_BOOK_CSV_PATH));
+
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        importCommand.execute(testModel);
+
+        assert true;
+    }
+
+    @Test
+    public void retrievePersonsFromFile_invalidCsvFile_failure() {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(UNKNOWN_CSV_FILE));
+
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        assertThrows(CommandException.class, () -> importCommand.execute(testModel));
+    }
+
+    @Test
+    public void execute_importingFromUnknownFileFormat_failure() {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(UNKNOWN_FILE_EXTENSION));
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        assertThrows(CommandException.class, () -> importCommand.execute(model));
+    }
+
+    @Test
+    public void execute_importingFromNoFileExtension_failure() {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(NO_FILE_EXTENSION));
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        assertThrows(CommandException.class, () -> importCommand.execute(model));
     }
 
     @Test
