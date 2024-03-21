@@ -113,16 +113,16 @@ public class ImportCommand extends Command {
 
             try {
 
-                if (getFileFormat(file) == null) {
-                    logger.info(MESSAGE_INVALID_FILE);
-                    throw new IllegalValueException(MESSAGE_INVALID_FILE);
-                }
-
-                if (getFileFormat(file).equals("json")) {
+                switch (getFileFormat(file)) {
+                case "json":
+                    logger.info("Reading from json file: " + file.getPath());
                     savedPersons.addAll(readPersons(file));
-                } else if (getFileFormat(file).equals("csv")) {
+                    break;
+                case "csv":
+                    logger.info("Reading from csv file: " + file.getPath());
                     savedPersons.addAll(readPersonsFromCsv(file));
-                } else {
+                    break;
+                default:
                     logger.info(MESSAGE_INVALID_FILE);
                     throw new IllegalValueException(MESSAGE_INVALID_FILE);
                 }
@@ -209,9 +209,8 @@ public class ImportCommand extends Command {
     private String getFileFormat(File file) {
         String fileName = file.getName();
         int index = fileName.lastIndexOf(".");
-        if (index == -1) {
-            return null;
-        }
+        assert index != -1;
+
         return fileName.substring(index + 1);
     }
 
