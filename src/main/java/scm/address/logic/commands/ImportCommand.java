@@ -27,8 +27,8 @@ import scm.address.storage.JsonAdaptedTag;
 import scm.address.storage.JsonAddressBookStorage;
 import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
 import scm.address.model.file.FileFormat;
-import static scm.address.model.file.FileFormat.MESSAGE_INVALID_FILE_FORMAT;
-import static scm.address.model.file.FileFormat.UNSUPPORTED_FILE_FORMAT;
+
+import static scm.address.model.file.FileFormat.MESSAGE_UNSUPPORTED_FILE_FORMAT;
 import static scm.address.model.file.FileFormat.JSON_FILE;
 import static scm.address.model.file.FileFormat.CSV_FILE;
 
@@ -125,8 +125,8 @@ public class ImportCommand extends Command {
                     savedPersons.addAll(readPersonsFromCsv(file));
                     break;
                 default:
-                    logger.info(UNSUPPORTED_FILE_FORMAT);
-                    throw new IllegalValueException(UNSUPPORTED_FILE_FORMAT);
+                    logger.info(MESSAGE_UNSUPPORTED_FILE_FORMAT);
+                    throw new IllegalValueException(MESSAGE_UNSUPPORTED_FILE_FORMAT);
                 }
             }
             catch (IllegalValueException e) {

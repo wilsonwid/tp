@@ -8,7 +8,7 @@ public class FileFormat {
     public static final String JSON_FILE = "json";
     public static final String CSV_FILE = "csv";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format!";
-    public static final String UNSUPPORTED_FILE_FORMAT = "Unsupported file format!";
+    public static final String MESSAGE_UNSUPPORTED_FILE_FORMAT = "Unsupported file format!";
 
 
     /**
@@ -33,7 +33,7 @@ public class FileFormat {
         case "csv":
             return CSV_FILE;
         default:
-            throw new IllegalValueException(UNSUPPORTED_FILE_FORMAT);
+            throw new IllegalValueException(MESSAGE_UNSUPPORTED_FILE_FORMAT);
         }
     }
 }
