@@ -10,7 +10,7 @@ import java.util.Set;
 import scm.address.commons.core.index.Index;
 import scm.address.commons.util.StringUtil;
 import scm.address.logic.parser.exceptions.ParseException;
-import scm.address.model.filename.Filename;
+import scm.address.model.file.Filename;
 import scm.address.model.person.Address;
 import scm.address.model.person.Email;
 import scm.address.model.person.Name;
@@ -149,5 +149,15 @@ public class ParserUtil {
             filenameSet.add(curFilename);
         }
         return fileSet;
+    }
+
+    public static File parseFile(String filename) throws ParseException {
+        requireNonNull(filename);
+        String trimmedFname = filename.trim();
+        if (!Filename.isValidFilename(trimmedFname)) {
+            throw new ParseException(Filename.MESSAGE_CONSTRAINTS);
+        }
+        trimmedFname = "./" + trimmedFname;
+        return new File(trimmedFname);
     }
 }

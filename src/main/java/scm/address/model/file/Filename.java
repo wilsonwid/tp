@@ -1,4 +1,4 @@
-package scm.address.model.filename;
+package scm.address.model.file;
 
 import static java.util.Objects.requireNonNull;
 
@@ -11,7 +11,7 @@ public class Filename {
 
     public static final String MESSAGE_DUPLICATE = "Filenames should be unique.";
 
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+.json|\\p{Alnum}+.csv";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+\\.json|\\p{Alnum}+.csv";
 
     public final String filename;
 
