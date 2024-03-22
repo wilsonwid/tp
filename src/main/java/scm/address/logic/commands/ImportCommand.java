@@ -184,7 +184,7 @@ public class ImportCommand extends Command {
                     continue;
                 }
 
-                List<JsonAdaptedTag> tags = Arrays.stream(info[5].split(" \\| "))
+                List<JsonAdaptedTag> tags = Arrays.stream(info[4].split(" \\| "))
                         .map(String::trim)
                         .map(JsonAdaptedTag::new)
                         .collect(Collectors.toList());
