@@ -151,7 +151,7 @@ public class ParserUtil {
         return fileSet;
     }
 
-    public static File parseFile(String filename) throws ParseException {
+    public static File parseFileForExport(String filename) throws ParseException {
         requireNonNull(filename);
         String trimmedFname = filename.trim();
         if (!Filename.isValidFilename(trimmedFname)) {
