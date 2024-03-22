@@ -1,21 +1,18 @@
 package scm.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import scm.address.logic.commands.exceptions.CommandException;
+import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.person.Person;
+import scm.address.storage.JsonAddressBookStorage;
 
 /**
  * Represents a command to find users based on specified criteria and export their information.
@@ -25,6 +22,7 @@ import scm.address.model.person.Person;
 public class FindAndExportCommand extends Command {
 
     public static final String COMMAND_WORD = "find_and_export";
+    public static final String DEFAULT_FILEPATH = "./data/default_filename.json";
     public static final String MESSAGE_USAGE = "find_and_export: Exports the users filtered by a tag "
             + "and other optional parameters.\n"
             + "Parameters: TAG [n/NAME] [a/ADDRESS] [f/FILENAME] [v/FILEFORMAT]\n"
@@ -133,7 +131,8 @@ public class FindAndExportCommand extends Command {
         if (Files.exists(path) && !Files.isWritable(path)) {
             throw new IOException("File exists but is not writable: " + path);
         }
-        mapper.writeValue(Files.newOutputStream(path), data);
+
+        jsonAddressBookStorage.saveAddressBook(addressBook);
     }
 
     private void exportDataAsCsv(List<Person> users, String filename) throws IOException {
