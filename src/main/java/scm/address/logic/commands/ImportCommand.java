@@ -1,7 +1,6 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,6 +25,13 @@ import scm.address.model.person.Person;
 import scm.address.storage.JsonAdaptedPerson;
 import scm.address.storage.JsonAdaptedTag;
 import scm.address.storage.JsonAddressBookStorage;
+import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
+import scm.address.model.file.FileFormat;
+import static scm.address.model.file.FileFormat.MESSAGE_INVALID_FILE_FORMAT;
+import static scm.address.model.file.FileFormat.UNSUPPORTED_FILE_FORMAT;
+import static scm.address.model.file.FileFormat.JSON_FILE;
+import static scm.address.model.file.FileFormat.CSV_FILE;
+
 
 /**
  * Imports contacts from a file into the contact manager.
@@ -46,8 +52,6 @@ public class ImportCommand extends Command {
             + "already exists in the contact manager.";
 
     public static final String MESSAGE_FILE_NOT_FOUND = "Filename %s is not found!";
-
-    public static final String MESSAGE_INVALID_FILE = "Invalid file format!";
 
     private static final Logger logger = LogsCenter.getLogger(ImportCommand.class);
     private final Set<File> files;
@@ -110,24 +114,26 @@ public class ImportCommand extends Command {
                 logger.info(String.format(MESSAGE_FILE_NOT_FOUND, file.getPath()));
                 throw new IllegalValueException(String.format(MESSAGE_FILE_NOT_FOUND, file.getPath()));
             }
-
             try {
-
-                switch (getFileFormat(file)) {
-                case "json":
+                switch (FileFormat.getFileFormat(file)) {
+                case JSON_FILE:
                     logger.info("Reading from json file: " + file.getPath());
                     savedPersons.addAll(readPersons(file));
                     break;
-                case "csv":
+                case CSV_FILE:
                     logger.info("Reading from csv file: " + file.getPath());
                     savedPersons.addAll(readPersonsFromCsv(file));
                     break;
                 default:
-                    logger.info(MESSAGE_INVALID_FILE);
-                    throw new IllegalValueException(MESSAGE_INVALID_FILE);
+                    logger.info(UNSUPPORTED_FILE_FORMAT);
+                    throw new IllegalValueException(UNSUPPORTED_FILE_FORMAT);
                 }
-
-            } catch (DataLoadingException dle) {
+            }
+            catch (IllegalValueException e) {
+                logger.info(e.getMessage());
+                throw e;
+            }
+            catch (DataLoadingException dle) {
                 logger.info("Data loading exception in: " + file.getPath());
                 throw dle;
             }
@@ -198,21 +204,6 @@ public class ImportCommand extends Command {
             throw new DataLoadingException(new Exception("Error reading file: " + file.getPath()));
         }
         return persons;
-    }
-
-    /**
-     * Returns the file format of the {@code file}. Returns null if the file format is not found.
-     *
-     * @param file A File.
-     * @return The file format of the {@code file}. | null if the file format is not found.
-     */
-    private String getFileFormat(File file) throws IllegalValueException {
-        String fileName = file.getName();
-        int index = fileName.lastIndexOf(".");
-        if (index == -1) {
-            throw new IllegalValueException(MESSAGE_INVALID_FILE);
-        }
-        return fileName.substring(index + 1);
     }
 
     @Override
