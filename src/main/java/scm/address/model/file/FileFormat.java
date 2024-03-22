@@ -4,6 +4,8 @@ import scm.address.commons.exceptions.IllegalValueException;
 
 import java.io.File;
 
+import static java.util.Objects.requireNonNull;
+
 public class FileFormat {
     public static final String JSON_FILE = "json";
     public static final String CSV_FILE = "csv";
@@ -20,6 +22,7 @@ public class FileFormat {
      * @throws IllegalValueException If the file format is not found, or is unsupported.
      */
     public static String getFileFormat(File file) throws IllegalValueException {
+        requireNonNull(file);
         String fileName = file.getName();
         int index = fileName.lastIndexOf(".");
         if (index == -1) {
