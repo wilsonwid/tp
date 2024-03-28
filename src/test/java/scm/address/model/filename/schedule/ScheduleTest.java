@@ -1,5 +1,8 @@
 package scm.address.model.filename.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,8 +13,6 @@ import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ScheduleTest {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
