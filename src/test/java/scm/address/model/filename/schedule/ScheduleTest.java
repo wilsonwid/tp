@@ -16,7 +16,8 @@ public class ScheduleTest {
     public void constructor_validArgs_createsSchedule() {
         LocalDateTime startDateTime = LocalDateTime.now();
         LocalDateTime endDateTime = startDateTime.plusHours(1);
-        Schedule schedule = new Schedule(new Title("Meeting"), new Description("Discuss project"), startDateTime, endDateTime);
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Discuss project"), startDateTime, endDateTime);
         assertNotNull(schedule);
     }
 

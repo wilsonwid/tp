@@ -19,8 +19,10 @@ public class AddScheduleCommandParserTest {
     public void parse_validArgs_returnsAddScheduleCommand() throws ParseException {
         LocalDateTime startDateTime = LocalDateTime.now();
         LocalDateTime endDateTime = startDateTime.plusHours(1);
-        Schedule schedule = new Schedule(new Title("Meeting"), new Description("Discuss project"), startDateTime, endDateTime);
-        AddScheduleCommand command = parser.parse("t/Meeting d/Discuss project sd/" + startDateTime.toString() + " ed/" + endDateTime.toString());
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Discuss project"), startDateTime, endDateTime);
+        AddScheduleCommand command = parser.parse("t/Meeting d/Discuss project sd/" +
+                startDateTime.toString() + " ed/" + endDateTime.toString());
 
         assertEquals(new AddScheduleCommand(schedule), command);
     }
