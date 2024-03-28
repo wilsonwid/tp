@@ -53,10 +53,10 @@ public class Schedule {
         }
         if (other instanceof Schedule) {
             Schedule otherSchedule = (Schedule) other;
-            return title.equals(otherSchedule.title) &&
-                    description.equals(otherSchedule.description) &&
-                    startDateTime.equals(otherSchedule.startDateTime) &&
-                    endDateTime.equals(otherSchedule.endDateTime);
+            return title.equals(otherSchedule.title)
+                    && description.equals(otherSchedule.description)
+                    && startDateTime.equals(otherSchedule.startDateTime)
+                    && endDateTime.equals(otherSchedule.endDateTime);
         }
         return false;
     }
