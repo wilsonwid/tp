@@ -141,7 +141,7 @@ public class AddScheduleCommandParserTest {
         String dateTimeStr1 = "2023-03-21T15:00";
         String dateTimeStr2 = "2023-03-21T16:00";
 
-        boolean result = parser.createDTC().isFirstDateTimeBeforeSecond(dateTimeStr1, dateTimeStr2);
+        boolean result = parser.createDtc().isFirstDateTimeBeforeSecond(dateTimeStr1, dateTimeStr2);
 
         assertTrue(result, "First date-time should be before the second date-time");
     }
@@ -152,7 +152,7 @@ public class AddScheduleCommandParserTest {
         String dateTimeStr1 = "2023-03-21T17:00";
         String dateTimeStr2 = "2023-03-21T16:00";
 
-        boolean result = parser.createDTC().isFirstDateTimeBeforeSecond(dateTimeStr1, dateTimeStr2);
+        boolean result = parser.createDtc().isFirstDateTimeBeforeSecond(dateTimeStr1, dateTimeStr2);
 
         assertFalse(result, "First date-time should not be before the second date-time");
     }
