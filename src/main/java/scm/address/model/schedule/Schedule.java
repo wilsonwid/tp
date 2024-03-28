@@ -38,13 +38,17 @@ public class Schedule {
 
     @Override
     public boolean equals(Object other) {
-        if (this == other) return true;
-        if (other == null || getClass() != other.getClass()) return false;
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
         Schedule schedule = (Schedule) other;
-        return Objects.equals(title, schedule.title) &&
-                Objects.equals(description, schedule.description) &&
-                Objects.equals(startDateTime, schedule.startDateTime) &&
-                Objects.equals(endDateTime, schedule.endDateTime);
+        return Objects.equals(title, schedule.title)
+                && Objects.equals(description, schedule.description)
+                && Objects.equals(startDateTime, schedule.startDateTime)
+                && Objects.equals(endDateTime, schedule.endDateTime);
     }
 
     @Override
