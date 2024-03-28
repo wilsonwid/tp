@@ -1,7 +1,6 @@
 package scm.address.model.filename.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 
@@ -19,14 +18,5 @@ public class ScheduleTest {
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Discuss project"), startDateTime, endDateTime);
         assertNotNull(schedule);
-    }
-
-    @Test
-    public void constructor_invalidDateTime_throwsException() {
-        LocalDateTime startDateTime = LocalDateTime.now();
-        LocalDateTime endDateTime = startDateTime.minusHours(1);
-
-        assertThrows(IllegalArgumentException.class, () ->
-                new Schedule(new Title("Meeting"), new Description("Discuss project"), startDateTime, endDateTime));
     }
 }

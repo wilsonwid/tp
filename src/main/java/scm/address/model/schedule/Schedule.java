@@ -29,6 +29,7 @@ public class Schedule {
         assert startDateTime != null : "Start DateTime cannot be null";
         assert endDateTime != null : "End DateTime cannot be null";
         assert startDateTime.isBefore(endDateTime) : "Start DateTime must be before End DateTime";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         this.title = title;
         this.description = description;
@@ -45,10 +46,10 @@ public class Schedule {
             return false;
         }
         Schedule schedule = (Schedule) other;
-        return Objects.equals(title, schedule.title)
-                && Objects.equals(description, schedule.description)
-                && Objects.equals(startDateTime, schedule.startDateTime)
-                && Objects.equals(endDateTime, schedule.endDateTime);
+        return title.equals(schedule.title)
+                && description.equals(schedule.description)
+                && startDateTime == schedule.startDateTime
+                && endDateTime == schedule.endDateTime;
     }
 
     @Override
