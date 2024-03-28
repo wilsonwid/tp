@@ -3,6 +3,12 @@ package scm.address.logic.commands;
 import scm.address.model.Model;
 import scm.address.model.schedule.Schedule;
 
+/**
+ * A command to add a schedule to the address book.
+ * <p>
+ * This command allows users to add a schedule with a title, description,
+ * start datetime, and end datetime to the address book.
+ */
 public class AddScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "add_schedule";

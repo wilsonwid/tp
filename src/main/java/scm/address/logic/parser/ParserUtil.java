@@ -18,8 +18,8 @@ import scm.address.model.person.Address;
 import scm.address.model.person.Email;
 import scm.address.model.person.Name;
 import scm.address.model.person.Phone;
-import scm.address.model.schedule.Title;
 import scm.address.model.schedule.Description;
+import scm.address.model.schedule.Title;
 import scm.address.model.tag.Tag;
 
 /**
@@ -157,6 +157,13 @@ public class ParserUtil {
         return fileSet;
     }
 
+    /**
+     * Parses the given {@code String} of arguments and returns a LocalDateTime object.
+     *
+     * @param dateTimeStr The string to be parsed into a LocalDateTime object.
+     * @return The parsed LocalDateTime object.
+     * @throws ParseException If the given string does not match the expected format.
+     */
     public static LocalDateTime parseDateTime(String dateTimeStr) throws ParseException {
         try {
             return LocalDateTime.parse(dateTimeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
@@ -165,11 +172,23 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses the given {@code String} and returns a Title object.
+     *
+     * @param titleStr The string to be parsed into a Title object.
+     * @return The parsed Title object.
+     */
     public static Title parseTitle(String titleStr) {
         assert titleStr != null : "Title string cannot be null";
         return new Title(titleStr);
     }
 
+    /**
+     * Parses the given {@code String} and returns a Description object.
+     *
+     * @param descriptionStr The string to be parsed into a Description object.
+     * @return The parsed Description object.
+     */
     public static Description parseDescription(String descriptionStr) {
         assert descriptionStr != null : "Description string cannot be null";
         return new Description(descriptionStr);
