@@ -27,9 +27,4 @@ public class Title {
 
         return false;
     }
-
-    @Override
-    public int hashCode() {
-        return title.hashCode();
-    }
 }
