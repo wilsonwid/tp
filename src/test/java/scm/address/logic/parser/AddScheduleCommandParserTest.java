@@ -3,11 +3,9 @@ package scm.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
-import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
