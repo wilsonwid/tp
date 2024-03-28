@@ -21,8 +21,8 @@ public class AddScheduleCommandParserTest {
         LocalDateTime endDateTime = startDateTime.plusHours(1);
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Discuss project"), startDateTime, endDateTime);
-        AddScheduleCommand command = parser.parse("t/Meeting d/Discuss project sd/" +
-                startDateTime.toString() + " ed/" + endDateTime.toString());
+        AddScheduleCommand command = parser.parse("t/Meeting d/Discuss project sd/"
+                + startDateTime.toString() + " ed/" + endDateTime.toString());
 
         assertEquals(new AddScheduleCommand(schedule), command);
     }
