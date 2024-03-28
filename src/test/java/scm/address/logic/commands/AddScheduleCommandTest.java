@@ -1,6 +1,6 @@
 package scm.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -27,6 +27,6 @@ public class AddScheduleCommandTest {
 
         CommandResult result = command.execute(model);
 
-        assertEquals("Expected success message", result.getFeedbackToUser());
+        assertTrue(command.scheduleExists());
     }
 }

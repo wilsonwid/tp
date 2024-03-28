@@ -1,6 +1,6 @@
 package scm.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +24,6 @@ public class AddScheduleCommandParserTest {
         AddScheduleCommand command = parser.parse("t/Meeting d/Discuss project sd/"
                 + startDateTime.toString() + " ed/" + endDateTime.toString());
 
-        assertEquals(new AddScheduleCommand(schedule), command);
+        assertTrue(new AddScheduleCommand(schedule).equals(command));
     }
 }
