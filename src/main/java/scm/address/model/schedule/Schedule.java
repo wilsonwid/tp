@@ -1,5 +1,7 @@
 package scm.address.model.schedule;
 
+import java.util.Objects;
+
 /**
  * Represents a Schedule in the address book.
  * <p>
@@ -43,4 +45,25 @@ public class Schedule {
     public String toString() {
         return String.format("%s at %s", description, startDateTime);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof Schedule) {
+            Schedule otherSchedule = (Schedule) other;
+            return title.equals(otherSchedule.title) &&
+                    description.equals(otherSchedule.description) &&
+                    startDateTime.equals(otherSchedule.startDateTime) &&
+                    endDateTime.equals(otherSchedule.endDateTime);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, startDateTime, endDateTime);
+    }
+
 }

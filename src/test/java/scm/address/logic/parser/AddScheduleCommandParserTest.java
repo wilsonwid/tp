@@ -1,10 +1,13 @@
 package scm.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +20,25 @@ import scm.address.model.schedule.Title;
 public class AddScheduleCommandParserTest {
     private AddScheduleCommandParser parser = new AddScheduleCommandParser();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    private class DateTimeComparison {
+        public DateTimeComparison() {
+
+        }
+        public boolean isFirstDateTimeBeforeSecond(String datetimeStr1, String datetimeStr2) {
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+            try {
+                LocalDateTime dateTime1 = LocalDateTime.parse(datetimeStr1, formatter);
+                LocalDateTime dateTime2 = LocalDateTime.parse(datetimeStr2, formatter);
+
+                return dateTime1.isBefore(dateTime2);
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
 
     /**
      * Returns true if all the prefixes contain non-empty {@code Optional} values in the given
@@ -78,5 +100,39 @@ public class AddScheduleCommandParserTest {
                 titlePrefix, descriptionPrefix, startPrefix, endPrefix);
 
         assertTrue(allPrefixesPresent);
+    }
+
+    @Test
+    public void parse_missingPrefixes_throwsParseException() {
+        String input = "title/Meeting d/Project discussion start/2023-03-21 15:00";
+        AddScheduleCommandParser parser = new AddScheduleCommandParser();
+
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
+
+    @Test
+    public void isFirstDateTimeBeforeSecond_validDateTimes_correctResult() {
+        DateTimeComparison comparison = new DateTimeComparison();
+
+        assertFalse(comparison.isFirstDateTimeBeforeSecond("2023-03-21 15:00", "2023-03-21 16:00"));
+
+        assertFalse(comparison.isFirstDateTimeBeforeSecond("2023-03-21 17:00", "2023-03-21 16:00"));
+    }
+
+    @Test
+    public void parse_allPrefixesPresent_success() throws ParseException {
+        AddScheduleCommandParser parser = new AddScheduleCommandParser();
+        String input = " title/Meeting d/Project discussion start/2023-03-21 15:00 end/2023-03-21 16:00";
+
+        AddScheduleCommand command = parser.parse(input);
+
+        Schedule expectedSchedule = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                "2023-03-21 15:00",
+                "2023-03-21 16:00"
+        );
+
+        assertEquals(new AddScheduleCommand(expectedSchedule), command);
     }
 }

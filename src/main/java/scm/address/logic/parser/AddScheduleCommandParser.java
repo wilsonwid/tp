@@ -1,5 +1,10 @@
 package scm.address.logic.parser;
 
+import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -36,17 +41,30 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
      */
     @Override
     public AddScheduleCommand parse(String userInput) throws ParseException {
-        String[] parts = userInput.trim().split("\\s+", 4);
-        if (parts.length < 4 || !comparator.isFirstDateTimeBeforeSecond(parts[2], parts[3])) {
-            throw new ParseException("Invalid number of arguments."
-                    + " Expected format: Title Description yyyy-MM-dd HH:mm");
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(userInput, PREFIX_TITLE,
+                        PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
+
+        // Debug information
+        System.out.println("Preamble: '" + argMultimap.getPreamble() + "'");
+        System.out.println("Title present: " + argMultimap.getValue(PREFIX_TITLE).isPresent());
+        System.out.println("Description present: " + argMultimap.getValue(PREFIX_DESCRIPTION).isPresent());
+        System.out.println("Start datetime present: " + argMultimap.getValue(PREFIX_START_DATETIME).isPresent());
+        System.out.println("End datetime present: " + argMultimap.getValue(PREFIX_END_DATETIME).isPresent());
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_TITLE,
+                PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_USAGE));
         }
 
-        String title = parts[0];
-        String description = parts[1];
-        String datetime = parts[2] + " " + parts[3];
+        Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
+        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        String startDateTime = argMultimap.getValue(PREFIX_START_DATETIME).get();
+        String endDateTime = argMultimap.getValue(PREFIX_END_DATETIME).get();
+        Schedule schedule = new Schedule(title, description, startDateTime, endDateTime);
 
-        Schedule schedule = new Schedule(new Title(title), new Description(description), parts[2], parts[3]);
         return new AddScheduleCommand(schedule);
     }
 
