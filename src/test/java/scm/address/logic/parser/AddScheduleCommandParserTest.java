@@ -1,5 +1,9 @@
 package scm.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,10 +14,6 @@ import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AddScheduleCommandParserTest {
     private AddScheduleCommandParser parser = new AddScheduleCommandParser();
