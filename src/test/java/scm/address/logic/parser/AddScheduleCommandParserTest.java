@@ -135,4 +135,25 @@ public class AddScheduleCommandParserTest {
 
         assertEquals(new AddScheduleCommand(expectedSchedule), command);
     }
+    @Test
+    public void isFirstDateTimeBeforeSecond_validDateTimes_firstIsBefore() {
+        AddScheduleCommandParser parser = new AddScheduleCommandParser();
+        String dateTimeStr1 = "2023-03-21T15:00";
+        String dateTimeStr2 = "2023-03-21T16:00";
+
+        boolean result = parser.createDTC().isFirstDateTimeBeforeSecond(dateTimeStr1, dateTimeStr2);
+
+        assertTrue(result, "First date-time should be before the second date-time");
+    }
+
+    @Test
+    public void isFirstDateTimeBeforeSecond_validDateTimes_firstIsAfter() {
+        AddScheduleCommandParser parser = new AddScheduleCommandParser();
+        String dateTimeStr1 = "2023-03-21T17:00";
+        String dateTimeStr2 = "2023-03-21T16:00";
+
+        boolean result = parser.createDTC().isFirstDateTimeBeforeSecond(dateTimeStr1, dateTimeStr2);
+
+        assertFalse(result, "First date-time should not be before the second date-time");
+    }
 }

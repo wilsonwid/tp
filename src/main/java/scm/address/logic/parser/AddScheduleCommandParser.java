@@ -81,7 +81,11 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                 .allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private class DateTimeComparison {
+    public DateTimeComparison createDTC() {
+        return new DateTimeComparison();
+    }
+
+    protected class DateTimeComparison {
         public DateTimeComparison() {
 
         }
