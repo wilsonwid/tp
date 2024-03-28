@@ -2,6 +2,7 @@ package scm.address.model.filename.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,5 +23,10 @@ public class DescriptionTest {
 
         assertEquals(description1, description2);
         assertNotEquals(description1, description3);
+    }
+
+    @Test
+    public void constructor_nullDescription_throwsNullPointerException() {
+        assertDoesNotThrow(() -> new Description(null));
     }
 }

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 
+import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Title;
 
 public class TitleTest {
@@ -22,5 +23,14 @@ public class TitleTest {
 
         assertEquals(title1, title2);
         assertNotEquals(title1, title3);
+    }
+
+    @Test
+    public void equals_variousDescriptions_correctResult() {
+        Description description1 = new Description("description");
+        Description description2 = new Description("description");
+        Description description3 = new Description("other");
+        assertEquals(description1, description2);
+        assertNotEquals(description1, description3);
     }
 }

@@ -1,6 +1,8 @@
 package scm.address.logic.parser;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import scm.address.logic.commands.AddScheduleCommand;
@@ -22,6 +24,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private DateTimeComparison comparator = new DateTimeComparison();
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddScheduleCommand
@@ -34,7 +37,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
     @Override
     public AddScheduleCommand parse(String userInput) throws ParseException {
         String[] parts = userInput.trim().split("\\s+", 4); // Assuming format: date time description
-        if (parts.length < 4) {
+        if (parts.length < 4 || !comparator.isFirstDateTimeBeforeSecond(parts[2], parts[3])) {
             throw new ParseException("Invalid number of arguments. Expected format: yyyy-MM-dd HH:mm description");
         }
 
@@ -57,5 +60,24 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes)
                 .allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private class DateTimeComparison {
+        public DateTimeComparison() {
+
+        }
+        public boolean isFirstDateTimeBeforeSecond(String datetimeStr1, String datetimeStr2) {
+            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+
+            try {
+                LocalDateTime dateTime1 = LocalDateTime.parse(datetimeStr1, formatter);
+                LocalDateTime dateTime2 = LocalDateTime.parse(datetimeStr2, formatter);
+
+                return dateTime1.isBefore(dateTime2);
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
 }

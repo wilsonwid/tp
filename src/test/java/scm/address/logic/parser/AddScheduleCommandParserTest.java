@@ -3,6 +3,7 @@ package scm.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -72,5 +73,13 @@ public class AddScheduleCommandParserTest {
             assertEquals("Invalid command format! \n"
                     + AddScheduleCommandParser.MESSAGE_USAGE, thrownException.getMessage());
         }
+    }
+
+    @Test
+    public void parse_missingTitle_throwsParseException() {
+        String expectedMessage = String.format("Invalid command format! \n%1$s",
+                AddScheduleCommandParser.MESSAGE_USAGE);
+        assertThrows(ParseException.class, () -> parser.parse(
+                "d/Description start/2023-03-21 15:00 end/2023-03-21 16:00"), expectedMessage);
     }
 }
