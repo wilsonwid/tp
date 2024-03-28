@@ -38,8 +38,8 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
     public AddScheduleCommand parse(String userInput) throws ParseException {
         String[] parts = userInput.trim().split("\\s+", 4);
         if (parts.length < 4 || !comparator.isFirstDateTimeBeforeSecond(parts[2], parts[3])) {
-            throw new ParseException("Invalid number of arguments." +
-                    " Expected format: Title Description yyyy-MM-dd HH:mm");
+            throw new ParseException("Invalid number of arguments."
+                    + " Expected format: Title Description yyyy-MM-dd HH:mm");
         }
 
         String title = parts[0];
