@@ -249,4 +249,10 @@ public class ParserUtilTest {
         assertEquals(VALID_START_DATETIME,
                 ParserUtil.parseDateTime(VALID_START_DATETIME).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
+
+    @Test
+    public void parseDateTime_invalidDateTime_throwsParseException() {
+        String invalidDateTime = "2023/03/21 15:00";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(invalidDateTime));
+    }
 }

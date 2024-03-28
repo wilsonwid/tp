@@ -1,6 +1,7 @@
 package scm.address.model.filename.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -21,5 +22,14 @@ public class ScheduleTest {
                 new Description("Discuss project"),
                 startDateTime.format(formatter), endDateTime.format(formatter));
         assertNotNull(schedule);
+    }
+
+    @Test
+    public void constructor_nullTitle_throwsNullPointerException() {
+        Description validDescription = new Description("Valid Description");
+        LocalDateTime validStartDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime validEndDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        assertThrows(AssertionError.class, () -> new Schedule(null,
+                validDescription, validStartDateTime.format(formatter), validEndDateTime.format(formatter)));
     }
 }
