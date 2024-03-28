@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import scm.address.logic.commands.AddCommand;
-import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.EditCommand;
