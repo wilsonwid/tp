@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import scm.address.commons.core.GuiSettings;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 
 /**
  * The API of the Model component.
@@ -85,4 +86,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    ObservableList<Schedule> getScheduleList();
+    void addSchedule(Schedule schedule);
 }

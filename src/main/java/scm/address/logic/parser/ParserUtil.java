@@ -3,6 +3,9 @@ package scm.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +18,8 @@ import scm.address.model.person.Address;
 import scm.address.model.person.Email;
 import scm.address.model.person.Name;
 import scm.address.model.person.Phone;
+import scm.address.model.schedule.Title;
+import scm.address.model.schedule.Description;
 import scm.address.model.tag.Tag;
 
 /**
@@ -150,5 +155,23 @@ public class ParserUtil {
             filenameSet.add(curFilename);
         }
         return fileSet;
+    }
+
+    public static LocalDateTime parseDateTime(String dateTimeStr) throws ParseException {
+        try {
+            return LocalDateTime.parse(dateTimeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date time format. Correct format: yyyy-MM-dd HH:mm");
+        }
+    }
+
+    public static Title parseTitle(String titleStr) {
+        assert titleStr != null : "Title string cannot be null";
+        return new Title(titleStr);
+    }
+
+    public static Description parseDescription(String descriptionStr) {
+        assert descriptionStr != null : "Description string cannot be null";
+        return new Description(descriptionStr);
     }
 }

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import scm.address.commons.core.LogsCenter;
 import scm.address.logic.commands.AddCommand;
+import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
 import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
+
+        case AddScheduleCommand.COMMAND_WORD:
+            return new AddScheduleCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

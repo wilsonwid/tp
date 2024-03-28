@@ -7,11 +7,13 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import scm.address.commons.core.GuiSettings;
 import scm.address.commons.core.LogsCenter;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 
 /**
  * Represents the in-memory model of the contact manager data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -109,6 +112,14 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    public ObservableList<Schedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void addSchedule(Schedule schedule) {
+        scheduleList.add(schedule);
     }
 
     //=========== Filtered Person List Accessors =============================================================
