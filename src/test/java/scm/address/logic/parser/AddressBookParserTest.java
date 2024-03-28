@@ -149,7 +149,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addSchedule() throws ParseException {
         AddScheduleCommand command = (AddScheduleCommand) parser.parseCommand(
-                AddScheduleCommand.COMMAND_WORD + " title/Meeting d/Discuss project start/2023-03-21 15:00 end/2023-03-21 16:00");
+                AddScheduleCommand.COMMAND_WORD
+                        + " title/Meeting d/Discuss project start/2023-03-21 15:00 end/2023-03-21 16:00");
         assertTrue(command instanceof AddScheduleCommand);
     }
 }

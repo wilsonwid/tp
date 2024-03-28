@@ -246,6 +246,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDateTime_validDateTime_returnsLocalDateTime() throws ParseException {
-        assertEquals(VALID_START_DATETIME, ParserUtil.parseDateTime(VALID_START_DATETIME).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+        assertEquals(VALID_START_DATETIME,
+                ParserUtil.parseDateTime(VALID_START_DATETIME).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
     }
 }
