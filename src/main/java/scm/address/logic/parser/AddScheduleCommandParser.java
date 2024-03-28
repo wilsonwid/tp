@@ -56,6 +56,14 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         return new AddScheduleCommand(schedule);
     }
 
+    /**
+     * Checks if all the given prefixes contain non-empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap The map of arguments to check.
+     * @param prefixes         The prefixes to check for presence.
+     * @return True if all prefixes are present, otherwise false.
+     */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes)
                 .allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
