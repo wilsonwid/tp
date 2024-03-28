@@ -1,7 +1,5 @@
 package scm.address.model.schedule;
 
-import java.util.Objects;
-
 /**
  * Represents a Schedule in the address book.
  * <p>
@@ -31,6 +29,14 @@ public class Schedule {
         this.description = description;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+    }
+
+    public Description getDescription() {
+        return description;
+    }
+
+    public Title getTitle() {
+        return title;
     }
 
     @Override

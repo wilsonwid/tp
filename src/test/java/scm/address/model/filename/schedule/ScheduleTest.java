@@ -1,5 +1,6 @@
 package scm.address.model.filename.schedule;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -45,5 +46,20 @@ public class ScheduleTest {
                         + validTitle.toString() + " d/" + validDescription.toString()
                         + " start/" + invalidStartDateTime.format(formatter)
                         + " end/" + invalidEndDateTime.format(formatter)));
+    }
+
+    @Test
+    public void createScheduleFromParts_validInputs_success() {
+        String title = "Meeting";
+        String description = "Project discussion";
+        String date = "2023-03-21";
+        String time1 = "15:00";
+        String time2 = "16:00";
+
+        Schedule schedule = new Schedule(new Title(title), new Description(description),
+                date + " " + time1, date + " " + time2);
+        assertNotNull(schedule);
+        assertEquals(title, schedule.getTitle().toString());
+        assertEquals(description, schedule.getDescription().toString());
     }
 }
