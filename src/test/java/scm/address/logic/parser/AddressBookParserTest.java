@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import scm.address.logic.commands.AddCommand;
+import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.EditCommand;
@@ -143,5 +144,12 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand.getName(), resultCommand.getName());
         assertEquals(expectedCommand.getAddress(), resultCommand.getAddress());
         assertEquals(expectedCommand.getFilename(), resultCommand.getFilename());
+    }
+
+    @Test
+    public void parseCommand_addSchedule() throws ParseException {
+        AddScheduleCommand command = (AddScheduleCommand) parser.parseCommand(
+                AddScheduleCommand.COMMAND_WORD + " title/Meeting d/Discuss project start/2023-03-21 15:00 end/2023-03-21 16:00");
+        assertTrue(command instanceof AddScheduleCommand);
     }
 }
