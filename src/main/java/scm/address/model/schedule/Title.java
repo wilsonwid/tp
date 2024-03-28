@@ -13,23 +13,4 @@ public class Title {
     public String toString() {
         return title;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-
-        if (other instanceof Title) {
-            Title otherTitle = (Title) other;
-            return title.equals(otherTitle.title);
-        }
-
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return title.hashCode();
-    }
 }

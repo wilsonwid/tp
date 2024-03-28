@@ -10,25 +10,6 @@ public class Description {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-
-        if (other instanceof Description) {
-            Description otherDescription = (Description) other;
-            return description.equals(otherDescription.description);
-        }
-
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return description.hashCode();
-    }
-
-    @Override
     public String toString() {
         return description;
     }

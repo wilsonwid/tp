@@ -12,8 +12,8 @@ import java.util.Objects;
 public class Schedule {
     private final Title title;
     private final Description description;
-    private final LocalDateTime startDateTime;
-    private final LocalDateTime endDateTime;
+    private final String startDateTime;
+    private final String endDateTime;
 
     /**
      * Constructs a {@code Schedule} with the specified title, description, start and end datetime.
@@ -23,13 +23,11 @@ public class Schedule {
      * @param startDateTime The schedule's start datetime.
      * @param endDateTime The schedule's end datetime.
      */
-    public Schedule(Title title, Description description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public Schedule(Title title, Description description, String startDateTime, String endDateTime) {
         assert title != null : "Title cannot be null";
         assert description != null : "Description cannot be null";
         assert startDateTime != null : "Start DateTime cannot be null";
         assert endDateTime != null : "End DateTime cannot be null";
-        assert startDateTime.isBefore(endDateTime) : "Start DateTime must be before End DateTime";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         this.title = title;
         this.description = description;
@@ -59,7 +57,6 @@ public class Schedule {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return String.format("%s at %s", description, startDateTime.format(formatter));
+        return String.format("%s at %s", description, startDateTime);
     }
 }

@@ -27,16 +27,4 @@ public class AddScheduleCommand extends Command {
     public boolean scheduleExists() {
         return schedule != null;
     }
-
-    @Override
-    public boolean equals(Object object) {
-        if (object == this) {
-            return true;
-        }
-        if (!(object instanceof AddScheduleCommand)) {
-            return false;
-        }
-        AddScheduleCommand test = (AddScheduleCommand) object;
-        return this.schedule.equals(test.schedule);
-    }
 }
