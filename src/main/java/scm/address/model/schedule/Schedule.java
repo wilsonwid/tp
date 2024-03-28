@@ -1,7 +1,5 @@
 package scm.address.model.schedule;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
