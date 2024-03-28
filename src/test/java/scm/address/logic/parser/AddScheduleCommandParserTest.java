@@ -11,7 +11,9 @@ import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AddScheduleCommandParserTest {
     private AddScheduleCommandParser parser = new AddScheduleCommandParser();
@@ -59,7 +61,7 @@ public class AddScheduleCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        String missingPartsInput = "title/Meeting d/Project discussion start/2023-03-21 15:00"; // End datetime is missing.
+        String missingPartsInput = "title/Meeting d/Project discussion start/2023-03-21 15:00";
         ParseException thrownException = null;
 
         try {
