@@ -3,6 +3,7 @@ package scm.address.model.filename.schedule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -72,6 +73,6 @@ public class ScheduleTest {
         String time2 = "16:00";
         Schedule schedule = new Schedule(new Title(title), new Description(description),
                 date + " " + time1, date + " " + time2);
-        assertEquals(schedule, schedule);
+        assertTrue(schedule.equals(schedule));
     }
 }
