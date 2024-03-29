@@ -110,6 +110,7 @@ public class AddScheduleCommandTest {
         AddScheduleCommand command = new AddScheduleCommand(schedule);
 
         int expectedHashCode = schedule.hashCode();
-        assertEquals(expectedHashCode, command.hashCode(), "Hash code should be consistent and equal to the schedule's hash code.");
+        assertEquals(expectedHashCode, command.hashCode(),
+                "Hash code should be consistent and equal to the schedule's hash code.");
     }
 }
