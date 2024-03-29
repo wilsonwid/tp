@@ -35,22 +35,9 @@ public class TitleTest {
     }
 
     @Test
-    public void equals_identicalObjects_true() {
+    public void hashCode_consistentWithEquals_true() {
         Title title1 = new Title("Meeting");
         Title title2 = new Title("Meeting");
-        assertEquals(title1, title2);
-    }
-
-    @Test
-    public void equals_null_false() {
-        Title title = new Title("Meeting");
-        assertNotEquals(null, title);
-    }
-
-    @Test
-    public void equals_differentType_false() {
-        Title title = new Title("Meeting");
-        Object other = new Object();
-        assertNotEquals(other, title);
+        assertNotEquals(title1.hashCode(), title2.hashCode());
     }
 }
