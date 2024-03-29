@@ -1,6 +1,7 @@
 package scm.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -48,5 +49,67 @@ public class AddScheduleCommandTest {
         AddScheduleCommand command = new AddScheduleCommand(scheduleToAdd);
 
         assertEquals(expectedCommandResult, command.execute(model));
+    }
+
+    @Test
+    public void equals_sameObject_true() {
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                "2023-03-03 16:00",
+                "2023-03-03 17:00");
+        AddScheduleCommand command = new AddScheduleCommand(schedule);
+
+        assertTrue(command.equals(command), "A command should equal itself.");
+    }
+
+    @Test
+    public void equals_null_false() {
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                "2023-03-03 16:00",
+                "2023-03-03 17:00");
+        AddScheduleCommand command = new AddScheduleCommand(schedule);
+
+        assertFalse(command.equals(null), "A command should not equal null.");
+    }
+
+    @Test
+    public void equals_differentType_false() {
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                "2023-03-03 16:00",
+                "2023-03-03 17:00");
+        AddScheduleCommand command = new AddScheduleCommand(schedule);
+        Object other = new Object();
+
+        assertFalse(command.equals(other), "A command should not equal an object of a different type.");
+    }
+
+    @Test
+    public void equals_differentValues_false() {
+        Schedule schedule1 = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                "2023-03-03 16:00",
+                "2023-03-03 17:00");
+        Schedule schedule2 = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                "2023-03-04 16:00",
+                "2023-03-04 17:00");
+        AddScheduleCommand command1 = new AddScheduleCommand(schedule1);
+        AddScheduleCommand command2 = new AddScheduleCommand(schedule2);
+
+        assertFalse(command1.equals(command2), "Commands with different schedules should not be equal.");
+    }
+
+    @Test
+    public void hashCode_consistency_check() {
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                "2023-03-03 16:00",
+                "2023-03-03 17:00");
+        AddScheduleCommand command = new AddScheduleCommand(schedule);
+
+        int expectedHashCode = schedule.hashCode();
+        assertEquals(expectedHashCode, command.hashCode(), "Hash code should be consistent and equal to the schedule's hash code.");
     }
 }
