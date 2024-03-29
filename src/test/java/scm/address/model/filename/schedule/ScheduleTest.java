@@ -62,4 +62,16 @@ public class ScheduleTest {
         assertEquals(title, schedule.getTitle().toString());
         assertEquals(description, schedule.getDescription().toString());
     }
+
+    @Test
+    public void sameSchedule() {
+        String title = "Meeting";
+        String description = "Project discussion";
+        String date = "2023-03-21";
+        String time1 = "15:00";
+        String time2 = "16:00";
+        Schedule schedule = new Schedule(new Title(title), new Description(description),
+                date + " " + time1, date + " " + time2);
+        assertEquals(schedule, schedule);
+    }
 }
