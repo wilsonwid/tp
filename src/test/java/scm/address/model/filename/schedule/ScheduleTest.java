@@ -1,6 +1,7 @@
 package scm.address.model.filename.schedule;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -74,5 +75,29 @@ public class ScheduleTest {
         Schedule schedule = new Schedule(new Title(title), new Description(description),
                 date + " " + time1, date + " " + time2);
         assertTrue(schedule.equals(schedule));
+    }
+
+    @Test
+    public void equals() {
+        String title = "Meeting";
+        String description = "Project discussion";
+        String date = "2023-03-21";
+        String time1 = "15:00";
+        String time2 = "16:00";
+        Schedule schedule = new Schedule(new Title(title), new Description(description),
+                date + " " + time1, date + " " + time2);
+        assertTrue(schedule.equals(schedule));
+        Schedule scheduleCopy = new Schedule(new Title(title), new Description(description),
+                date + " " + time1, date + " " + time2);
+        assertTrue(schedule.equals(scheduleCopy));
+
+        assertFalse(schedule.equals(1));
+
+        assertFalse(schedule.equals(null));
+
+        String date2 = "2023-04-21";
+        Schedule differentSchedule = new Schedule(new Title(title), new Description(description),
+                date + " " + time1, date2 + " " + time2);
+        assertFalse(schedule.equals(differentSchedule));
     }
 }
