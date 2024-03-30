@@ -1,5 +1,7 @@
 package scm.address.model.schedule;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -10,8 +12,9 @@ import java.util.Objects;
 public class Schedule {
     private final Title title;
     private final Description description;
-    private final String startDateTime;
-    private final String endDateTime;
+    private final LocalDateTime startDateTime;
+    private final LocalDateTime endDateTime;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Constructs a {@code Schedule} with the specified title, description, start and end datetime.
@@ -21,7 +24,7 @@ public class Schedule {
      * @param startDateTime The schedule's start datetime.
      * @param endDateTime The schedule's end datetime.
      */
-    public Schedule(Title title, Description description, String startDateTime, String endDateTime) {
+    public Schedule(Title title, Description description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         if (title == null || description == null || startDateTime == null || endDateTime == null) {
             throw new NullPointerException("None of the fields should be null.");
         }
@@ -42,7 +45,7 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return description.toString() + startDateTime.toString();
+        return title.toString() + description.toString() + startDateTime.toString() + endDateTime.toString();
     }
 
     @Override
@@ -54,8 +57,8 @@ public class Schedule {
             Schedule otherSchedule = (Schedule) other;
             return title.equals(otherSchedule.title)
                     && description.equals(otherSchedule.description)
-                    && startDateTime.equals(otherSchedule.startDateTime)
-                    && endDateTime.equals(otherSchedule.endDateTime);
+                    && startDateTime.format(formatter).equals(otherSchedule.startDateTime.format(formatter))
+                    && endDateTime.format(formatter).equals(otherSchedule.endDateTime.format(formatter));
         }
         return false;
     }

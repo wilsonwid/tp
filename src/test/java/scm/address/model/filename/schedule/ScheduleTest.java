@@ -25,7 +25,7 @@ public class ScheduleTest {
         LocalDateTime endDateTime = startDateTime.plusHours(1);
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Discuss project"),
-                startDateTime.format(formatter), endDateTime.format(formatter));
+                startDateTime, endDateTime);
         assertNotNull(schedule);
     }
 
@@ -35,7 +35,7 @@ public class ScheduleTest {
         LocalDateTime validStartDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
         LocalDateTime validEndDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         assertThrows(NullPointerException.class, () -> new Schedule(null,
-                validDescription, validStartDateTime.format(formatter), validEndDateTime.format(formatter)));
+                validDescription, validStartDateTime, validEndDateTime));
     }
 
     @Test
@@ -58,8 +58,13 @@ public class ScheduleTest {
         String time1 = "15:00";
         String time2 = "16:00";
 
-        Schedule schedule = new Schedule(new Title(title), new Description(description),
-                date + " " + time1, date + " " + time2);
+        Schedule schedule = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                LocalDateTime.of(2023, 3, 21, 15, 0),
+                LocalDateTime.of(2023, 3, 21, 16, 0)
+        );
+
         assertNotNull(schedule);
         assertEquals(title, schedule.getTitle().toString());
         assertEquals(description, schedule.getDescription().toString());
@@ -72,8 +77,13 @@ public class ScheduleTest {
         String date = "2023-03-21";
         String time1 = "15:00";
         String time2 = "16:00";
-        Schedule schedule = new Schedule(new Title(title), new Description(description),
-                date + " " + time1, date + " " + time2);
+
+        Schedule schedule = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                LocalDateTime.of(2023, 3, 21, 15, 0),
+                LocalDateTime.of(2023, 3, 21, 16, 0)
+        );
         assertTrue(schedule.equals(schedule));
     }
 
@@ -84,20 +94,32 @@ public class ScheduleTest {
         String date = "2023-03-21";
         String time1 = "15:00";
         String time2 = "16:00";
-        Schedule schedule = new Schedule(new Title(title), new Description(description),
-                date + " " + time1, date + " " + time2);
+
+        Schedule schedule = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                LocalDateTime.of(2023, 3, 21, 15, 0),
+                LocalDateTime.of(2023, 3, 21, 16, 0)
+        );
         assertTrue(schedule.equals(schedule));
-        Schedule scheduleCopy = new Schedule(new Title(title), new Description(description),
-                date + " " + time1, date + " " + time2);
+        Schedule scheduleCopy = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                LocalDateTime.of(2023, 3, 21, 15, 0),
+                LocalDateTime.of(2023, 3, 21, 16, 0)
+        );
         assertTrue(schedule.equals(scheduleCopy));
 
         assertFalse(schedule.equals(1));
 
         assertFalse(schedule.equals(null));
 
-        String date2 = "2023-04-21";
-        Schedule differentSchedule = new Schedule(new Title(title), new Description(description),
-                date + " " + time1, date2 + " " + time2);
+        Schedule differentSchedule = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                LocalDateTime.of(2023, 3, 21, 15, 0),
+                LocalDateTime.of(2023, 3, 21, 17, 0)
+        );
         assertFalse(schedule.equals(differentSchedule));
     }
 }

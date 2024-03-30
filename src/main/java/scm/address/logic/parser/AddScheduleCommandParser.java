@@ -5,7 +5,9 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.lang.Integer;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
 import scm.address.logic.commands.AddScheduleCommand;
@@ -54,8 +56,22 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         String startDateTime = argMultimap.getValue(PREFIX_START_DATETIME).get();
+        String startYear = startDateTime.substring(0, 4);
+        String startMonth = startDateTime.substring(5, 7);
+        String startDay = startDateTime.substring(8, 10);
+        String startHour = startDateTime.substring(11, 13);
+        String startMinute = startDateTime.substring(14, 16);
         String endDateTime = argMultimap.getValue(PREFIX_END_DATETIME).get();
-        Schedule schedule = new Schedule(title, description, startDateTime, endDateTime);
+        String endYear = endDateTime.substring(0, 4);
+        String endMonth = endDateTime.substring(5, 7);
+        String endDay = endDateTime.substring(8, 10);
+        String endHour = endDateTime.substring(11, 13);
+        String endMinute = endDateTime.substring(14, 16);
+        Schedule schedule = new Schedule(title, description,
+                LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
+                        Integer.parseInt(startDay), Integer.parseInt(startHour), Integer.parseInt(startMinute)),
+                LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
+                        Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute)));
 
         return new AddScheduleCommand(schedule);
     }
