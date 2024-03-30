@@ -20,10 +20,10 @@ import scm.address.model.schedule.Title;
 public class AddScheduleCommandParserTest {
     private AddScheduleCommandParser parser = new AddScheduleCommandParser();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private String INVALIDINPUTNOEND = "title/Meeting d/Project discussion start/2023-03-21 15:00";
-    private String INVALIDFORMATTEDSTART = "2023-10-10 18:00";
-    private String FORMATTEDSTART = "2023-10-10 16:00";
-    private String FORMATTEDEND = "2023-10-10 17:00";
+    private String invalidInputNoEnd = "title/Meeting d/Project discussion start/2023-03-21 15:00";
+    private String invalidFormattedStart = "2023-10-10 18:00";
+    private String formattedStart = "2023-10-10 16:00";
+    private String formattedEnd = "2023-10-10 17:00";
 
     private class DateTimeComparison {
         public DateTimeComparison() {
@@ -55,11 +55,11 @@ public class AddScheduleCommandParserTest {
     @Test
     public void parse_validArgs_returnsAddScheduleCommand() {
         String input = String.format("title/Meeting d/Discuss project start/%s end/%s",
-                FORMATTEDSTART, FORMATTEDEND);
+                formattedStart, formattedEnd);
 
         AddScheduleCommand expectedCommand = new AddScheduleCommand(
                 new Schedule(new Title("Meeting"), new Description("Discuss project"),
-                        FORMATTEDSTART, FORMATTEDEND)
+                        formattedStart, formattedEnd)
         );
 
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
@@ -105,16 +105,16 @@ public class AddScheduleCommandParserTest {
     public void parse_missingPrefixes_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
 
-        assertThrows(ParseException.class, () -> parser.parse(INVALIDINPUTNOEND));
+        assertThrows(ParseException.class, () -> parser.parse(invalidInputNoEnd));
     }
 
     @Test
     public void isFirstDateTimeBeforeSecond_validDateTimes_correctResult() {
         DateTimeComparison comparison = new DateTimeComparison();
 
-        assertFalse(comparison.isFirstDateTimeBeforeSecond(FORMATTEDSTART, FORMATTEDEND));
+        assertFalse(comparison.isFirstDateTimeBeforeSecond(formattedStart, formattedEnd));
 
-        assertFalse(comparison.isFirstDateTimeBeforeSecond(INVALIDFORMATTEDSTART, FORMATTEDEND));
+        assertFalse(comparison.isFirstDateTimeBeforeSecond(invalidFormattedStart, formattedEnd));
     }
 
     @Test
