@@ -168,6 +168,21 @@ public class AddCommandTest {
         public void addSchedule(Schedule schedule) {
             return;
         };
+
+        @Override
+        public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
+            return;
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            return;
+        }
+
+        @Override
+        public void deleteSchedule(Schedule schedule) {
+            return;
+        }
     }
 
     /**
