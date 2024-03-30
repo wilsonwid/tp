@@ -24,7 +24,9 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+    private final ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+    private final FilteredList<Schedule> filteredSchedules;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,7 +38,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredSchedules = new FilteredList<>(this.scheduleList);
     }
 
     public ModelManager() {
@@ -130,6 +133,11 @@ public class ModelManager implements Model {
 
     public void deleteSchedule(Schedule schedule) {
         scheduleList.remove(schedule);
+    }
+
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
     }
 
     //=========== Filtered Person List Accessors =============================================================
