@@ -20,6 +20,10 @@ import scm.address.model.schedule.Title;
 public class AddScheduleCommandParserTest {
     private AddScheduleCommandParser parser = new AddScheduleCommandParser();
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private String INVALID_INPUT_NO_END = "title/Meeting d/Project discussion start/2023-03-21 15:00";
+    private String INVALID_FORMATTED_START = "2023-10-10 18:00";
+    private String FORMATTED_START = "2023-10-10 16:00";
+    private String FORMATTED_END = "2023-10-10 17:00";
 
     private class DateTimeComparison {
         public DateTimeComparison() {
@@ -50,15 +54,12 @@ public class AddScheduleCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsAddScheduleCommand() {
-        String formattedStart = "2023-10-10 16:00";
-        String formattedEnd = "2023-10-10 17:00";
-
         String input = String.format("title/Meeting d/Discuss project start/%s end/%s",
-                formattedStart, formattedEnd);
+                FORMATTED_START, FORMATTED_END);
 
         AddScheduleCommand expectedCommand = new AddScheduleCommand(
                 new Schedule(new Title("Meeting"), new Description("Discuss project"),
-                        formattedStart, formattedEnd)
+                        FORMATTED_START, FORMATTED_END)
         );
 
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
@@ -102,19 +103,18 @@ public class AddScheduleCommandParserTest {
 
     @Test
     public void parse_missingPrefixes_throwsParseException() {
-        String input = "title/Meeting d/Project discussion start/2023-03-21 15:00";
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
 
-        assertThrows(ParseException.class, () -> parser.parse(input));
+        assertThrows(ParseException.class, () -> parser.parse(INVALID_INPUT_NO_END));
     }
 
     @Test
     public void isFirstDateTimeBeforeSecond_validDateTimes_correctResult() {
         DateTimeComparison comparison = new DateTimeComparison();
 
-        assertFalse(comparison.isFirstDateTimeBeforeSecond("2023-03-21 15:00", "2023-03-21 16:00"));
+        assertFalse(comparison.isFirstDateTimeBeforeSecond(FORMATTED_START, FORMATTED_END));
 
-        assertFalse(comparison.isFirstDateTimeBeforeSecond("2023-03-21 17:00", "2023-03-21 16:00"));
+        assertFalse(comparison.isFirstDateTimeBeforeSecond(INVALID_FORMATTED_START, FORMATTED_END));
     }
 
     @Test

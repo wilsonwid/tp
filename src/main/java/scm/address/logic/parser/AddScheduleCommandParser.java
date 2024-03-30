@@ -44,13 +44,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                 ArgumentTokenizer.tokenize(userInput, PREFIX_TITLE,
                         PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
 
-        // Debug information
-        System.out.println("Preamble: '" + argMultimap.getPreamble() + "'");
-        System.out.println("Title present: " + argMultimap.getValue(PREFIX_TITLE).isPresent());
-        System.out.println("Description present: " + argMultimap.getValue(PREFIX_DESCRIPTION).isPresent());
-        System.out.println("Start datetime present: " + argMultimap.getValue(PREFIX_START_DATETIME).isPresent());
-        System.out.println("End datetime present: " + argMultimap.getValue(PREFIX_END_DATETIME).isPresent());
-
         if (!arePrefixesPresent(argMultimap, PREFIX_TITLE,
                 PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)
                 || !argMultimap.getPreamble().isEmpty()) {
