@@ -11,6 +11,8 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +20,9 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import scm.address.logic.commands.AddCommand;
+import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
+import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.EditCommand;
 import scm.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -33,6 +37,9 @@ import scm.address.model.person.AddressContainsKeywordsPredicate;
 import scm.address.model.person.NameContainsKeywordsPredicate;
 import scm.address.model.person.Person;
 import scm.address.model.person.TagsContainKeywordsPredicate;
+import scm.address.model.schedule.Description;
+import scm.address.model.schedule.Schedule;
+import scm.address.model.schedule.Title;
 import scm.address.testutil.EditPersonDescriptorBuilder;
 import scm.address.testutil.PersonBuilder;
 import scm.address.testutil.PersonUtil;
@@ -40,6 +47,7 @@ import scm.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -143,5 +151,26 @@ public class AddressBookParserTest {
         assertEquals(expectedCommand.getName(), resultCommand.getName());
         assertEquals(expectedCommand.getAddress(), resultCommand.getAddress());
         assertEquals(expectedCommand.getFilename(), resultCommand.getFilename());
+    }
+
+    @Test
+    public void parseCommand_addScheduleCommand() throws Exception {
+        Schedule schedule = new Schedule(
+                new Title("Meeting"),
+                new Description("Project discussion"),
+                LocalDateTime.of(2023, 3, 21, 15, 0).format(formatter),
+                LocalDateTime.of(2023, 3, 21, 16, 0).format(formatter)
+        );
+
+        String commandString = AddScheduleCommand.COMMAND_WORD + " title/Meeting d/Project discussion "
+                + "start/2023-03-21 15:00 end/2023-03-21 16:00";
+
+        AddScheduleCommand command = new AddScheduleCommand(schedule);
+
+        AddressBookParser parser = new AddressBookParser();
+        Command result = parser.parseCommand(commandString);
+
+        assertTrue(result instanceof AddScheduleCommand);
+        assertEquals(command, result);
     }
 }

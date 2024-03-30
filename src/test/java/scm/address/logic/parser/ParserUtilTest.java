@@ -7,6 +7,7 @@ import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -41,6 +42,10 @@ public class ParserUtilTest {
     private static final String VALID_FILEPATH = "./data/" + VALID_FILENAME + ".json";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String VALID_TITLE = "Meeting";
+    private static final String VALID_DESCRIPTION = "Discuss project";
+    private static final String VALID_START_DATETIME = "2023-03-21 15:00";
+    private static final String VALID_END_DATETIME = "2023-03-21 16:00";
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
@@ -229,4 +234,25 @@ public class ParserUtilTest {
         assertEquals(ParserUtil.parseFiles(filenames), expectedSet);
     }
 
+    @Test
+    public void parseTitle_validTitle_returnsTitle() {
+        assertEquals(VALID_TITLE, ParserUtil.parseTitle(VALID_TITLE).toString());
+    }
+
+    @Test
+    public void parseDescription_validDescription_returnsDescription() {
+        assertEquals(VALID_DESCRIPTION, ParserUtil.parseDescription(VALID_DESCRIPTION).toString());
+    }
+
+    @Test
+    public void parseDateTime_validDateTime_returnsLocalDateTime() throws ParseException {
+        assertEquals(VALID_START_DATETIME,
+                ParserUtil.parseDateTime(VALID_START_DATETIME).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")));
+    }
+
+    @Test
+    public void parseDateTime_invalidDateTime_throwsParseException() {
+        String invalidDateTime = "2023/03/21 15:00";
+        assertThrows(ParseException.class, () -> ParserUtil.parseDateTime(invalidDateTime));
+    }
 }

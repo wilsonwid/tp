@@ -23,6 +23,7 @@ import scm.address.model.Model;
 import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.ReadOnlyUserPrefs;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 import scm.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -157,6 +158,16 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public javafx.collections.ObservableList<Schedule> getScheduleList() {
+            return null;
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            return;
+        };
     }
 
     /**
