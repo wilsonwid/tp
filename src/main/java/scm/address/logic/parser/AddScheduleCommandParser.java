@@ -5,9 +5,8 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
-import java.lang.Integer;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import scm.address.logic.commands.AddScheduleCommand;
