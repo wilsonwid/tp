@@ -34,7 +34,7 @@ public class ScheduleTest {
         Description validDescription = new Description("Valid Description");
         LocalDateTime validStartDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
         LocalDateTime validEndDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
-        assertThrows(AssertionError.class, () -> new Schedule(null,
+        assertThrows(NullPointerException.class, () -> new Schedule(null,
                 validDescription, validStartDateTime.format(formatter), validEndDateTime.format(formatter)));
     }
 

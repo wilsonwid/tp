@@ -50,17 +50,15 @@ public class AddScheduleCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsAddScheduleCommand() {
-        LocalDateTime startDateTime = LocalDateTime.now();
-        LocalDateTime endDateTime = startDateTime.plusHours(1);
-        String formattedStart = startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        String formattedEnd = endDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String formattedStart = "2023-10-10 16:00";
+        String formattedEnd = "2023-10-10 17:00";
 
         String input = String.format("title/Meeting d/Discuss project start/%s end/%s",
                 formattedStart, formattedEnd);
 
         AddScheduleCommand expectedCommand = new AddScheduleCommand(
                 new Schedule(new Title("Meeting"), new Description("Discuss project"),
-                        startDateTime.format(formatter), endDateTime.format(formatter))
+                        formattedStart, formattedEnd)
         );
 
         AddScheduleCommandParser parser = new AddScheduleCommandParser();

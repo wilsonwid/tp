@@ -22,10 +22,9 @@ public class Schedule {
      * @param endDateTime The schedule's end datetime.
      */
     public Schedule(Title title, Description description, String startDateTime, String endDateTime) {
-        assert title != null : "Title cannot be null";
-        assert description != null : "Description cannot be null";
-        assert startDateTime != null : "Start DateTime cannot be null";
-        assert endDateTime != null : "End DateTime cannot be null";
+        if (title == null || description == null || startDateTime == null || endDateTime == null) {
+            throw new NullPointerException("None of the fields should be null.");
+        }
 
         this.title = title;
         this.description = description;
@@ -43,7 +42,7 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return String.format("%s at %s", description, startDateTime);
+        return description.toString() + startDateTime.toString();
     }
 
     @Override

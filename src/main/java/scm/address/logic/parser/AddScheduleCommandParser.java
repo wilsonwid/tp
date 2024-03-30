@@ -29,7 +29,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private DateTimeComparison comparator = new DateTimeComparison();
+    private final DateTimeComparison comparator = new DateTimeComparison();
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddScheduleCommand

@@ -179,7 +179,9 @@ public class ParserUtil {
      * @return The parsed Title object.
      */
     public static Title parseTitle(String titleStr) {
-        assert titleStr != null : "Title string cannot be null";
+        if (titleStr == null) {
+            throw new NullPointerException("The title cannot be null.");
+        }
         return new Title(titleStr);
     }
 
@@ -190,7 +192,9 @@ public class ParserUtil {
      * @return The parsed Description object.
      */
     public static Description parseDescription(String descriptionStr) {
-        assert descriptionStr != null : "Description string cannot be null";
+        if (descriptionStr == null) {
+            throw new NullPointerException("The description cannot be null.");
+        }
         return new Description(descriptionStr);
     }
 }
