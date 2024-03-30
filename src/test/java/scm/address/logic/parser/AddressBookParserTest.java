@@ -158,8 +158,8 @@ public class AddressBookParserTest {
         Schedule schedule = new Schedule(
                 new Title("Meeting"),
                 new Description("Project discussion"),
-                LocalDateTime.of(2023, 3, 21, 15, 0).format(formatter),
-                LocalDateTime.of(2023, 3, 21, 16, 0).format(formatter)
+                LocalDateTime.of(2023, 3, 21, 15, 0),
+                LocalDateTime.of(2023, 3, 21, 16, 0)
         );
 
         String commandString = AddScheduleCommand.COMMAND_WORD + " title/Meeting d/Project discussion "

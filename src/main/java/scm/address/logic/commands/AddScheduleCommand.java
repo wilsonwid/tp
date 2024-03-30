@@ -44,4 +44,9 @@ public class AddScheduleCommand extends Command {
     public int hashCode() {
         return schedule.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return schedule.toString();
+    }
 }

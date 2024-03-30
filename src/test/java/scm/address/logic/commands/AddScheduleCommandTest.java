@@ -27,7 +27,7 @@ public class AddScheduleCommandTest {
         Model model = new ModelManager();
 
         Schedule schedule = new Schedule(title, description,
-                startDateTime.format(formatter), endDateTime.format(formatter));
+                startDateTime, endDateTime);
         AddScheduleCommand command = new AddScheduleCommand(schedule);
 
         CommandResult result = command.execute(model);
@@ -43,7 +43,7 @@ public class AddScheduleCommandTest {
         LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
         LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         Schedule scheduleToAdd = new Schedule(title, description,
-                startDateTime.format(formatter), endDateTime.format(formatter));
+                startDateTime, endDateTime);
 
         CommandResult expectedCommandResult = new CommandResult("Added schedule: " + scheduleToAdd);
         AddScheduleCommand command = new AddScheduleCommand(scheduleToAdd);
@@ -53,10 +53,12 @@ public class AddScheduleCommandTest {
 
     @Test
     public void equals_sameObject_true() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Project Discussion"),
-                "2023-03-03 16:00",
-                "2023-03-03 17:00");
+                startDateTime,
+                endDateTime);
         AddScheduleCommand command = new AddScheduleCommand(schedule);
 
         assertTrue(command.equals(command), "A command should equal itself.");
@@ -64,10 +66,12 @@ public class AddScheduleCommandTest {
 
     @Test
     public void equals_null_false() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Project Discussion"),
-                "2023-03-03 16:00",
-                "2023-03-03 17:00");
+                startDateTime,
+                endDateTime);
         AddScheduleCommand command = new AddScheduleCommand(schedule);
 
         assertFalse(command.equals(null), "A command should not equal null.");
@@ -75,10 +79,12 @@ public class AddScheduleCommandTest {
 
     @Test
     public void equals_differentType_false() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Project Discussion"),
-                "2023-03-03 16:00",
-                "2023-03-03 17:00");
+                startDateTime,
+                endDateTime);
         AddScheduleCommand command = new AddScheduleCommand(schedule);
         Object other = new Object();
 
@@ -87,14 +93,17 @@ public class AddScheduleCommandTest {
 
     @Test
     public void equals_differentValues_false() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        LocalDateTime endDateTime1 = LocalDateTime.of(2023, 3, 21, 17, 0);
         Schedule schedule1 = new Schedule(new Title("Meeting"),
                 new Description("Project Discussion"),
-                "2023-03-03 16:00",
-                "2023-03-03 17:00");
+                startDateTime,
+                endDateTime);
         Schedule schedule2 = new Schedule(new Title("Meeting"),
                 new Description("Project Discussion"),
-                "2023-03-04 16:00",
-                "2023-03-04 17:00");
+                startDateTime,
+                endDateTime1);
         AddScheduleCommand command1 = new AddScheduleCommand(schedule1);
         AddScheduleCommand command2 = new AddScheduleCommand(schedule2);
 
@@ -103,10 +112,12 @@ public class AddScheduleCommandTest {
 
     @Test
     public void hashCode_consistency_check() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         Schedule schedule = new Schedule(new Title("Meeting"),
                 new Description("Project Discussion"),
-                "2023-03-03 16:00",
-                "2023-03-03 17:00");
+                startDateTime,
+                endDateTime);
         AddScheduleCommand command = new AddScheduleCommand(schedule);
 
         int expectedHashCode = schedule.hashCode();
