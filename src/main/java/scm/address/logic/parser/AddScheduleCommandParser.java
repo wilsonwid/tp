@@ -5,9 +5,7 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
 import scm.address.logic.commands.AddScheduleCommand;
@@ -15,6 +13,7 @@ import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
+import scm.address.model.util.DateTimeComparison;
 
 /**
  * Parser for {@code AddScheduleCommand}.
@@ -83,24 +82,5 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
     public DateTimeComparison createDtc() {
         return new DateTimeComparison();
-    }
-
-    protected class DateTimeComparison {
-        public DateTimeComparison() {
-
-        }
-        public boolean isFirstDateTimeBeforeSecond(String datetimeStr1, String datetimeStr2) {
-            DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-
-            try {
-                LocalDateTime dateTime1 = LocalDateTime.parse(datetimeStr1, formatter);
-                LocalDateTime dateTime2 = LocalDateTime.parse(datetimeStr2, formatter);
-
-                return dateTime1.isBefore(dateTime2);
-            } catch (DateTimeParseException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
     }
 }
