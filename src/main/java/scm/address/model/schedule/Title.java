@@ -4,9 +4,20 @@ package scm.address.model.schedule;
  * Represents a Schedule's title in the address book.
  */
 public class Title {
-    final String title;
+    public static final String MESSAGE_CONSTRAINTS = "Titles should be alphanumeric and cannot be empty.";
+    private final String title;
     public Title(String title) {
         this.title = title;
+    }
+
+    /**
+     * Returns whether the given {@code title} is a valid title.
+     *
+     * @param title The title to be checked.
+     * @return A boolean value.
+     */
+    public boolean isValidTitle(String title) {
+
     }
 
     @Override

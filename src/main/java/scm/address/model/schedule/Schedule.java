@@ -11,6 +11,7 @@ import java.util.Objects;
  */
 public class Schedule {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final String DATE_TIME_CONSTRAINTS = "Datetimes should be in yyyy-MM-dd HH:mm format.";
 
     private final Title title;
     private final Description description;
