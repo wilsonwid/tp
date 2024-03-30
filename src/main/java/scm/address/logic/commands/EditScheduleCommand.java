@@ -76,6 +76,9 @@ public class EditScheduleCommand extends Command {
                 .orElse(scheduleToEdit.getStartDateTime());
         LocalDateTime updatedEndDateTime = editScheduleDescriptor.getEndDateTime()
                 .orElse(scheduleToEdit.getEndDateTime());
+
+        return new Schedule(updatedTitle, updatedDescription,
+                updatedStartDateTime, updatedEndDateTime);
     }
 
     @Override

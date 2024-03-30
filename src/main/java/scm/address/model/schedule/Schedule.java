@@ -10,11 +10,12 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Schedule {
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     private final Title title;
     private final Description description;
     private final LocalDateTime startDateTime;
     private final LocalDateTime endDateTime;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Constructs a {@code Schedule} with the specified title, description, start and end datetime.
@@ -65,8 +66,8 @@ public class Schedule {
             Schedule otherSchedule = (Schedule) other;
             return title.equals(otherSchedule.title)
                     && description.equals(otherSchedule.description)
-                    && startDateTime.format(formatter).equals(otherSchedule.startDateTime.format(formatter))
-                    && endDateTime.format(formatter).equals(otherSchedule.endDateTime.format(formatter));
+                    && startDateTime.format(DATE_TIME_FORMATTER).equals(otherSchedule.startDateTime.format(DATE_TIME_FORMATTER))
+                    && endDateTime.format(DATE_TIME_FORMATTER).equals(otherSchedule.endDateTime.format(DATE_TIME_FORMATTER));
         }
         return false;
     }

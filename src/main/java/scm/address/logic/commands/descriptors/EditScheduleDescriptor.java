@@ -84,7 +84,7 @@ public class EditScheduleDescriptor {
      * @return The current startDateTime.
      */
     public Optional<LocalDateTime> getStartDateTime() {
-        Optional.ofNullable(this.startDateTime);
+        return Optional.ofNullable(this.startDateTime);
     }
 
     /**
@@ -127,6 +127,8 @@ public class EditScheduleDescriptor {
                     && this.startDateTime.equals(otherDescriptor.startDateTime)
                     && this.endDateTime.equals(otherDescriptor.endDateTime);
         }
+
+        return false;
     }
 
     /**
