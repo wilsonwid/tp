@@ -122,6 +122,16 @@ public class ModelManager implements Model {
         scheduleList.add(schedule);
     }
 
+    public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
+        requireAllNonNull(scheduleToEdit, editedSchedule);
+        int idx = scheduleList.indexOf(scheduleToEdit);
+        scheduleList.set(idx, editedSchedule);
+    }
+
+    public void deleteSchedule(Schedule schedule) {
+        scheduleList.remove(schedule);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

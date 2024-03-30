@@ -43,6 +43,14 @@ public class Schedule {
         return title;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
     @Override
     public String toString() {
         return title.toString() + description.toString() + startDateTime.toString() + endDateTime.toString();

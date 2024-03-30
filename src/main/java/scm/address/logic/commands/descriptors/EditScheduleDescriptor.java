@@ -6,6 +6,7 @@ import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Title;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Descriptor for EditScheduleCommand.
@@ -46,8 +47,8 @@ public class EditScheduleDescriptor {
      *
      * @return The current title.
      */
-    public Title getTitle() {
-        return this.title;
+    public Optional<Title> getTitle() {
+        return Optional.ofNullable(this.title);
     }
 
     /**
@@ -64,8 +65,8 @@ public class EditScheduleDescriptor {
      *
      * @return The current description.
      */
-    public Description getDescription() {
-        return this.description;
+    public Optional<Description> getDescription() {
+        return Optional.ofNullable(this.description);
     }
 
     /**
@@ -82,8 +83,8 @@ public class EditScheduleDescriptor {
      *
      * @return The current startDateTime.
      */
-    public LocalDateTime getStartDateTime() {
-        return this.startDateTime;
+    public Optional<LocalDateTime> getStartDateTime() {
+        Optional.ofNullable(this.startDateTime);
     }
 
     /**
@@ -100,8 +101,8 @@ public class EditScheduleDescriptor {
      *
      * @return The current endDateTime.
      */
-    public LocalDateTime getEndDateTime() {
-        return this.endDateTime;
+    public Optional<LocalDateTime> getEndDateTime() {
+        return Optional.ofNullable(this.endDateTime);
     }
 
     /**
