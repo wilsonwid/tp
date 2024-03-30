@@ -1,0 +1,145 @@
+package scm.address.logic.commands.descriptors;
+
+import scm.address.commons.util.CollectionUtil;
+import scm.address.commons.util.ToStringBuilder;
+import scm.address.model.schedule.Description;
+import scm.address.model.schedule.Title;
+
+import java.time.LocalDateTime;
+
+/**
+ * Descriptor for EditScheduleCommand.
+ */
+public class EditScheduleDescriptor {
+    private Title title;
+    private Description description;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+
+    public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
+        setTitle(toCopy.title);
+        setDescription(toCopy.description);
+        setStartDateTime(toCopy.startDateTime);
+        setEndDateTime(toCopy.endDateTime);
+    }
+
+    /**
+     * Returns true if at least one field is edited.
+     *
+     * @return A boolean value.
+     */
+    public boolean isAnyFieldEdited() {
+        return CollectionUtil.isAnyNonNull(title, description, startDateTime, endDateTime);
+    }
+
+    /**
+     * Sets a new title for the EditScheduleDescriptor.
+     *
+     * @param title New title to be set.
+     */
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    /**
+     * Returns the current title of the EditScheduleDescriptor.
+     *
+     * @return The current title.
+     */
+    public Title getTitle() {
+        return this.title;
+    }
+
+    /**
+     * Sets a new description for the EditScheduleDescriptor.
+     *
+     * @param description New title to be set.
+     */
+    public void setDescription(Description description) {
+        this.description = description;
+    }
+
+    /**
+     * Returns the current title of the EditScheduleDescriptor.
+     *
+     * @return The current description.
+     */
+    public Description getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Sets a new startDateTime for the EditScheduleDescriptor.
+     *
+     * @param startDateTime New startDateTime to be set.
+     */
+    public void setStartDateTime(LocalDateTime startDateTime) {
+        this.startDateTime = startDateTime;
+    }
+
+    /**
+     * Returns the current startDateTime of the EditScheduleDescriptor.
+     *
+     * @return The current startDateTime.
+     */
+    public LocalDateTime getStartDateTime() {
+        return this.startDateTime;
+    }
+
+    /**
+     * Sets a new endDateTime for the EditScheduleDescriptor.
+     *
+     * @param endDateTime New endDateTime to be set.
+     */
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+    /**
+     * Returns the current endDateTime of the EditScheduleDescriptor.
+     *
+     * @return The current endDateTime.
+     */
+    public LocalDateTime getEndDateTime() {
+        return this.endDateTime;
+    }
+
+    /**
+     * Returns whether this instance is equal to another Object.
+     * Returns true only if all attributes return true or if this instance
+     * is the same as the other instance.
+     *
+     * @param other The other Object to be compared against.
+     * @return A boolean value.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (other instanceof EditScheduleDescriptor) {
+            EditScheduleDescriptor otherDescriptor = (EditScheduleDescriptor) other;
+
+            return this.title.equals(otherDescriptor.title)
+                    && this.description.equals(otherDescriptor.description)
+                    && this.startDateTime.equals(otherDescriptor.startDateTime)
+                    && this.endDateTime.equals(otherDescriptor.endDateTime);
+        }
+    }
+
+    /**
+     * Returns the String representation of this instance.
+     *
+     * @return A String representation.
+     */
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("title", this.title)
+                .add("description", this.description)
+                .add("startDateTime", this.startDateTime)
+                .add("endDateTime", this.endDateTime)
+                .toString();
+    }
+}
