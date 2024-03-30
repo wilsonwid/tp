@@ -56,10 +56,13 @@ public class AddScheduleCommandParserTest {
     public void parse_validArgs_returnsAddScheduleCommand() {
         String input = String.format("title/Meeting d/Discuss project start/%s end/%s",
                 formattedStart, formattedEnd);
-
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
         AddScheduleCommand expectedCommand = new AddScheduleCommand(
-                new Schedule(new Title("Meeting"), new Description("Discuss project"),
-                        formattedStart, formattedEnd)
+                new Schedule(new Title("Meeting"),
+                        new Description("Project Discussion"),
+                        startDateTime,
+                        endDateTime)
         );
 
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
@@ -120,18 +123,18 @@ public class AddScheduleCommandParserTest {
     @Test
     public void parse_allPrefixesPresent_success() throws ParseException {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String input = " title/Meeting d/Project discussion start/2023-03-21 15:00 end/2023-03-21 16:00";
+        String input = " title/Meeting d/Project Discussion start/2023-03-21 15:00 end/2023-03-21 16:00";
 
         AddScheduleCommand command = parser.parse(input);
 
-        Schedule expectedSchedule = new Schedule(
-                new Title("Meeting"),
-                new Description("Project discussion"),
-                "2023-03-21 15:00",
-                "2023-03-21 16:00"
-        );
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        Schedule expectedSchedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                startDateTime,
+                endDateTime);
 
-        assertEquals(new AddScheduleCommand(expectedSchedule), command);
+        assertTrue(command.equals(new AddScheduleCommand(expectedSchedule)));
     }
     @Test
     public void isFirstDateTimeBeforeSecond_validDateTimes_firstIsBefore() {
