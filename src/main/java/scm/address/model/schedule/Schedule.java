@@ -1,5 +1,7 @@
 package scm.address.model.schedule;
 
+import scm.address.commons.util.ToStringBuilder;
+
 import static scm.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
@@ -72,7 +74,12 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return title.toString() + description.toString() + startDateTime.toString() + endDateTime.toString();
+        return new ToStringBuilder(this)
+                .add("title", this.title)
+                .add("description", this.description)
+                .add("startDateTime", this.startDateTime.format(DATE_TIME_FORMATTER))
+                .add("endDateTime", this.endDateTime.format(DATE_TIME_FORMATTER))
+                .toString();
     }
 
     @Override

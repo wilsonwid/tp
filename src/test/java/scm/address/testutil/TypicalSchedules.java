@@ -21,20 +21,20 @@ public class TypicalSchedules {
     public static final Schedule EXERCISE = new ScheduleBuilder()
             .withTitle("Exercise")
             .withDescription("With 2 friends")
-            .withStartDateTime("2024-03-10 16:00")
-            .withEndDateTime("2024-03-10 18:00")
+            .withStartDateTime("2024-03-11 20:00")
+            .withEndDateTime("2024-03-11 21:00")
             .build();
 
-    public static final EditScheduleDescriptor MEETING_DESCRIPTOR
-            = new EditScheduleDescriptorBuilder()
+    public static final EditScheduleDescriptor MEETING_DESCRIPTOR =
+            new EditScheduleDescriptorBuilder()
             .withTitle("Meeting")
             .withDescription("Meeting with supervisor")
             .withStartDateTime("2024-03-10 16:00")
             .withEndDateTime("2024-03-10 17:00")
             .build();
 
-    public static final EditScheduleDescriptor EXERCISE_DESCRIPTOR
-            = new EditScheduleDescriptorBuilder()
+    public static final EditScheduleDescriptor EXERCISE_DESCRIPTOR =
+            new EditScheduleDescriptorBuilder()
             .withTitle("Exercise")
             .withDescription("With 2 friends")
             .withStartDateTime("2024-03-10 16:00")

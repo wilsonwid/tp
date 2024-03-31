@@ -3,12 +3,11 @@ package scm.address.logic.commands.descriptors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static scm.address.testutil.TypicalSchedules.*;
-
+import static scm.address.testutil.TypicalSchedules.EXERCISE_DESCRIPTOR;
+import static scm.address.testutil.TypicalSchedules.MEETING_DESCRIPTOR;
 
 import org.junit.jupiter.api.Test;
 
-import scm.address.logic.commands.EditScheduleCommand;
 import scm.address.model.schedule.Schedule;
 import scm.address.testutil.EditScheduleDescriptorBuilder;
 
@@ -65,11 +64,11 @@ public class EditScheduleDescriptorTest {
 
     @Test
     public void toStringMethod() {
-        EditScheduleDescriptor descriptor = new EditScheduleDescriptor();
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptor(MEETING_DESCRIPTOR);
         String expected = EditScheduleDescriptor.class.getCanonicalName() + "{title="
-                + descriptor.getTitle().orElse(null) + ",description="
-                + descriptor.getDescription().orElse(null) + ",startDateTime="
-                + descriptor.getStartDateTime().orElse(null) + ",endDateTime="
+                + descriptor.getTitle().orElse(null) + ", description="
+                + descriptor.getDescription().orElse(null) + ", startDateTime="
+                + descriptor.getStartDateTime().orElse(null) + ", endDateTime="
                 + descriptor.getEndDateTime().orElse(null) + "}";
         assertEquals(expected, descriptor.toString());
     }

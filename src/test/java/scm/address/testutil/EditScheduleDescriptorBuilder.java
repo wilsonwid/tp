@@ -1,11 +1,11 @@
 package scm.address.testutil;
 
+import java.time.LocalDateTime;
+
 import scm.address.logic.commands.descriptors.EditScheduleDescriptor;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
-
-import java.time.LocalDateTime;
 
 /**
  * A utility class to help with building EditScheduleDescriptor objects.
@@ -18,7 +18,7 @@ public class EditScheduleDescriptorBuilder {
     }
 
     public EditScheduleDescriptorBuilder(EditScheduleDescriptor descriptor) {
-        this.descriptor = descriptor;
+        this.descriptor = new EditScheduleDescriptor();
     }
 
     /**

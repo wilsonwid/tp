@@ -44,7 +44,8 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_PATH));
         ImportCommand importCommand = new ImportCommand(curHashSet);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleList());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), new ScheduleList());
         String expectedMessage = "Contacts from files imported";
         expectedModel.addPerson(JAMES);
         assertCommandSuccess(importCommand, model, expectedMessage, expectedModel);
@@ -55,7 +56,8 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_PATH));
         ImportCommand importCommand = new ImportCommand(curHashSet);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleList());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), new ScheduleList());
         expectedModel.addPerson(JAMES);
         String expectedMessage = String.format(ImportCommand.MESSAGE_DUPLICATE_PERSON, JAMES.getName(),
                 JAMES.getPhone());

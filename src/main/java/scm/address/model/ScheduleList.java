@@ -41,7 +41,7 @@ public class ScheduleList implements Iterable<Schedule>, ReadOnlyScheduleList {
      */
     public void setSchedules(List<Schedule> schedules) {
         requireNonNull(schedules);
-        this.schedules.addAll(schedules);
+        this.schedules.setAll(schedules);
     }
 
     /**
@@ -52,7 +52,7 @@ public class ScheduleList implements Iterable<Schedule>, ReadOnlyScheduleList {
      */
     public void resetData(ReadOnlyScheduleList newData) {
         requireNonNull(newData);
-        setSchedules(schedules);
+        setSchedules(newData.getScheduleList());
     }
 
     /**
