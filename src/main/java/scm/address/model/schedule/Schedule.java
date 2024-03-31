@@ -1,5 +1,7 @@
 package scm.address.model.schedule;
 
+import static scm.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -27,14 +29,21 @@ public class Schedule {
      * @param endDateTime The schedule's end datetime.
      */
     public Schedule(Title title, Description description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (title == null || description == null || startDateTime == null || endDateTime == null) {
-            throw new NullPointerException("None of the fields should be null.");
-        }
+        requireAllNonNull(title, description, startDateTime, endDateTime);
 
         this.title = title;
         this.description = description;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+    }
+
+    public Schedule(Title title, Description description, String startStringTime, String endStringTime) {
+        requireAllNonNull(title, description, startStringTime, endStringTime);
+
+        this.title = title;
+        this.description = description;
+        this.startDateTime = LocalDateTime.parse(startStringTime, DATE_TIME_FORMATTER);
+        this.endDateTime = LocalDateTime.parse(endStringTime, DATE_TIME_FORMATTER);
     }
 
     public Description getDescription() {
