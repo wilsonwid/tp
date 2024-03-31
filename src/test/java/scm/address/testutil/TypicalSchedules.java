@@ -7,6 +7,9 @@ import java.util.List;
 import scm.address.model.ScheduleList;
 import scm.address.model.schedule.Schedule;
 
+/**
+ * A utility class containing a list of {@code Schedule} objects to be used in tests.
+ */
 public class TypicalSchedules {
     public static final Schedule MEETING = new ScheduleBuilder()
             .withTitle("Meeting")
