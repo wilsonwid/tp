@@ -1,10 +1,5 @@
 package scm.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +10,12 @@ import scm.address.model.ModelManager;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddScheduleCommandTest {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -127,7 +128,14 @@ public class AddScheduleCommandTest {
     }
 
     @Test
-    public void nullSchedule() {
+    public void testConstructor() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                startDateTime,
+                endDateTime);
+        assertDoesNotThrow(() -> new AddScheduleCommand(schedule));
         assertThrows(AssertionError.class, () -> new AddScheduleCommand(null));
     }
 
