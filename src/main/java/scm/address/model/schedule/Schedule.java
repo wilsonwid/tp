@@ -37,6 +37,14 @@ public class Schedule {
         this.endDateTime = endDateTime;
     }
 
+    /**
+     * Constructs a {@code Schedule} with the specified title, description, start, and end datetime.
+     *
+     * @param title Title to be used.
+     * @param description Description to be used.
+     * @param startStringTime {@code startDateTime} in String to be used.
+     * @param endStringTime {@code endDateTime} in String to be used.
+     */
     public Schedule(Title title, Description description, String startStringTime, String endStringTime) {
         requireAllNonNull(title, description, startStringTime, endStringTime);
 
