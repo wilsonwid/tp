@@ -16,6 +16,9 @@ import scm.address.model.schedule.Title;
  */
 public class JsonAdaptedSchedule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Field %s is missing in the schedule!";
+    public static final String START_TIME_FIELD_NAME = "startDateTime";
+    public static final String END_TIME_FIELD_NAME = "endDateTime";
+
 
     private final String title;
     private final String description;
@@ -78,7 +81,7 @@ public class JsonAdaptedSchedule {
         final Description modelDescription = new Description(this.description);
 
         if (this.startDateTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "startDateTime"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, START_TIME_FIELD_NAME));
         }
         try {
             LocalDateTime.parse(this.startDateTime, Schedule.DATE_TIME_FORMATTER);
@@ -90,7 +93,7 @@ public class JsonAdaptedSchedule {
 
         if (this.endDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    "endDateTime"));
+                    END_TIME_FIELD_NAME));
         }
         try {
             LocalDateTime.parse(this.endDateTime, Schedule.DATE_TIME_FORMATTER);
