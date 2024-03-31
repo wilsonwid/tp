@@ -50,6 +50,9 @@ public class EditScheduleCommand extends Command {
      * @param editScheduleDescriptor The descriptor to edit with.
      */
     public EditScheduleCommand(Index index, EditScheduleDescriptor editScheduleDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editScheduleDescriptor);
+
         this.index = index;
         this.editScheduleDescriptor = editScheduleDescriptor;
     }
