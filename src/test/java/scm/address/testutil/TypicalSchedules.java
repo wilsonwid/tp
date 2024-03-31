@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import scm.address.logic.commands.descriptors.EditScheduleDescriptor;
 import scm.address.model.ScheduleList;
 import scm.address.model.schedule.Schedule;
 
@@ -18,6 +19,22 @@ public class TypicalSchedules {
             .withEndDateTime("2024-03-10 17:00")
             .build();
     public static final Schedule EXERCISE = new ScheduleBuilder()
+            .withTitle("Exercise")
+            .withDescription("With 2 friends")
+            .withStartDateTime("2024-03-10 16:00")
+            .withEndDateTime("2024-03-10 18:00")
+            .build();
+
+    public static final EditScheduleDescriptor MEETING_DESCRIPTOR
+            = new EditScheduleDescriptorBuilder()
+            .withTitle("Meeting")
+            .withDescription("Meeting with supervisor")
+            .withStartDateTime("2024-03-10 16:00")
+            .withEndDateTime("2024-03-10 17:00")
+            .build();
+
+    public static final EditScheduleDescriptor EXERCISE_DESCRIPTOR
+            = new EditScheduleDescriptorBuilder()
             .withTitle("Exercise")
             .withDescription("With 2 friends")
             .withStartDateTime("2024-03-10 16:00")

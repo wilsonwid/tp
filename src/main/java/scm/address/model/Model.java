@@ -122,4 +122,11 @@ public interface Model {
      * @param schedule Schedule to be deleted.
      */
     void removeSchedule(Schedule schedule);
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     *
+     * @return An ObservableList of Schedules.
+     */
+    ObservableList<Schedule> getFilteredScheduleList();
 }

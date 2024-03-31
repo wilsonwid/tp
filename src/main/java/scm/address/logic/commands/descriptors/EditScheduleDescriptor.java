@@ -18,6 +18,11 @@ public class EditScheduleDescriptor {
     private LocalDateTime endDateTime;
 
     /**
+     * Constructs a default EditScheduleDescriptor.
+     */
+    public EditScheduleDescriptor() {}
+
+    /**
      * Constructs a new EditScheduleDescriptor.
      *
      * @param toCopy The EditScheduleDescriptor to copy from.

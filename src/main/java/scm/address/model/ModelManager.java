@@ -30,20 +30,20 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyScheduleList scheduleList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with contact manager: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        this.scheduleList = new ScheduleList();
+        this.scheduleList = new ScheduleList(scheduleList);
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.filteredSchedules = new FilteredList<>(this.scheduleList.getScheduleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -142,6 +142,16 @@ public class ModelManager implements Model {
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered list of {@code Schedule}.
+     *
+     * @return An ObservableList of Schedules.
+     */
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
     }
 
     //=========== Filtered Person List Accessors =============================================================
