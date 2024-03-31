@@ -29,6 +29,10 @@ public class AddScheduleCommand extends Command {
         return new CommandResult("Added schedule: " + schedule);
     }
 
+    public boolean scheduleExists() {
+        return schedule != null;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {

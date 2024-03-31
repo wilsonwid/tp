@@ -136,6 +136,7 @@ public class AddScheduleCommandTest {
                 startDateTime,
                 endDateTime);
         assertDoesNotThrow(() -> new AddScheduleCommand(schedule));
+        assertTrue(new AddScheduleCommand(schedule).scheduleExists());
         assertThrows(AssertionError.class, () -> new AddScheduleCommand(null));
     }
 
