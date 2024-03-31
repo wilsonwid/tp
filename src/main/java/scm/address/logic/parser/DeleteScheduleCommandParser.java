@@ -6,6 +6,9 @@ import scm.address.commons.core.index.Index;
 import scm.address.logic.commands.DeleteScheduleCommand;
 import scm.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new DeleteScheduleCommand object.
+ */
 public class DeleteScheduleCommandParser implements Parser<DeleteScheduleCommand> {
 
     /**

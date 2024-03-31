@@ -1,11 +1,13 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static scm.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static scm.address.model.Model.PREDICATE_SHOW_ALL_SCHEDULES;
 
 import scm.address.model.Model;
 
+/**
+ * Represents the command to list all available schedules.
+ */
 public class ListScheduleCommand extends Command {
     public static final String COMMAND_WORD = "list_schedule";
 

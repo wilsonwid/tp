@@ -1,5 +1,7 @@
 package scm.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -7,8 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import scm.address.commons.core.LogsCenter;
 import scm.address.model.schedule.Schedule;
-
-import java.util.logging.Logger;
 
 /**
  * Panel containing the list of persons.

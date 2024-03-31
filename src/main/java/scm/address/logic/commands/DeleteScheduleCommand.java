@@ -1,7 +1,6 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static scm.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -11,6 +10,9 @@ import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
 import scm.address.model.schedule.Schedule;
 
+/**
+ * Represents the command to delete a schedule.
+ */
 public class DeleteScheduleCommand extends Command {
     public static final String COMMAND_WORD = "delete_schedule";
 

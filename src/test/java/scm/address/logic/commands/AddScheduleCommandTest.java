@@ -149,7 +149,11 @@ public class AddScheduleCommandTest {
                 startDateTime,
                 endDateTime);
         AddScheduleCommand command1 = new AddScheduleCommand(schedule1);
-
-        assertTrue(command1.toString().equals("MeetingProject Discussion2023-03-21T15:002023-03-21T16:00"));
+        String expectedOutput = Schedule.class.getCanonicalName()
+                + "{title=Meeting, "
+                + "description=Project Discussion, "
+                + "startDateTime=2023-03-21 15:00, "
+                + "endDateTime=2023-03-21 16:00}";
+        assertTrue(command1.toString().equals(expectedOutput));
     }
 }
