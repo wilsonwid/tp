@@ -73,9 +73,10 @@ public class CommandTestUtil {
 
     public static final String DESCRIPTION_DESC_MEETING = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_MEETING;
 
-    public static final String VALID_START_DATE_TIME_MEETING =  "2024-03-10 16:00";
+    public static final String VALID_START_DATE_TIME_MEETING = "2024-03-10 16:00";
 
-    public static final String START_DATE_TIME_DESC_MEETING = " " + PREFIX_START_DATETIME + VALID_START_DATE_TIME_MEETING;
+    public static final String START_DATE_TIME_DESC_MEETING = " " + PREFIX_START_DATETIME
+            + VALID_START_DATE_TIME_MEETING;
 
     public static final String VALID_END_DATE_TIME_MEETING = "2024-03-10 18:00";
 

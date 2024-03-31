@@ -33,7 +33,8 @@ public class EditScheduleCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        assertParseFailure(parser, "-5" + VALID_TITLE_MEETING, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, "-5" + VALID_TITLE_MEETING,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         assertParseFailure(parser, "1 i/ string", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
