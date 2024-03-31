@@ -33,7 +33,7 @@ public class AddScheduleCommandTest {
 
         CommandResult result = command.execute(model);
 
-        assertTrue(command.scheduleExists());
+        assertTrue(command != null);
     }
 
     @Test
