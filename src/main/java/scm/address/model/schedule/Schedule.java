@@ -1,12 +1,12 @@
 package scm.address.model.schedule;
 
-import scm.address.commons.util.ToStringBuilder;
-
 import static scm.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import scm.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Schedule in the address book.
