@@ -38,8 +38,7 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditScheduleCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_DESCRIPTION,
@@ -53,17 +52,17 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            descriptor.setTitle(ParserUtil.parseTitle(
+            descriptor.setDescription(ParserUtil.parseDescription(
                     argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
 
         if (argMultimap.getValue(PREFIX_START_DATETIME).isPresent()) {
-            descriptor.setTitle(ParserUtil.parseTitle(
+            descriptor.setStartDateTime(ParserUtil.parseDateTime(
                     argMultimap.getValue(PREFIX_START_DATETIME).get()));
         }
 
         if (argMultimap.getValue(PREFIX_END_DATETIME).isPresent()) {
-            descriptor.setTitle(ParserUtil.parseTitle(
+            descriptor.setEndDateTime(ParserUtil.parseDateTime(
                     argMultimap.getValue(PREFIX_END_DATETIME).get()));
         }
 
