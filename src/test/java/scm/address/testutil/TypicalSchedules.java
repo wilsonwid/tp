@@ -1,11 +1,11 @@
 package scm.address.testutil;
 
-import scm.address.model.ScheduleList;
-import scm.address.model.schedule.Schedule;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import scm.address.model.ScheduleList;
+import scm.address.model.schedule.Schedule;
 
 public class TypicalSchedules {
     public static final Schedule MEETING = new ScheduleBuilder()

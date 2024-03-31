@@ -3,8 +3,8 @@ package scm.address.testutil;
 import java.time.LocalDateTime;
 
 import scm.address.model.schedule.Description;
-import scm.address.model.schedule.Title;
 import scm.address.model.schedule.Schedule;
+import scm.address.model.schedule.Title;
 
 /**
  * A utility class to help with building Schedule objects.
