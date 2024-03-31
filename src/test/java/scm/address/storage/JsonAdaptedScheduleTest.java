@@ -33,6 +33,12 @@ public class JsonAdaptedScheduleTest {
     }
 
     @Test
+    public void constructor_fromSchedule_test() throws Exception {
+        JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(MEETING);
+        assertEquals(MEETING, schedule.toModelType());
+    }
+
+    @Test
     public void toModelType_missingTitle_failure() {
         JsonAdaptedSchedule schedule = new JsonAdaptedSchedule(null,
                 VALID_DESCRIPTION, VALID_START_STRING_TIME, VALID_END_STRING_TIME);

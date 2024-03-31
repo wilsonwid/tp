@@ -34,8 +34,8 @@ public class EditScheduleCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TITLE + "TITLE]"
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
-            + "[" + PREFIX_START_DATETIME + "START_DATETIME"
-            + "[" + PREFIX_END_DATETIME + "END_DATETIME";
+            + "[" + PREFIX_START_DATETIME + "START_DATETIME]"
+            + "[" + PREFIX_END_DATETIME + "END_DATETIME]";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited schedule: %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided in the command.";
