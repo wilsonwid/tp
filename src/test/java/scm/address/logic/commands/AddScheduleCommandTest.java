@@ -140,7 +140,6 @@ public class AddScheduleCommandTest {
                 startDateTime,
                 endDateTime);
         AddScheduleCommand command1 = new AddScheduleCommand(schedule1);
-        System.out.println(command1.toString());
 
         assertTrue(command1.toString().equals("MeetingProject Discussion2023-03-21T15:002023-03-21T16:00"));
     }

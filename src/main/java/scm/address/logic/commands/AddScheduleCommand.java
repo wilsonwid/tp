@@ -19,7 +19,7 @@ public class AddScheduleCommand extends Command {
      * @param schedule
      */
     public AddScheduleCommand(Schedule schedule) {
-        assert schedule != null : "Schedule cannot be null";
+        assert schedule != null;
         this.schedule = schedule;
     }
 
