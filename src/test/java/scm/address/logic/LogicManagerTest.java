@@ -29,6 +29,7 @@ import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.UserPrefs;
 import scm.address.model.person.Person;
 import scm.address.storage.JsonAddressBookStorage;
+import scm.address.storage.JsonScheduleStorage;
 import scm.address.storage.JsonUserPrefsStorage;
 import scm.address.storage.StorageManager;
 import scm.address.testutil.PersonBuilder;
@@ -48,7 +49,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(temporaryFolder.resolve("scheduleList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonScheduleStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -160,7 +162,9 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(temporaryFolder.resolve("ExceptionScheduleList.json"));
+
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonScheduleStorage);
 
         logic = new LogicManager(model, storage);
 

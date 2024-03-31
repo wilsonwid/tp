@@ -22,12 +22,7 @@ import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.ReadOnlyUserPrefs;
 import scm.address.model.UserPrefs;
 import scm.address.model.util.SampleDataUtil;
-import scm.address.storage.AddressBookStorage;
-import scm.address.storage.JsonAddressBookStorage;
-import scm.address.storage.JsonUserPrefsStorage;
-import scm.address.storage.Storage;
-import scm.address.storage.StorageManager;
-import scm.address.storage.UserPrefsStorage;
+import scm.address.storage.*;
 import scm.address.ui.Ui;
 import scm.address.ui.UiManager;
 
@@ -58,7 +53,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ScheduleStorage scheduleStorage = new JsonScheduleStorage(userPrefs.getScheduleListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleStorage);
 
         model = initModelManager(storage, userPrefs);
 

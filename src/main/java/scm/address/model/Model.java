@@ -121,5 +121,5 @@ public interface Model {
      *
      * @param schedule Schedule to be deleted.
      */
-    void deleteSchedule(Schedule schedule);
+    void removeSchedule(Schedule schedule);
 }

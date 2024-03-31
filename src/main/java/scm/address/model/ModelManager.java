@@ -24,7 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<Schedule> scheduleList = FXCollections.observableArrayList();
+    private final ScheduleList scheduleList;
     private final FilteredList<Schedule> filteredSchedules;
 
 
@@ -38,8 +38,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.scheduleList = new ScheduleList();
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.filteredSchedules = new FilteredList<>(this.scheduleList);
+        this.filteredSchedules = new FilteredList<>(this.scheduleList.getScheduleList());
     }
 
     public ModelManager() {
@@ -118,21 +119,20 @@ public class ModelManager implements Model {
     }
 
     public ObservableList<Schedule> getScheduleList() {
-        return scheduleList;
+        return this.scheduleList.getScheduleList();
     }
 
     public void addSchedule(Schedule schedule) {
-        scheduleList.add(schedule);
+        scheduleList.addSchedule(schedule);
     }
 
     public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
         requireAllNonNull(scheduleToEdit, editedSchedule);
-        int idx = scheduleList.indexOf(scheduleToEdit);
-        scheduleList.set(idx, editedSchedule);
+        scheduleList.setSchedule(scheduleToEdit, editedSchedule);
     }
 
-    public void deleteSchedule(Schedule schedule) {
-        scheduleList.remove(schedule);
+    public void removeSchedule(Schedule schedule) {
+        scheduleList.removeSchedule(schedule);
     }
 
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {

@@ -180,7 +180,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteSchedule(Schedule schedule) {
+        public void removeSchedule(Schedule schedule) {
             return;
         }
     }
