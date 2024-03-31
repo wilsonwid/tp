@@ -1,5 +1,10 @@
 package scm.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,8 +15,6 @@ import scm.address.model.ModelManager;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AddScheduleCommandTest {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
