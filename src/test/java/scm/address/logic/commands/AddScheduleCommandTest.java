@@ -130,4 +130,18 @@ public class AddScheduleCommandTest {
     public void nullSchedule() {
         assertThrows(AssertionError.class, () -> new AddScheduleCommand(null));
     }
+
+    @Test
+    public void toStringAccurate() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        Schedule schedule1 = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                startDateTime,
+                endDateTime);
+        AddScheduleCommand command1 = new AddScheduleCommand(schedule1);
+        System.out.println(command1.toString());
+
+        assertTrue(command1.toString().equals("MeetingProject Discussion2023-03-21T15:002023-03-21T16:00"));
+    }
 }
