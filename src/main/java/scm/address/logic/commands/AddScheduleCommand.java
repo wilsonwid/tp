@@ -14,7 +14,12 @@ public class AddScheduleCommand extends Command {
     public static final String COMMAND_WORD = "add_schedule";
     private final Schedule schedule;
 
+    /**
+     * Default constructor
+     * @param schedule
+     */
     public AddScheduleCommand(Schedule schedule) {
+        assert schedule != null;
         this.schedule = schedule;
     }
 

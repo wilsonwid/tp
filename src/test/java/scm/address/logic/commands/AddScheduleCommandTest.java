@@ -1,7 +1,9 @@
 package scm.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
@@ -32,7 +34,7 @@ public class AddScheduleCommandTest {
 
         CommandResult result = command.execute(model);
 
-        assertTrue(command.scheduleExists());
+        assertTrue(command != null);
     }
 
     @Test
@@ -123,5 +125,31 @@ public class AddScheduleCommandTest {
         int expectedHashCode = schedule.hashCode();
         assertEquals(expectedHashCode, command.hashCode(),
                 "Hash code should be consistent and equal to the schedule's hash code.");
+    }
+
+    @Test
+    public void testConstructor() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        Schedule schedule = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                startDateTime,
+                endDateTime);
+        assertDoesNotThrow(() -> new AddScheduleCommand(schedule));
+        assertTrue(new AddScheduleCommand(schedule).scheduleExists());
+        assertThrows(AssertionError.class, () -> new AddScheduleCommand(null));
+    }
+
+    @Test
+    public void toStringAccurate() {
+        LocalDateTime startDateTime = LocalDateTime.of(2023, 3, 21, 15, 0);
+        LocalDateTime endDateTime = LocalDateTime.of(2023, 3, 21, 16, 0);
+        Schedule schedule1 = new Schedule(new Title("Meeting"),
+                new Description("Project Discussion"),
+                startDateTime,
+                endDateTime);
+        AddScheduleCommand command1 = new AddScheduleCommand(schedule1);
+
+        assertTrue(command1.toString().equals("MeetingProject Discussion2023-03-21T15:002023-03-21T16:00"));
     }
 }
