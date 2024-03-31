@@ -5,14 +5,16 @@ package scm.address.model.schedule;
  */
 public class Description {
     /** Informs the user of the constraints for valid descriptions. **/
-    public static final String MESSAGE_CONSTRAINTS = "Descriptions should be alphanumeric and cannot be empty. They can contain a space only after the first character";
+    public static final String MESSAGE_CONSTRAINTS = "Descriptions should be alphanumeric and cannot be empty. "
+            + "They can contain a space only after the first character";
 
     /** The regular expression to be used for determinig whether a Description is valid. **/
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     private final String description;
 
-    /** Constructs a new Description instance.
+    /**
+     * Constructs a new Description instance.
      *
      * @param description The description to be added.
      */

@@ -39,7 +39,8 @@ public class JsonScheduleStorage implements ScheduleStorage {
     public Optional<ReadOnlyScheduleList> readScheduleList(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableScheduleList> jsonScheduleList = JsonUtil.readJsonFile(this.filePath, JsonSerializableScheduleList.class);
+        Optional<JsonSerializableScheduleList> jsonScheduleList = JsonUtil
+                .readJsonFile(this.filePath, JsonSerializableScheduleList.class);
 
         if (!jsonScheduleList.isPresent()) {
             return Optional.empty();
@@ -48,7 +49,7 @@ public class JsonScheduleStorage implements ScheduleStorage {
         try {
             return Optional.of(jsonScheduleList.get().toModelType());
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + this.filePath + ": "+ ive.getMessage());
+            logger.info("Illegal values found in " + this.filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
         }
     }

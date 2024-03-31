@@ -43,6 +43,12 @@ public class EditScheduleCommand extends Command {
     private final Index index;
     private final EditScheduleDescriptor editScheduleDescriptor;
 
+    /**
+     * Constructs a new EditScheduleCommand instance.
+     *
+     * @param index Index of the Schedule to be edited.
+     * @param editScheduleDescriptor The descriptor to edit with.
+     */
     public EditScheduleCommand(Index index, EditScheduleDescriptor editScheduleDescriptor) {
         this.index = index;
         this.editScheduleDescriptor = editScheduleDescriptor;

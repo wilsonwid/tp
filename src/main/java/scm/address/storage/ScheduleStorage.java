@@ -7,6 +7,9 @@ import java.util.Optional;
 import scm.address.commons.exceptions.DataLoadingException;
 import scm.address.model.ReadOnlyScheduleList;
 
+/**
+ * Represents a storage for {@link scm.address.model.ScheduleList}.
+ */
 public interface ScheduleStorage {
 
     /**
@@ -45,7 +48,8 @@ public interface ScheduleStorage {
     void saveScheduleList(ReadOnlyScheduleList scheduleList) throws IOException;
 
     /**
-     * Saves the given {@code scheduleList} to the storage. This overloaded method allows one to indicate the {@code filePath} for this to be saved to.
+     * Saves the given {@code scheduleList} to the storage.
+     * This overloaded method allows one to indicate the {@code filePath} for this to be saved to.
      *
      * @param scheduleList The schedule list, which cannot be null.
      * @param filePath The filepath for the schedule list to be saved to.

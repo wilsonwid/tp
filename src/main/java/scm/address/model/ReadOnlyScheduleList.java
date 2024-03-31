@@ -3,6 +3,9 @@ package scm.address.model;
 import javafx.collections.ObservableList;
 import scm.address.model.schedule.Schedule;
 
+/**
+ * Unmodifiable view of a schedule list.
+ */
 public interface ReadOnlyScheduleList {
 
     /**

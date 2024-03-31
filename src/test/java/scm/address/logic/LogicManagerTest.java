@@ -162,7 +162,8 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(temporaryFolder.resolve("ExceptionScheduleList.json"));
+        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(temporaryFolder
+                .resolve("ExceptionScheduleList.json"));
 
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonScheduleStorage);
 

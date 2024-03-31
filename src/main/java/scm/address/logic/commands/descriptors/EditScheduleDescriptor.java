@@ -1,12 +1,12 @@
 package scm.address.logic.commands.descriptors;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 import scm.address.commons.util.CollectionUtil;
 import scm.address.commons.util.ToStringBuilder;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Title;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
 
 /**
  * Descriptor for EditScheduleCommand.
@@ -17,6 +17,11 @@ public class EditScheduleDescriptor {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
 
+    /**
+     * Constructs a new EditScheduleDescriptor.
+     *
+     * @param toCopy The EditScheduleDescriptor to copy from.
+     */
     public EditScheduleDescriptor(EditScheduleDescriptor toCopy) {
         setTitle(toCopy.title);
         setDescription(toCopy.description);

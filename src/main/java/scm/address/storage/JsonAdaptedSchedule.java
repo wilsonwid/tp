@@ -2,11 +2,6 @@ package scm.address.storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,8 +57,7 @@ public class JsonAdaptedSchedule {
      * {@code Schedule} object.
      *
      * @return A Schedule.
-     * @throws IllegalValueException If there are any data constraints violated in the
-     * adapted schedule.
+     * @throws IllegalValueException If there are any data constraints violated in the adapted schedule.
      */
     public Schedule toModelType() throws IllegalValueException {
         if (this.title == null) {
@@ -75,7 +69,8 @@ public class JsonAdaptedSchedule {
         final Title modelTitle = new Title(this.title);
 
         if (this.description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(this.description)) {
             throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);

@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import scm.address.commons.core.GuiSettings;
@@ -135,6 +134,11 @@ public class ModelManager implements Model {
         scheduleList.removeSchedule(schedule);
     }
 
+    /**
+     * Updates the filtered schedule list to use {@code predicate}.
+     *
+     * @param predicate The predicate to be used as a filter.
+     */
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);

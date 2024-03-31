@@ -67,8 +67,12 @@ public class Schedule {
             Schedule otherSchedule = (Schedule) other;
             return title.equals(otherSchedule.title)
                     && description.equals(otherSchedule.description)
-                    && startDateTime.format(DATE_TIME_FORMATTER).equals(otherSchedule.startDateTime.format(DATE_TIME_FORMATTER))
-                    && endDateTime.format(DATE_TIME_FORMATTER).equals(otherSchedule.endDateTime.format(DATE_TIME_FORMATTER));
+                    && startDateTime
+                    .format(DATE_TIME_FORMATTER)
+                    .equals(otherSchedule.startDateTime.format(DATE_TIME_FORMATTER))
+                    && endDateTime
+                    .format(DATE_TIME_FORMATTER)
+                    .equals(otherSchedule.endDateTime.format(DATE_TIME_FORMATTER));
         }
         return false;
     }

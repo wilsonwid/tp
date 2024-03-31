@@ -5,7 +5,8 @@ package scm.address.model.schedule;
  */
 public class Title {
     /** Informs the user of the constriants for valid titles. **/
-    public static final String MESSAGE_CONSTRAINTS = "Titles should be alphanumeric and cannot be empty. They can contain a space only after the first character.";
+    public static final String MESSAGE_CONSTRAINTS = "Titles should be alphanumeric and cannot be empty. "
+            + "They can contain a space only after the first character.";
 
     /** The regular expression to be used for determining whether a Title is valid. **/
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
