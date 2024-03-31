@@ -30,7 +30,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyScheduleList scheduleList) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, ReadOnlyScheduleList scheduleList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with contact manager: " + addressBook + " and user prefs " + userPrefs);
@@ -117,8 +118,8 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    public ObservableList<Schedule> getScheduleList() {
-        return this.scheduleList.getScheduleList();
+    public ReadOnlyScheduleList getScheduleList() {
+        return this.scheduleList;
     }
 
     public void addSchedule(Schedule schedule) {

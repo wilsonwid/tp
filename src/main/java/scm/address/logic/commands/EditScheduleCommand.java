@@ -60,7 +60,7 @@ public class EditScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Schedule> scheduleList = model.getScheduleList();
+        List<Schedule> scheduleList = model.getScheduleList().getScheduleList();
 
         if (index.getZeroBased() >= scheduleList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX);

@@ -91,7 +91,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /** Returns an unmodifiable view of available schedules. **/
-    ObservableList<Schedule> getScheduleList();
+    ReadOnlyScheduleList getScheduleList();
 
     /**
      * Adds the given schedule.

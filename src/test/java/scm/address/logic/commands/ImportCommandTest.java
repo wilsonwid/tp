@@ -7,6 +7,7 @@ import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalPersons.JAMES;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static scm.address.testutil.TypicalSchedules.getTypicalScheduleList;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 import scm.address.storage.JsonAdaptedPerson;
 
@@ -30,7 +32,7 @@ public class ImportCommandTest {
     private static final String UNKNOWN_FILE_NAME = "./src/test/data/ImportCommandTest/abcdefgh_abcdefgh.json";
     private static final String ADDRESS_BOOK_PATH = "./src/test/data/ImportCommandTest/addressbook.json";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
 
     @Test
     public void constructor_nullFileSet_throwsNullPointerException() {
@@ -42,7 +44,7 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_PATH));
         ImportCommand importCommand = new ImportCommand(curHashSet);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleList());
         String expectedMessage = "Contacts from files imported";
         expectedModel.addPerson(JAMES);
         assertCommandSuccess(importCommand, model, expectedMessage, expectedModel);
@@ -53,7 +55,7 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_PATH));
         ImportCommand importCommand = new ImportCommand(curHashSet);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new ScheduleList());
         expectedModel.addPerson(JAMES);
         String expectedMessage = String.format(ImportCommand.MESSAGE_DUPLICATE_PERSON, JAMES.getName(),
                 JAMES.getPhone());
