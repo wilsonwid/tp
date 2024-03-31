@@ -1,9 +1,5 @@
 package scm.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -14,6 +10,8 @@ import scm.address.model.ModelManager;
 import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AddScheduleCommandTest {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -123,5 +121,10 @@ public class AddScheduleCommandTest {
         int expectedHashCode = schedule.hashCode();
         assertEquals(expectedHashCode, command.hashCode(),
                 "Hash code should be consistent and equal to the schedule's hash code.");
+    }
+
+    @Test
+    public void nullSchedule() {
+        assertThrows(AssertionError.class, () -> new AddScheduleCommand(null));
     }
 }
