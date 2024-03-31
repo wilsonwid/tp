@@ -1,16 +1,22 @@
 package scm.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import scm.address.model.AddressBook;
 import scm.address.model.ReadOnlyAddressBook;
+import scm.address.model.ReadOnlyScheduleList;
+import scm.address.model.ScheduleList;
 import scm.address.model.person.Address;
 import scm.address.model.person.Email;
 import scm.address.model.person.Name;
 import scm.address.model.person.Person;
 import scm.address.model.person.Phone;
+import scm.address.model.schedule.Description;
+import scm.address.model.schedule.Schedule;
+import scm.address.model.schedule.Title;
 import scm.address.model.tag.Tag;
 
 /**
@@ -40,12 +46,32 @@ public class SampleDataUtil {
         };
     }
 
+    public static Schedule[] getSampleSchedules() {
+        return new Schedule[] {
+            new Schedule(new Title("Make cookies"), new Description("Chocolate cookies"),
+                LocalDateTime.parse("2024-01-03 16:00", Schedule.DATE_TIME_FORMATTER),
+                LocalDateTime.parse("2024-01-03 18:00", Schedule.DATE_TIME_FORMATTER)
+                ),
+            new Schedule(new Title("Make homework"), new Description("Computer Science 101"),
+                LocalDateTime.parse("2024-01-03 20:00", Schedule.DATE_TIME_FORMATTER),
+                LocalDateTime.parse("2024-01-03 22:00", Schedule.DATE_TIME_FORMATTER))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyScheduleList getSampleScheduleList() {
+        ScheduleList sampleScheduleList = new ScheduleList();
+        for (Schedule sampleSchedule : getSampleSchedules()) {
+            sampleScheduleList.addSchedule(sampleSchedule);
+        }
+        return sampleScheduleList;
     }
 
     /**

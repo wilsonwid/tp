@@ -1,8 +1,12 @@
 package scm.address.model.schedule;
 
+import static scm.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+
+import scm.address.commons.util.ToStringBuilder;
 
 /**
  * Represents a Schedule in the address book.
@@ -10,11 +14,13 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class Schedule {
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public static final String DATE_TIME_CONSTRAINTS = "Datetimes should be in yyyy-MM-dd HH:mm format.";
+
     private final Title title;
     private final Description description;
     private final LocalDateTime startDateTime;
     private final LocalDateTime endDateTime;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Constructs a {@code Schedule} with the specified title, description, start and end datetime.
@@ -25,14 +31,29 @@ public class Schedule {
      * @param endDateTime The schedule's end datetime.
      */
     public Schedule(Title title, Description description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (title == null || description == null || startDateTime == null || endDateTime == null) {
-            throw new NullPointerException("None of the fields should be null.");
-        }
+        requireAllNonNull(title, description, startDateTime, endDateTime);
 
         this.title = title;
         this.description = description;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
+    }
+
+    /**
+     * Constructs a {@code Schedule} with the specified title, description, start, and end datetime.
+     *
+     * @param title Title to be used.
+     * @param description Description to be used.
+     * @param startStringTime {@code startDateTime} in String to be used.
+     * @param endStringTime {@code endDateTime} in String to be used.
+     */
+    public Schedule(Title title, Description description, String startStringTime, String endStringTime) {
+        requireAllNonNull(title, description, startStringTime, endStringTime);
+
+        this.title = title;
+        this.description = description;
+        this.startDateTime = LocalDateTime.parse(startStringTime, DATE_TIME_FORMATTER);
+        this.endDateTime = LocalDateTime.parse(endStringTime, DATE_TIME_FORMATTER);
     }
 
     public Description getDescription() {
@@ -43,9 +64,22 @@ public class Schedule {
         return title;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return startDateTime;
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return endDateTime;
+    }
+
     @Override
     public String toString() {
-        return title.toString() + description.toString() + startDateTime.toString() + endDateTime.toString();
+        return new ToStringBuilder(this)
+                .add("title", this.title)
+                .add("description", this.description)
+                .add("startDateTime", this.startDateTime.format(DATE_TIME_FORMATTER))
+                .add("endDateTime", this.endDateTime.format(DATE_TIME_FORMATTER))
+                .toString();
     }
 
     @Override
@@ -57,8 +91,12 @@ public class Schedule {
             Schedule otherSchedule = (Schedule) other;
             return title.equals(otherSchedule.title)
                     && description.equals(otherSchedule.description)
-                    && startDateTime.format(formatter).equals(otherSchedule.startDateTime.format(formatter))
-                    && endDateTime.format(formatter).equals(otherSchedule.endDateTime.format(formatter));
+                    && startDateTime
+                    .format(DATE_TIME_FORMATTER)
+                    .equals(otherSchedule.startDateTime.format(DATE_TIME_FORMATTER))
+                    && endDateTime
+                    .format(DATE_TIME_FORMATTER)
+                    .equals(otherSchedule.endDateTime.format(DATE_TIME_FORMATTER));
         }
         return false;
     }

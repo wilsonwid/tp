@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 
 /**
@@ -22,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     @Test

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 
 public class ClearCommandTest {
@@ -22,8 +23,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

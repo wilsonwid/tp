@@ -3,10 +3,14 @@ package scm.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static scm.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 import static scm.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -60,6 +64,23 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String VALID_TITLE_MEETING = "Meeting";
+
+    public static final String TITLE_DESC_MEETING = " " + PREFIX_TITLE + VALID_TITLE_MEETING;
+
+    public static final String VALID_DESCRIPTION_MEETING = "Meeting in some place";
+
+    public static final String DESCRIPTION_DESC_MEETING = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_MEETING;
+
+    public static final String VALID_START_DATE_TIME_MEETING = "2024-03-10 16:00";
+
+    public static final String START_DATE_TIME_DESC_MEETING = " " + PREFIX_START_DATETIME
+            + VALID_START_DATE_TIME_MEETING;
+
+    public static final String VALID_END_DATE_TIME_MEETING = "2024-03-10 18:00";
+
+    public static final String END_DATE_TIME_DESC_MEETING = " " + PREFIX_END_DATETIME + VALID_END_DATE_TIME_MEETING;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

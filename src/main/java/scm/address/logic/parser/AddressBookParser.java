@@ -14,6 +14,7 @@ import scm.address.logic.commands.ClearCommand;
 import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.EditCommand;
+import scm.address.logic.commands.EditScheduleCommand;
 import scm.address.logic.commands.ExitCommand;
 import scm.address.logic.commands.FindAndExportCommand;
 import scm.address.logic.commands.FindCommand;
@@ -88,6 +89,9 @@ public class AddressBookParser {
 
         case AddScheduleCommand.COMMAND_WORD:
             return new AddScheduleCommandParser().parse(arguments);
+
+        case EditScheduleCommand.COMMAND_WORD:
+            return new EditScheduleCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

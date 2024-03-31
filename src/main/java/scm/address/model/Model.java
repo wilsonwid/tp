@@ -15,6 +15,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluates to true. **/
+    Predicate<Schedule> PREDICATE_SHOW_ALL_SCHEDULES = x -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -87,6 +90,43 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    ObservableList<Schedule> getScheduleList();
+    /** Returns an unmodifiable view of available schedules. **/
+    ReadOnlyScheduleList getScheduleList();
+
+    /**
+     * Adds the given schedule.
+     *
+     * @param schedule Schedule to be added.
+     */
     void addSchedule(Schedule schedule);
+
+    /**
+     * Sets the scheduleToEdit to editedSchedule.
+     *
+     * @param scheduleToEdit Schedule to be edited.
+     * @param editedSchedule Schedule that has been edited.
+     */
+    void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule);
+
+    /**
+     * Updates the filter of the filtered schedule list to filter by the
+     * given {@code predicate}
+     *
+     * @param predicate The predicate to be used as a filter.
+     */
+    void updateFilteredScheduleList(Predicate<Schedule> predicate);
+
+    /**
+     * Deletes the given schedule.
+     *
+     * @param schedule Schedule to be deleted.
+     */
+    void removeSchedule(Schedule schedule);
+
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     *
+     * @return An ObservableList of Schedules.
+     */
+    ObservableList<Schedule> getFilteredScheduleList();
 }

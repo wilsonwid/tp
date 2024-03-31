@@ -12,6 +12,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 
 public class FindAndExportCommandTest {
@@ -19,7 +20,7 @@ public class FindAndExportCommandTest {
     @TempDir
     Path testFolder;
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
 
     @Test
     public void execute_validTagAndFilename_success() throws Exception {
