@@ -15,6 +15,7 @@ public class AddScheduleCommand extends Command {
     private final Schedule schedule;
 
     public AddScheduleCommand(Schedule schedule) {
+        assert schedule != null : "Schedule cannot be null";
         this.schedule = schedule;
     }
 
