@@ -79,6 +79,7 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+
     // ================ ScheduleStorage methods ==============================
 
     @Override
@@ -104,7 +105,7 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveScheduleList(ReadOnlyScheduleList scheduleList, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        this.scheduleStorage.saveScheduleList(scheduleList, filePath);
+        logger.fine("Attempting to write to schedule list file: " + filePath);
+        scheduleStorage.saveScheduleList(scheduleList, filePath);
     }
 }

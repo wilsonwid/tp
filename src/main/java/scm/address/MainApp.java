@@ -79,6 +79,7 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using schedule list file: " + storage.getScheduleStorageFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyScheduleList> scheduleListOptional;
