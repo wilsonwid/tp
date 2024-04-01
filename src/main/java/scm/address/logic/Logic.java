@@ -9,6 +9,7 @@ import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 
 /**
  * API of the Logic component
@@ -47,4 +48,7 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /** Returns an unmodifiable view of the list of schedules. **/
+    ObservableList<Schedule> getFilteredScheduleList();
 }

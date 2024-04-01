@@ -19,19 +19,24 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import scm.address.commons.core.index.Index;
 import scm.address.logic.commands.AddCommand;
 import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
 import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
+import scm.address.logic.commands.DeleteScheduleCommand;
 import scm.address.logic.commands.EditCommand;
 import scm.address.logic.commands.EditCommand.EditPersonDescriptor;
+import scm.address.logic.commands.EditScheduleCommand;
 import scm.address.logic.commands.ExitCommand;
 import scm.address.logic.commands.FindAndExportCommand;
 import scm.address.logic.commands.FindCommand;
 import scm.address.logic.commands.HelpCommand;
 import scm.address.logic.commands.ImportCommand;
 import scm.address.logic.commands.ListCommand;
+import scm.address.logic.commands.ListScheduleCommand;
+import scm.address.logic.commands.descriptors.EditScheduleDescriptor;
 import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.person.AddressContainsKeywordsPredicate;
 import scm.address.model.person.NameContainsKeywordsPredicate;
@@ -41,6 +46,7 @@ import scm.address.model.schedule.Description;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
 import scm.address.testutil.EditPersonDescriptorBuilder;
+import scm.address.testutil.EditScheduleDescriptorBuilder;
 import scm.address.testutil.PersonBuilder;
 import scm.address.testutil.PersonUtil;
 
@@ -172,5 +178,42 @@ public class AddressBookParserTest {
 
         assertTrue(result instanceof AddScheduleCommand);
         assertEquals(command, result);
+    }
+
+    @Test
+    public void parseCommand_editScheduleCommand() throws Exception {
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptorBuilder()
+                .withTitle("Meeting")
+                .withDescription("Project discussion")
+                .withStartDateTime("2023-03-21 15:00")
+                .withEndDateTime("2023-03-21 16:00")
+                .build();
+        Index index = Index.fromZeroBased(0);
+        EditScheduleCommand command = new EditScheduleCommand(index, descriptor);
+        String commandString = EditScheduleCommand.COMMAND_WORD
+                + " 1 "
+                + "title/Meeting "
+                + "d/Project discussion "
+                + "start/2023-03-21 15:00 "
+                + "end/2023-03-21 16:00";
+        EditScheduleCommand parsedCommand = (EditScheduleCommand) parser.parseCommand(commandString);
+        assertEquals(command, parsedCommand);
+    }
+
+    @Test
+    public void parseCommand_listScheduleCommand() throws Exception {
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
+
+        assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD + " 5") instanceof ListScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteScheduleCommand() throws Exception {
+        Index index = Index.fromZeroBased(0);
+        DeleteScheduleCommand command = new DeleteScheduleCommand(index);
+        String commandString = DeleteScheduleCommand.COMMAND_WORD
+                + " 1";
+        DeleteScheduleCommand parsedCommand = (DeleteScheduleCommand) parser.parseCommand(commandString);
+        assertEquals(command, parsedCommand);
     }
 }
