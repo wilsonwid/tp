@@ -1,5 +1,7 @@
 package scm.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -42,5 +44,25 @@ public class DeleteScheduleCommandTest {
     public void execute_outsideBounds_failure() {
         DeleteScheduleCommand command = new DeleteScheduleCommand(INVALID_INDEX);
         assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        DeleteScheduleCommand command = new DeleteScheduleCommand(VALID_INDEX);
+        DeleteScheduleCommand otherCommand = new DeleteScheduleCommand(VALID_INDEX);
+
+        assertEquals(command, otherCommand);
+
+        DeleteScheduleCommand invalidCommand = new DeleteScheduleCommand(INVALID_INDEX);
+
+        assertFalse(command.equals(invalidCommand));
+    }
+
+    @Test
+    public void testToString() {
+        DeleteScheduleCommand command = new DeleteScheduleCommand(VALID_INDEX);
+        String expectedMessage = DeleteScheduleCommand.class.getCanonicalName()
+                + "{targetIndex=" + VALID_INDEX + "}";
+        assertEquals(command.toString(), expectedMessage);
     }
 }
