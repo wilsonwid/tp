@@ -3,6 +3,7 @@ package scm.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static scm.address.testutil.TypicalSchedules.getTypicalScheduleList;
@@ -51,11 +52,14 @@ public class DeleteScheduleCommandTest {
         DeleteScheduleCommand command = new DeleteScheduleCommand(VALID_INDEX);
         DeleteScheduleCommand otherCommand = new DeleteScheduleCommand(VALID_INDEX);
 
-        assertEquals(command, otherCommand);
+        assertTrue(command.equals(otherCommand));
 
         DeleteScheduleCommand invalidCommand = new DeleteScheduleCommand(INVALID_INDEX);
 
         assertFalse(command.equals(invalidCommand));
+
+        ListScheduleCommand listCommand = new ListScheduleCommand();
+        assertFalse(command.equals(listCommand));
     }
 
     @Test
