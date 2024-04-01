@@ -28,7 +28,7 @@ public class DeleteScheduleCommandTest {
     }
 
     @Test
-    public void execute_testIndex_success() throws Exception {
+    public void execute_testIndex_success() {
         DeleteScheduleCommand command = new DeleteScheduleCommand(VALID_INDEX);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
         Schedule scheduleToDelete = expectedModel.getScheduleList().getScheduleList().get(0);
