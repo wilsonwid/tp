@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import scm.address.commons.core.index.Index;
+import scm.address.commons.util.ToStringBuilder;
 import scm.address.logic.Messages;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
@@ -47,5 +48,26 @@ public class DeleteScheduleCommand extends Command {
         Schedule scheduleToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.removeSchedule(scheduleToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_SCHEDULE_SUCCESS, Messages.format(scheduleToDelete)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof DeleteScheduleCommand)) {
+            return false;
+        }
+
+        DeleteScheduleCommand otherCommand = (DeleteScheduleCommand) other;
+        return this.targetIndex.equals(otherCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", this.targetIndex)
+                .toString();
     }
 }
