@@ -25,7 +25,13 @@ public class DeleteScheduleCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs a DeleteScheduleCommand.
+     *
+     * @param targetIndex The target index to delete.
+     */
     public DeleteScheduleCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
