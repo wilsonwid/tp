@@ -18,11 +18,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import scm.address.commons.core.GuiSettings;
 import scm.address.logic.commands.AddCommand;
 import scm.address.logic.commands.CommandResult;
 import scm.address.logic.commands.ListCommand;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.logic.parser.exceptions.ParseException;
+import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
 import scm.address.model.ReadOnlyAddressBook;
@@ -87,6 +89,27 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void testReturn_addressBook_success() {
+        ReadOnlyAddressBook ab = new AddressBook();
+        assertEquals(logic.getAddressBook(), ab);
+    }
+
+    @Test
+    public void returnPath_addressBook_success() {
+        assertEquals(model.getAddressBookFilePath(), logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void returnSettings_testGui_success() {
+        assertEquals(new GuiSettings(), logic.getGuiSettings());
+    }
+
+    @Test
+    public void returnList_getFilteredScheduleList_success() {
+        assertEquals(model.getFilteredPersonList(), logic.getFilteredScheduleList());
     }
 
     /**
