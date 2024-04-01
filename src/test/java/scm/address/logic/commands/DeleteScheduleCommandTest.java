@@ -54,6 +54,8 @@ public class DeleteScheduleCommandTest {
 
         assertTrue(command.equals(otherCommand));
 
+        assertTrue(command.equals(command));
+
         DeleteScheduleCommand invalidCommand = new DeleteScheduleCommand(INVALID_INDEX);
 
         assertFalse(command.equals(invalidCommand));
