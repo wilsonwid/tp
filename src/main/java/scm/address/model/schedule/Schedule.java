@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import scm.address.commons.util.ToStringBuilder;
+
 /**
  * Represents a Schedule in the address book.
  * <p>
@@ -70,8 +72,7 @@ public class Schedule {
         return endDateTime;
     }
 
-    @Override
-    public String toString() {
+    public String toStringCalendar() {
         return title.toString()
                 + "\n"
                 + description.toString()
@@ -79,6 +80,16 @@ public class Schedule {
                 + startDateTime.toString()
                 + "\n"
                 + endDateTime.toString();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("title", this.title)
+                .add("description", this.description)
+                .add("startDateTime", this.startDateTime.format(DATE_TIME_FORMATTER))
+                .add("endDateTime", this.endDateTime.format(DATE_TIME_FORMATTER))
+                .toString();
     }
 
     @Override
