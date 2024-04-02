@@ -5,7 +5,6 @@ import java.time.YearMonth;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import scm.address.model.Model;
 import scm.address.model.view.CalendarView;
 

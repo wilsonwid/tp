@@ -15,6 +15,10 @@ import javafx.scene.layout.VBox;
 import scm.address.model.Model;
 import scm.address.model.schedule.Schedule;
 
+/**
+ * Represents a calendar view in the GUI.
+ * This class is responsible for visualizing the calendar grid with schedules.
+ */
 public class CalendarView extends GridPane {
 
     private YearMonth currentYearMonth;
@@ -22,12 +26,24 @@ public class CalendarView extends GridPane {
     private List<Schedule> schedules;
     private Model model;
 
+    /**
+     * Constructs a {@code CalendarView} with the specified year and month, and the model from which
+     * to retrieve the schedule information.
+     *
+     * @param yearMonth The year and month for which the calendar view is to be generated.
+     * @param model     The model from which the schedule data is retrieved.
+     */
     public CalendarView(YearMonth yearMonth, Model model) {
         this.currentYearMonth = yearMonth;
         this.schedules = model.getScheduleList().getScheduleList();
         populateCalendar(this.currentYearMonth);
     }
 
+    /**
+     * Fills the calendar view with days, labels and schedules for the specified year and month.
+     *
+     * @param yearMonth The year and month for which the calendar view is to be populated.
+     */
     public void populateCalendar(YearMonth yearMonth) {
         calendarGrid.getChildren().clear();
 
