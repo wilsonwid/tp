@@ -1,5 +1,7 @@
 package scm.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.Assert.assertThrows;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import scm.address.commons.core.index.Index;
 import scm.address.logic.Messages;
 import scm.address.logic.commands.descriptors.EditScheduleDescriptor;
+import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
@@ -22,6 +25,7 @@ import scm.address.testutil.ScheduleBuilder;
 
 public class EditScheduleCommandTest {
     private static final Index VALID_INDEX = Index.fromZeroBased(0);
+    private static final Index INVALID_INDEX = Index.fromZeroBased(9999);
     private static final EditScheduleDescriptor VALID_DESCRIPTOR = new EditScheduleDescriptor();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
@@ -34,9 +38,12 @@ public class EditScheduleCommandTest {
     }
 
     @Test
-    public void equals_testEquality_success() {
+    public void equals() {
         EditScheduleCommand command = new EditScheduleCommand(VALID_INDEX, VALID_DESCRIPTOR);
         assertTrue(command.equals(command));
+
+        ListScheduleCommand listCommand = new ListScheduleCommand();
+        assertFalse(command.equals(listCommand));
     }
 
     @Test
@@ -57,4 +64,23 @@ public class EditScheduleCommandTest {
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
+
+    @Test
+    public void toStringTest() {
+        EditScheduleCommand command = new EditScheduleCommand(VALID_INDEX, VALID_DESCRIPTOR);
+        String expectedString = EditScheduleCommand.class.getCanonicalName()
+                + "{index=" + VALID_INDEX + ", "
+                + "editScheduleDescriptor=" + VALID_DESCRIPTOR + "}";
+
+
+        assertEquals(expectedString, command.toString());
+    }
+
+    @Test
+    public void invalidIndex_executeCommand_failure() {
+        EditScheduleCommand command = new EditScheduleCommand(INVALID_INDEX, VALID_DESCRIPTOR);
+        assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+
 }
