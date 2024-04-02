@@ -47,6 +47,7 @@ public class EditScheduleCommandTest {
 
         EditScheduleCommand otherCommand = new EditScheduleCommand(VALID_INDEX, VALID_DESCRIPTOR);
         assertTrue(command.equals(otherCommand));
+        assertTrue(otherCommand.equals(command));
     }
 
     @Test
