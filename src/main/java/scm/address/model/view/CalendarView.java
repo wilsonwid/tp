@@ -1,6 +1,5 @@
 package scm.address.model.view;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.time.DayOfWeek;
@@ -13,10 +12,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import scm.address.model.schedule.Description;
-import scm.address.model.schedule.Schedule;
-import scm.address.model.schedule.Title;
 import scm.address.model.Model;
+import scm.address.model.schedule.Schedule;
 
 public class CalendarView extends GridPane {
 
