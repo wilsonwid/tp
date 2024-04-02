@@ -74,12 +74,13 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("title", this.title)
-                .add("description", this.description)
-                .add("startDateTime", this.startDateTime.format(DATE_TIME_FORMATTER))
-                .add("endDateTime", this.endDateTime.format(DATE_TIME_FORMATTER))
-                .toString();
+        return title.toString()
+                + "\n"
+                + description.toString()
+                + "\n"
+                + startDateTime.toString()
+                + "\n"
+                + endDateTime.toString();
     }
 
     @Override
