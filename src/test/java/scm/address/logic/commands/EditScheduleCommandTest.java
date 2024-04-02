@@ -82,5 +82,9 @@ public class EditScheduleCommandTest {
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
+    @Test
+    public void createEditedSchedule_nullTest_failure() {
+        EditScheduleCommand command = new EditScheduleCommand(VALID_INDEX, VALID_DESCRIPTOR);
 
+    }
 }
