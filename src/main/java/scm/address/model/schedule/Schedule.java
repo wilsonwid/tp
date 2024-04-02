@@ -6,8 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-import scm.address.commons.util.ToStringBuilder;
-
 /**
  * Represents a Schedule in the address book.
  * <p>

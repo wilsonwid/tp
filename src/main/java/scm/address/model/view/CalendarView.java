@@ -1,10 +1,10 @@
 package scm.address.model.view;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -40,7 +40,8 @@ public class CalendarView extends GridPane {
             calendarGrid.add(new Label(dayNames[i]), i, 0);
         }
 
-        int row = 1, col = firstDayOfWeek.getValue() % 7;
+        int row = 1;
+        int col = firstDayOfWeek.getValue() % 7;
         for (int day = 1; day <= numOfDaysInMonth; day++, calendarDate = calendarDate.plusDays(1)) {
             StackPane dayCell = new StackPane();
             dayCell.setPrefSize(200, 200);
