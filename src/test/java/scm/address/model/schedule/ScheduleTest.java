@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scm.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-import scm.address.testutil.ScheduleBuilder;
-
 import java.time.LocalDateTime;
 
+import org.junit.jupiter.api.Test;
+
+import scm.address.testutil.ScheduleBuilder;
 
 public class ScheduleTest {
     @Test

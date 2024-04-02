@@ -43,16 +43,16 @@ public class ScheduleBuilder {
      * @param schedule Schedule to be copied.
      */
     public ScheduleBuilder(Schedule schedule) {
-       this.title = new Title(schedule.getTitle().toString());
-       this.description = new Description(schedule.getDescription().toString());
-       this.startDateTime = LocalDateTime.parse(schedule
-               .getStartDateTime()
-               .format(Schedule.DATE_TIME_FORMATTER),
-               Schedule.DATE_TIME_FORMATTER);
-       this.endDateTime = LocalDateTime.parse(schedule
-               .getEndDateTime()
-               .format(Schedule.DATE_TIME_FORMATTER),
-               Schedule.DATE_TIME_FORMATTER);
+        this.title = new Title(schedule.getTitle().toString());
+        this.description = new Description(schedule.getDescription().toString());
+        this.startDateTime = LocalDateTime.parse(schedule
+                        .getStartDateTime()
+                        .format(Schedule.DATE_TIME_FORMATTER),
+                Schedule.DATE_TIME_FORMATTER);
+        this.endDateTime = LocalDateTime.parse(schedule
+                        .getEndDateTime()
+                        .format(Schedule.DATE_TIME_FORMATTER),
+                Schedule.DATE_TIME_FORMATTER);
     }
 
     /**
