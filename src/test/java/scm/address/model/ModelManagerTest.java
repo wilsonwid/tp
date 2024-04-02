@@ -7,6 +7,7 @@ import static scm.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalPersons.ALICE;
 import static scm.address.testutil.TypicalPersons.BENSON;
+import static scm.address.testutil.TypicalSchedules.getTypicalScheduleList;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -91,6 +92,15 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void removeSchedule_scheduleInList_success() {
+        Model modelManagerOne = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalScheduleList());
+        Model modelManagerTwo = new ModelManager(new AddressBook(), new UserPrefs(), getTypicalScheduleList());
+        modelManagerOne.removeSchedule(modelManagerOne.getFilteredScheduleList().get(0));
+        modelManagerTwo.removeSchedule(modelManagerTwo.getFilteredScheduleList().get(0));
+        assertEquals(modelManagerOne, modelManagerTwo);
     }
 
     @Test
