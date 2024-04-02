@@ -75,8 +75,8 @@ public class EditScheduleCommand extends Command {
 
     private static Schedule createEditedSchedule(Schedule scheduleToEdit, EditScheduleDescriptor
             editScheduleDescriptor) {
-        assert scheduleToEdit != null;
-        assert editScheduleDescriptor != null;
+        requireNonNull(scheduleToEdit);
+        requireNonNull(editScheduleDescriptor);
 
         Title updatedTitle = editScheduleDescriptor.getTitle().orElse(scheduleToEdit.getTitle());
         Description updatedDescription = editScheduleDescriptor.getDescription()

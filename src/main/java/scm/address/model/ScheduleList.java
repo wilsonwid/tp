@@ -56,18 +56,6 @@ public class ScheduleList implements Iterable<Schedule>, ReadOnlyScheduleList {
     }
 
     /**
-     * Returns whether the {@code schedule} is in the list of schedules.
-     * Requires {@code schedule} to be non-null.
-     *
-     * @param schedule Schedule to be checked.
-     * @return A boolean value.
-     */
-    public boolean hasSchedule(Schedule schedule) {
-        requireNonNull(schedule);
-        return this.schedules.contains(schedule);
-    }
-
-    /**
      * Adds {@code schedule} to the list of schedules.
      * Requires {@code schedule} to be non-null.
      *
