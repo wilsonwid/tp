@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 
 public class DescriptionTest {
-    private static String VALID_DESCRIPTION_STRING = "Project meeting";
+    private static final String VALID_DESCRIPTION_STRING = "Project meeting";
     @Test
     public void equals() {
         Description description = new Description(VALID_DESCRIPTION_STRING);

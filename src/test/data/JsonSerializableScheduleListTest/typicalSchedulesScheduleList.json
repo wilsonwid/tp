@@ -1,0 +1,13 @@
+{
+  "schedules" : [ {
+    "title" : "Meeting",
+    "description" : "Meeting with supervisor",
+    "startDateTime" : "2024-03-10 16:00",
+    "endDateTime" : "2024-03-10 17:00"
+  }, {
+    "title" : "Exercise",
+    "description" : "With 2 friends",
+    "startDateTime" : "2024-03-11 20:00",
+    "endDateTime" : "2024-03-11 21:00"
+  } ]
+}
