@@ -18,6 +18,18 @@ public class ScheduleTest {
         LocalDateTime startDateTime = LocalDateTime.parse("2024-03-10 16:00", Schedule.DATE_TIME_FORMATTER);
         LocalDateTime endDateTime = LocalDateTime.parse("2024-03-10 18:00", Schedule.DATE_TIME_FORMATTER);
         Schedule schedule = new Schedule(title, description, startDateTime, endDateTime);
+
+        assertTrue(schedule instanceof Schedule);
+    }
+
+    @Test
+    public void constructor_createScheduleFromString_success() {
+        Title title = new Title("Meeting");
+        Description description = new Description("Project meeting");
+        String startDateTime = "2024-03-10 16:00";
+        String endDateTime = "2024-03-10 18:00";
+        Schedule schedule = new Schedule(title, description, startDateTime, endDateTime);
+
         assertTrue(schedule instanceof Schedule);
     }
 
@@ -61,7 +73,8 @@ public class ScheduleTest {
 
     @Test
     public void constructor_nullField_failure() {
-        assertThrows(NullPointerException.class, () -> new Schedule((Title) null, (Description) null,
-                (LocalDateTime) null, (LocalDateTime) null));
+        assertThrows(NullPointerException.class, () -> new Schedule(null, null, null, (LocalDateTime) null));
+
+        assertThrows(NullPointerException.class, () -> new Schedule(null, null, null, (String) null));
     }
 }
