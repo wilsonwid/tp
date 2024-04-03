@@ -1,0 +1,43 @@
+package scm.address.model.schedule;
+
+import scm.address.commons.util.ToStringBuilder;
+
+import java.time.LocalDateTime;
+import java.util.function.Predicate;
+
+/**
+ * Tests that a {@code Schedule}'s {@code startDateTime} is on or after the given date and time.
+ */
+public class AfterDateTimePredicate implements Predicate<Schedule> {
+    private final LocalDateTime dateTime;
+
+    public AfterDateTimePredicate(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public boolean test(Schedule schedule) {
+        LocalDateTime startDateTime = schedule.getStartDateTime();
+        return startDateTime.compareTo(dateTime) >= 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AfterDateTimePredicate)) {
+            return false;
+        }
+
+        AfterDateTimePredicate otherAfterDateTimePredicate = (AfterDateTimePredicate) other;
+        return dateTime.equals(otherAfterDateTimePredicate.dateTime);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("dateTime", dateTime).toString();
+    }
+}

@@ -1,0 +1,45 @@
+package scm.address.model.schedule;
+
+import scm.address.commons.util.ToStringBuilder;
+
+import java.time.LocalDateTime;
+import java.util.function.Predicate;
+
+/**
+ * Tests that the given date and time lies between the {@code Schedule}'s {@code startDateTime}
+ * and {@code endDateTime} inclusive.
+ */
+public class DuringDateTimePredicate implements Predicate<Schedule> {
+    private final LocalDateTime dateTime;
+
+    public DuringDateTimePredicate(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public boolean test(Schedule schedule) {
+        LocalDateTime startDateTime = schedule.getStartDateTime();
+        LocalDateTime endDateTime = schedule.getEndDateTime();
+        return startDateTime.compareTo(dateTime) <= 0 && endDateTime.compareTo(dateTime) >= 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DuringDateTimePredicate)) {
+            return false;
+        }
+
+        DuringDateTimePredicate otherDuringDateTimePredicate = (DuringDateTimePredicate) other;
+        return dateTime.equals(otherDuringDateTimePredicate.dateTime);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).add("dateTime", dateTime).toString();
+    }
+}
