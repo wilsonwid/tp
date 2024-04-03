@@ -1,10 +1,10 @@
 package scm.address.model.schedule;
 
-import scm.address.commons.util.ToStringBuilder;
-
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import scm.address.commons.util.ToStringBuilder;
 
 /**
  * Tests that the given date and time lies between the {@code Schedule}'s {@code startDateTime}

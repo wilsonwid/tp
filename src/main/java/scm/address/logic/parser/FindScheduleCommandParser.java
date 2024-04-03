@@ -1,8 +1,11 @@
 package scm.address.logic.parser;
 
-import scm.address.logic.commands.FindScheduleCommand;
-import scm.address.logic.parser.exceptions.ParseException;
-import scm.address.model.schedule.*;
+import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static scm.address.logic.parser.CliSyntax.PREFIX_AFTER_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DURING_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,8 +16,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static scm.address.logic.parser.CliSyntax.*;
+import scm.address.logic.commands.FindScheduleCommand;
+import scm.address.logic.parser.exceptions.ParseException;
+import scm.address.model.schedule.AfterDateTimePredicate;
+import scm.address.model.schedule.BeforeDateTimePredicate;
+import scm.address.model.schedule.DescriptionContainsKeywordsPredicate;
+import scm.address.model.schedule.DuringDateTimePredicate;
+import scm.address.model.schedule.TitleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindScheduleCommand object

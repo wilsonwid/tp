@@ -19,6 +19,7 @@ import scm.address.logic.commands.EditScheduleCommand;
 import scm.address.logic.commands.ExitCommand;
 import scm.address.logic.commands.FindAndExportCommand;
 import scm.address.logic.commands.FindCommand;
+import scm.address.logic.commands.FindScheduleCommand;
 import scm.address.logic.commands.HelpCommand;
 import scm.address.logic.commands.ImportCommand;
 import scm.address.logic.commands.ListCommand;
@@ -94,6 +95,9 @@ public class AddressBookParser {
 
         case EditScheduleCommand.COMMAND_WORD:
             return new EditScheduleCommandParser().parse(arguments);
+
+        case FindScheduleCommand.COMMAND_WORD:
+            return new FindScheduleCommandParser().parse(arguments);
 
         case ListScheduleCommand.COMMAND_WORD:
             return new ListScheduleCommand();

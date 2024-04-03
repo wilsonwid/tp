@@ -1,5 +1,7 @@
 package scm.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import scm.address.commons.util.ToStringBuilder;
 import scm.address.logic.Messages;
 import scm.address.model.Model;
@@ -8,8 +10,6 @@ import scm.address.model.schedule.BeforeDateTimePredicate;
 import scm.address.model.schedule.DescriptionContainsKeywordsPredicate;
 import scm.address.model.schedule.DuringDateTimePredicate;
 import scm.address.model.schedule.TitleContainsKeywordsPredicate;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * A command to find certain schedules in the address book
@@ -34,6 +34,11 @@ public class FindScheduleCommand extends Command {
     private final AfterDateTimePredicate afterPredicate;
     private final DuringDateTimePredicate duringPredicate;
 
+    /**
+     * Creates a FindScheduleCommand to find all {@code Schedule} that
+     * contains any keyword in its title or description, starts after a certain date,
+     * ends before a certain date, or would be occurring at a certain date.
+     */
     public FindScheduleCommand(TitleContainsKeywordsPredicate titlePredicate,
                                DescriptionContainsKeywordsPredicate descriptionPredicate,
                                BeforeDateTimePredicate beforePredicate,
