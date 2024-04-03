@@ -1,11 +1,14 @@
 package scm.address.model.file;
 
-import scm.address.commons.exceptions.IllegalValueException;
+import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 
-import static java.util.Objects.requireNonNull;
+import scm.address.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents the file format of a file.
+ */
 public class FileFormat {
     public static final String JSON_FILE = "json";
     public static final String CSV_FILE = "csv";

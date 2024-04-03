@@ -1,12 +1,12 @@
 package scm.address.logic.parser;
 
-import java.io.File;
-
 import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static scm.address.logic.parser.ParserUtil.parseFileForExport;
+
+import java.io.File;
 
 import scm.address.logic.commands.FindAndExportCommand;
 import scm.address.logic.parser.exceptions.ParseException;

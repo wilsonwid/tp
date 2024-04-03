@@ -1,6 +1,10 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
+import static scm.address.model.file.FileFormat.CSV_FILE;
+import static scm.address.model.file.FileFormat.JSON_FILE;
+import static scm.address.model.file.FileFormat.MESSAGE_UNSUPPORTED_FILE_FORMAT;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,17 +24,11 @@ import scm.address.commons.exceptions.IllegalValueException;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
 import scm.address.model.ReadOnlyAddressBook;
+import scm.address.model.file.FileFormat;
 import scm.address.model.person.Person;
 import scm.address.storage.JsonAdaptedPerson;
 import scm.address.storage.JsonAdaptedTag;
 import scm.address.storage.JsonAddressBookStorage;
-import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
-import scm.address.model.file.FileFormat;
-
-import static scm.address.model.file.FileFormat.MESSAGE_UNSUPPORTED_FILE_FORMAT;
-import static scm.address.model.file.FileFormat.JSON_FILE;
-import static scm.address.model.file.FileFormat.CSV_FILE;
-
 
 /**
  * Imports contacts from a file into the contact manager.
@@ -128,12 +126,10 @@ public class ImportCommand extends Command {
                     logger.info(MESSAGE_UNSUPPORTED_FILE_FORMAT);
                     throw new IllegalValueException(MESSAGE_UNSUPPORTED_FILE_FORMAT);
                 }
-            }
-            catch (IllegalValueException e) {
+            } catch (IllegalValueException e) {
                 logger.info(e.getMessage());
                 throw e;
-            }
-            catch (DataLoadingException dle) {
+            } catch (DataLoadingException dle) {
                 logger.info(MESSAGE_FILE_LOADING_ERROR + file.getPath());
                 throw dle;
             }
@@ -198,7 +194,7 @@ public class ImportCommand extends Command {
                 JsonAdaptedPerson person = new JsonAdaptedPerson(name, phone, email, address, tags);
                 persons.add(person);
             }
-        } catch (IOException e ) {
+        } catch (IOException e) {
             throw new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath()));
         }
         return persons;

@@ -156,6 +156,13 @@ public class ParserUtil {
         return fileSet;
     }
 
+    /**
+     * Parses the given {@code String} and returns a File object.
+     *
+     * @param filename The string to be parsed into a File object.
+     * @return The parsed File object.
+     * @throws ParseException If the given string does not match the expected format.
+     */
     public static File parseFileForExport(String filename) throws ParseException {
         requireNonNull(filename);
         String trimmedFname = filename.trim();

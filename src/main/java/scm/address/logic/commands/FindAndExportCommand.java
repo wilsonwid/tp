@@ -1,13 +1,14 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static scm.address.model.file.FileFormat.*;
+import static scm.address.model.file.FileFormat.CSV_FILE;
+import static scm.address.model.file.FileFormat.JSON_FILE;
+import static scm.address.model.file.FileFormat.getFileFormat;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
 
