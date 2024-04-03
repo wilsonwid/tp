@@ -93,7 +93,8 @@ public class ImportCommandTest {
         ImportCommand importCommand = new ImportCommand(curHashSet);
         importCommand.execute(testModel);
 
-        assert true;
+        //Success if no exceptions are thrown
+        assertTrue(true);
     }
 
     @Test
