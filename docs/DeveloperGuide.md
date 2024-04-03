@@ -159,6 +159,21 @@ Classes used by multiple components are in the `scm.addressbook.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Importing feature
+
+#### Implementation
+
+The import feature is implemented through the use of `JsonAddressBookStorage`. Given that the user of the application has a JSON file containing contacts in a format similar to the save file of the application, they will be able to import such contacts by providing the filename of the JSON file. The implementation of the feature is somewhat similar to how the application natively reads its own contact manager data, and as such uses similar functions.
+
+This feature implements the following operations, other than the ones it is overriding:
+
+* `ImportCommand#retrievePersonsFromFile()`: Retrieves the `Person`s that are read from a given file and inserts them into a list of `JsonAdaptedPerson`.
+* `ImportCommand#readPersons()`: Reads the `Person`s currently inside the file to be read. This command succeeds only if the application is able to read the file and if the file is in the correct JSON format.
+
+This command is implemented in the above manner in order to follow OOP principles more closely, more specifically to prevent any one method from doing too many tasks. Moreover, the reuse of `JsonAddressBookStorage` and other related classes is done in order to aid future development of the feature. Following the same spirit, the logic of this feature is implemented in similar ways to how the application reads its own main save file.
+
+There is initially an alternative considered to refit the entire logic of the model and saving mechanism to fit this import feature. However, the current implementation is chosen over this due to the possibility of rewriting many pieces of unrelated code and of unknowingly breaking other features in the process. Another alternative that was not followed was to only use Jackson-based features to implement the import feature, in order to have more control over the code itself. However, as this feature should integrate with the exporting feature of the application, it became apparent that code reuse should be prioritised.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
