@@ -34,6 +34,7 @@ public class FindAndExportCommand extends Command {
             + "and other optional parameters.\n"
             + "Parameters: TAG [n/NAME] [a/ADDRESS] [f/FILENAME] \n"
             + "Example: find_and_export cs2103t n/john a/olive street 42 o/output1.json";
+    public static final String FILE_NOT_WRITABLE_MESSAGE = "File exists but is not writable: "
     private final String tag;
     private final String name;
     private final String address;
@@ -135,7 +136,7 @@ public class FindAndExportCommand extends Command {
 
     private void exportDataAsCsv(List<Person> users, File file) throws IOException {
         if (file.exists() && !file.canWrite()) {
-            throw new IOException("File exists but is not writable: " + file.getAbsolutePath());
+            throw new IOException(FILE_NOT_WRITABLE_MESSAGE + file.getAbsolutePath());
         }
         StringBuilder csv = new StringBuilder();
         csv.append("Name,Phone,Email,Address,Tags\n");

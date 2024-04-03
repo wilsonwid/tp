@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +51,7 @@ public class ImportCommand extends Command {
             + "already exists in the contact manager.";
 
     public static final String MESSAGE_FILE_NOT_FOUND = "Filename %s is not found!";
+    public static final String MESSAGE_FILE_LOADING_ERROR = "Couldn't load data in: ";
 
     private static final Logger logger = LogsCenter.getLogger(ImportCommand.class);
     private final Set<File> files;
@@ -134,7 +134,7 @@ public class ImportCommand extends Command {
                 throw e;
             }
             catch (DataLoadingException dle) {
-                logger.info("Data loading exception in: " + file.getPath());
+                logger.info(MESSAGE_FILE_LOADING_ERROR + file.getPath());
                 throw dle;
             }
         }
@@ -153,7 +153,7 @@ public class ImportCommand extends Command {
         Optional<ReadOnlyAddressBook> readOnlyAddressBook = curStorage.readAddressBook();
         return readOnlyAddressBook
                 .orElseThrow(() ->
-                        new DataLoadingException(new Exception("Cannot load file: " + file.getPath())))
+                        new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath())))
                 .getPersonList()
                 .stream()
                 .map(JsonAdaptedPerson::new)
@@ -198,10 +198,8 @@ public class ImportCommand extends Command {
                 JsonAdaptedPerson person = new JsonAdaptedPerson(name, phone, email, address, tags);
                 persons.add(person);
             }
-        } catch (FileNotFoundException e) {
-            throw new DataLoadingException(new Exception("Cannot load file: " + file.getPath()));
-        } catch (IOException e) {
-            throw new DataLoadingException(new Exception("Error reading file: " + file.getPath()));
+        } catch (IOException e ) {
+            throw new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath()));
         }
         return persons;
     }
