@@ -6,9 +6,9 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static scm.address.logic.parser.CliSyntax.PREFIX_DURING_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static scm.address.logic.parser.ScheduleDateTimeFormatter.FORMATTER;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -95,12 +95,11 @@ public class FindScheduleCommandParser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindScheduleCommand.MESSAGE_USAGE));
         } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String date = getKeywords(argMultimap, prefix).get(0);
             String time = getKeywords(argMultimap, prefix).get(1);
 
             try {
-                return Optional.of(LocalDateTime.parse(date + " " + time, formatter));
+                return Optional.of(LocalDateTime.parse(date + " " + time, FORMATTER));
             } catch (DateTimeParseException e) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindScheduleCommand.MESSAGE_USAGE));

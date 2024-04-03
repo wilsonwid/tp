@@ -9,5 +9,20 @@
     "description" : "With 2 friends",
     "startDateTime" : "2024-03-11 20:00",
     "endDateTime" : "2024-03-11 21:00"
+  }, {
+    "title" : "Doctor Appointment",
+    "description" : "Routine checkup",
+    "startDateTime" : "2024-03-12 09:00",
+    "endDateTime" : "2024-03-12 10:00"
+  }, {
+    "title" : "Study Session",
+    "description" : "Preparing for exams",
+    "startDateTime" : "2024-03-13 14:00",
+    "endDateTime" : "2024-03-13 16:00"
+  }, {
+    "title" : "Team Meeting",
+    "description" : "Discuss project progress",
+    "startDateTime" : "2024-03-14 10:00",
+    "endDateTime" : "2024-03-14 11:00"
   } ]
 }
