@@ -3,22 +3,27 @@ package scm.address.model.schedule;
 import scm.address.commons.util.ToStringBuilder;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Schedule}'s {@code endDateTime} is on or before the given date and time.
  */
 public class BeforeDateTimePredicate implements Predicate<Schedule> {
-    private final LocalDateTime dateTime;
+    private final Optional<LocalDateTime> dateTime;
 
-    public BeforeDateTimePredicate(LocalDateTime dateTime) {
+    public BeforeDateTimePredicate(Optional<LocalDateTime> dateTime) {
         this.dateTime = dateTime;
     }
 
     @Override
     public boolean test(Schedule schedule) {
-        LocalDateTime endDateTime = schedule.getEndDateTime();
-        return endDateTime.compareTo(dateTime) <= 0;
+        if (dateTime.isEmpty()) {
+            return true;
+        } else {
+            LocalDateTime endDateTime = schedule.getEndDateTime();
+            return endDateTime.compareTo(dateTime.get()) <= 0;
+        }
     }
 
     @Override

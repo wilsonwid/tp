@@ -3,6 +3,7 @@ package scm.address.model.schedule;
 import scm.address.commons.util.ToStringBuilder;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 /**
@@ -10,17 +11,21 @@ import java.util.function.Predicate;
  * and {@code endDateTime} inclusive.
  */
 public class DuringDateTimePredicate implements Predicate<Schedule> {
-    private final LocalDateTime dateTime;
+    private final Optional<LocalDateTime> dateTime;
 
-    public DuringDateTimePredicate(LocalDateTime dateTime) {
+    public DuringDateTimePredicate(Optional<LocalDateTime> dateTime) {
         this.dateTime = dateTime;
     }
 
     @Override
     public boolean test(Schedule schedule) {
-        LocalDateTime startDateTime = schedule.getStartDateTime();
-        LocalDateTime endDateTime = schedule.getEndDateTime();
-        return startDateTime.compareTo(dateTime) <= 0 && endDateTime.compareTo(dateTime) >= 0;
+        if (dateTime.isEmpty()) {
+            return true;
+        } else {
+            LocalDateTime startDateTime = schedule.getStartDateTime();
+            LocalDateTime endDateTime = schedule.getEndDateTime();
+            return startDateTime.compareTo(dateTime.get()) <= 0 && endDateTime.compareTo(dateTime.get()) >= 0;
+        }
     }
 
     @Override
