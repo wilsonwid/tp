@@ -30,6 +30,16 @@ public class FindScheduleCommandParserTest {
     }
 
     @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "before/2024-05-07 00:00 2024-04-30 12:00",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindScheduleCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "after/2024-04-19 00:00:09",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindScheduleCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "t/meeting d/project meeting",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindScheduleCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFindScheduleCommand() {
         // no leading and trailing whitespaces
         FindScheduleCommand expectedFindScheduleCommand =
