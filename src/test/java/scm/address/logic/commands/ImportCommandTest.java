@@ -61,11 +61,11 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_CSV_PATH));
 
-        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
         ImportCommand importCommand = new ImportCommand(curHashSet);
         importCommand.execute(testModel);
 
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
         expectedModel.addPerson(JAMES);
 
         assertEquals(testModel, expectedModel);
@@ -77,7 +77,7 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_PATH));
 
-        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
         ImportCommand importCommand = new ImportCommand(curHashSet);
         importCommand.execute(testModel);
 
@@ -89,7 +89,7 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(ADDRESS_BOOK_CSV_PATH));
 
-        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
         ImportCommand importCommand = new ImportCommand(curHashSet);
         importCommand.execute(testModel);
 
@@ -101,7 +101,7 @@ public class ImportCommandTest {
         HashSet<File> curHashSet = new HashSet<>();
         curHashSet.add(new File(UNKNOWN_CSV_FILE));
 
-        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
         ImportCommand importCommand = new ImportCommand(curHashSet);
         assertThrows(CommandException.class, () -> importCommand.execute(testModel));
     }

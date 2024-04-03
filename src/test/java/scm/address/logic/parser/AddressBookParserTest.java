@@ -11,6 +11,7 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -151,12 +152,12 @@ public class AddressBookParserTest {
                 + PREFIX_ADDRESS + address + " "
                 + PREFIX_FILENAME + filename;
 
-        FindAndExportCommand expectedCommand = new FindAndExportCommand(tag, name, address, filename, "json");
+        FindAndExportCommand expectedCommand = new FindAndExportCommand(tag, name, address, new File(filename));
 
         FindAndExportCommand resultCommand = (FindAndExportCommand) parser.parseCommand(input);
         assertEquals(expectedCommand.getName(), resultCommand.getName());
         assertEquals(expectedCommand.getAddress(), resultCommand.getAddress());
-        assertEquals(expectedCommand.getFilename(), resultCommand.getFilename());
+        assertEquals(expectedCommand.getFile().getName(), resultCommand.getFile().getName());
     }
 
     @Test
