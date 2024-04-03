@@ -1,6 +1,7 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static scm.address.model.file.FileFormat.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,11 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
-
-import static scm.address.model.file.FileFormat.JSON_FILE;
-import static scm.address.model.file.FileFormat.CSV_FILE;
-import static scm.address.model.file.FileFormat.MESSAGE_UNSUPPORTED_FILE_FORMAT;
-import static scm.address.model.file.FileFormat.getFileFormat;
 
 import scm.address.commons.exceptions.IllegalValueException;
 import scm.address.logic.commands.exceptions.CommandException;
@@ -34,7 +30,8 @@ public class FindAndExportCommand extends Command {
             + "and other optional parameters.\n"
             + "Parameters: TAG [n/NAME] [a/ADDRESS] [f/FILENAME] \n"
             + "Example: find_and_export cs2103t n/john a/olive street 42 o/output1.json";
-    public static final String FILE_NOT_WRITABLE_MESSAGE = "File exists but is not writable: "
+    public static final String FILE_NOT_WRITABLE_MESSAGE = "File exists but is not writable: ";
+    public static final String MESSAGE_UNSUPPORTED_FILE_FORMAT = "Unsupported file format: ";
     private final String tag;
     private final String name;
     private final String address;
@@ -112,20 +109,20 @@ public class FindAndExportCommand extends Command {
         String fileFormat = getFileFormat(file);
         switch (fileFormat) {
         case JSON_FILE:
-            exportDataAsJson(users, file.getName());
+            exportDataAsJson(users, file);
             break;
         case CSV_FILE:
             exportDataAsCsv(users, file);
             break;
         default:
-            throw new IOException("Unsupported file format: " + fileFormat);
+            throw new IOException(MESSAGE_UNSUPPORTED_FILE_FORMAT + fileFormat);
         }
     }
 
-    private void exportDataAsJson(List<Person> users, String filename) throws IOException {
+    private void exportDataAsJson(List<Person> users, File file) throws IOException {
         requireNonNull(users);
-        requireNonNull(filename);
-        Path filePath = Paths.get(filename);
+        requireNonNull(file);
+        Path filePath = file.toPath();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
         AddressBook addressBook = new AddressBook();
         for (Person p : users) {
