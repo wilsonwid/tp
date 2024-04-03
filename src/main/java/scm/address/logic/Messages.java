@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import scm.address.logic.parser.Prefix;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 
 /**
  * Container for user visible messages.
@@ -18,6 +19,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX = "The schedule index provided is invalid.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -48,4 +50,18 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code Schedule} for display to the user.
+     */
+    public static String format(Schedule schedule) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(schedule.getTitle())
+                .append("; Description: ")
+                .append(schedule.getDescription())
+                .append("; Start Time: ")
+                .append(schedule.getStartDateTime().format(Schedule.DATE_TIME_FORMATTER))
+                .append("; End Time: ")
+                .append(schedule.getEndDateTime().format(Schedule.DATE_TIME_FORMATTER));
+        return builder.toString();
+    }
 }

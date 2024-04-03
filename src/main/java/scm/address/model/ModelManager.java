@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import scm.address.commons.core.GuiSettings;
 import scm.address.commons.core.LogsCenter;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 
 /**
  * Represents the in-memory model of the contact manager data.
@@ -22,22 +23,28 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ScheduleList scheduleList;
+    private final FilteredList<Schedule> filteredSchedules;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, ReadOnlyScheduleList scheduleList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with contact manager: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.scheduleList = new ScheduleList(scheduleList);
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredSchedules = new FilteredList<>(this.scheduleList.getScheduleList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new ScheduleList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -109,6 +116,43 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    public ReadOnlyScheduleList getScheduleList() {
+        return this.scheduleList;
+    }
+
+    public void addSchedule(Schedule schedule) {
+        scheduleList.addSchedule(schedule);
+    }
+
+    public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
+        requireAllNonNull(scheduleToEdit, editedSchedule);
+        scheduleList.setSchedule(scheduleToEdit, editedSchedule);
+    }
+
+    public void removeSchedule(Schedule schedule) {
+        scheduleList.removeSchedule(schedule);
+    }
+
+    /**
+     * Updates the filtered schedule list to use {@code predicate}.
+     *
+     * @param predicate The predicate to be used as a filter.
+     */
+    public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+        requireNonNull(predicate);
+        filteredSchedules.setPredicate(predicate);
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered list of {@code Schedule}.
+     *
+     * @return An ObservableList of Schedules.
+     */
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return filteredSchedules;
     }
 
     //=========== Filtered Person List Accessors =============================================================

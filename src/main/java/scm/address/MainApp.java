@@ -19,12 +19,16 @@ import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
 import scm.address.model.ReadOnlyAddressBook;
+import scm.address.model.ReadOnlyScheduleList;
 import scm.address.model.ReadOnlyUserPrefs;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 import scm.address.model.util.SampleDataUtil;
 import scm.address.storage.AddressBookStorage;
 import scm.address.storage.JsonAddressBookStorage;
+import scm.address.storage.JsonScheduleStorage;
 import scm.address.storage.JsonUserPrefsStorage;
+import scm.address.storage.ScheduleStorage;
 import scm.address.storage.Storage;
 import scm.address.storage.StorageManager;
 import scm.address.storage.UserPrefsStorage;
@@ -58,7 +62,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ScheduleStorage scheduleStorage = new JsonScheduleStorage(userPrefs.getScheduleListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, scheduleStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -74,23 +79,34 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using schedule list file: " + storage.getScheduleStorageFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyScheduleList> scheduleListOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyScheduleList initialSchedules;
         try {
             addressBookOptional = storage.readAddressBook();
+            scheduleListOptional = storage.readScheduleList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+
+            if (!scheduleListOptional.isPresent()) {
+                logger.info("Creating a new schedule list file " + storage.getScheduleStorageFilePath());
+            }
+
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialSchedules = scheduleListOptional.orElseGet(SampleDataUtil::getSampleScheduleList);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
+            initialSchedules = new ScheduleList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialSchedules);
     }
 
     private void initLogging(Config config) {

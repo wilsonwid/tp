@@ -21,8 +21,10 @@ import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ReadOnlyAddressBook;
+import scm.address.model.ReadOnlyScheduleList;
 import scm.address.model.ReadOnlyUserPrefs;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 import scm.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -156,6 +158,36 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyScheduleList getScheduleList() {
+            return null;
+        }
+
+        @Override
+        public void addSchedule(Schedule schedule) {
+            return;
+        };
+
+        @Override
+        public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
+            return;
+        }
+
+        @Override
+        public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
+            return;
+        }
+
+        @Override
+        public void removeSchedule(Schedule schedule) {
+            return;
+        }
+
+        @Override
+        public ObservableList<Schedule> getFilteredScheduleList() {
+            return null;
         }
     }
 

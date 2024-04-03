@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 import scm.address.model.person.AddressContainsKeywordsPredicate;
 import scm.address.model.person.NameContainsKeywordsPredicate;
@@ -26,8 +27,8 @@ import scm.address.model.person.TagsContainKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
 
     @Test
     public void equals() {

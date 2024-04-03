@@ -16,6 +16,7 @@ import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.Model;
 import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.person.Person;
+import scm.address.model.schedule.Schedule;
 import scm.address.storage.Storage;
 
 /**
@@ -52,6 +53,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveScheduleList(model.getScheduleList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -84,5 +86,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ObservableList<Schedule> getFilteredScheduleList() {
+        return model.getFilteredScheduleList();
     }
 }

@@ -18,17 +18,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import scm.address.commons.core.GuiSettings;
 import scm.address.logic.commands.AddCommand;
 import scm.address.logic.commands.CommandResult;
 import scm.address.logic.commands.ListCommand;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.logic.parser.exceptions.ParseException;
+import scm.address.model.AddressBook;
 import scm.address.model.Model;
 import scm.address.model.ModelManager;
 import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.UserPrefs;
 import scm.address.model.person.Person;
 import scm.address.storage.JsonAddressBookStorage;
+import scm.address.storage.JsonScheduleStorage;
 import scm.address.storage.JsonUserPrefsStorage;
 import scm.address.storage.StorageManager;
 import scm.address.testutil.PersonBuilder;
@@ -48,7 +51,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(temporaryFolder.resolve("scheduleList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonScheduleStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -87,6 +91,27 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void testReturn_addressBook_success() {
+        ReadOnlyAddressBook ab = new AddressBook();
+        assertEquals(logic.getAddressBook(), ab);
+    }
+
+    @Test
+    public void returnPath_addressBook_success() {
+        assertEquals(model.getAddressBookFilePath(), logic.getAddressBookFilePath());
+    }
+
+    @Test
+    public void returnSettings_testGui_success() {
+        assertEquals(new GuiSettings(), logic.getGuiSettings());
+    }
+
+    @Test
+    public void returnList_getFilteredScheduleList_success() {
+        assertEquals(model.getFilteredPersonList(), logic.getFilteredScheduleList());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -123,7 +148,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getScheduleList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -160,7 +185,10 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(temporaryFolder
+                .resolve("ExceptionScheduleList.json"));
+
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, jsonScheduleStorage);
 
         logic = new LogicManager(model, storage);
 

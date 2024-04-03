@@ -3,6 +3,7 @@ package scm.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static scm.address.testutil.TypicalSchedules.getTypicalScheduleList;
 
 import java.nio.file.Path;
 
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.io.TempDir;
 import scm.address.commons.core.GuiSettings;
 import scm.address.model.AddressBook;
 import scm.address.model.ReadOnlyAddressBook;
+import scm.address.model.ReadOnlyScheduleList;
+import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -26,7 +29,8 @@ public class StorageManagerTest {
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonScheduleStorage jsonScheduleStorage = new JsonScheduleStorage(getTempFilePath("schedules"));
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, jsonScheduleStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -63,6 +67,19 @@ public class StorageManagerTest {
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
+    }
+
+    @Test
+    public void getScheduleListFilePath() {
+        assertNotNull(storageManager.getScheduleStorageFilePath());
+    }
+
+    @Test
+    public void scheduleListReadSave() throws Exception {
+        ScheduleList original = getTypicalScheduleList();
+        storageManager.saveScheduleList(original);
+        ReadOnlyScheduleList retrieved = storageManager.readScheduleList().get();
+        assertEquals(original, new ScheduleList(retrieved));
     }
 
 }
