@@ -123,8 +123,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the contact manager data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the contact manager data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), as well as all schedule list data (i.e., all `Schedule` objects).)
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Schedule` objects in a manner analogous to the above 'selected' `Person` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -144,8 +145,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both contact manager data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both contact manager data, user preference data, and schedule list data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `UserPrefStorage`, and `ScheduleStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
