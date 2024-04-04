@@ -198,6 +198,12 @@ Clears all contact entries from the contact manager.
 
 Format: `clear`
 
+### Adding an event : `add_schedule`
+
+Adds the schedule to the end of the list.
+
+Format: `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`
+
 ### Editing an event : `edit_schedule`
 
 Edits the schedule at the specified index. Useful if you wish to edit a certain schedule's description or timings.
@@ -230,6 +236,12 @@ Format: `delete_schedule INDEX`
 <box type="info" seamless>
 
 * `INDEX` must be a positive number and a valid index of a schedule.
+
+### Calendar view of schedule : `calendar_view`
+
+Shows your schedule for the month in a pop up window.
+
+Format: `calendar_view`
 
 </box>
 
