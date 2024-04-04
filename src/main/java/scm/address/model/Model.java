@@ -124,6 +124,20 @@ public interface Model {
     void removeSchedule(Schedule schedule);
 
     /**
+     * Returns the theme of the application.
+     *
+     * @return The theme of the application.
+     */
+    String getTheme();
+
+    /**
+     * Sets the theme of the application.
+     *
+     * @param theme The theme to be set.
+     */
+    void setTheme(String theme);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      *
      * @return An ObservableList of Schedules.
