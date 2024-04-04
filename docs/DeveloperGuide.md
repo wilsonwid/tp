@@ -123,8 +123,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the contact manager data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the contact manager data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), as well as all schedule list data (i.e., all `Schedule` objects).)
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Schedule` objects in a manner analogous to the above 'selected' `Person` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -144,8 +145,8 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both contact manager data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both contact manager data, user preference data, and schedule list data in JSON format, and read them back into corresponding objects.
+* inherits from `AddressBookStorage`, `UserPrefStorage`, and `ScheduleStorage`, which means it can be treated as any one of these (if the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -157,6 +158,33 @@ Classes used by multiple components are in the `scm.addressbook.commons` package
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Importing feature
+
+#### Implementation
+
+The import feature is implemented through the use of `JsonAddressBookStorage`. Given that the user of the application has a JSON file containing contacts in a format similar to the save file of the application, they will be able to import such contacts by providing the filename of the JSON file. The implementation of the feature is somewhat similar to how the application natively reads its own contact manager data, and as such uses similar functions.
+
+This feature implements the following operations, other than the ones it is overriding:
+
+* `ImportCommand#retrievePersonsFromFile()`: Retrieves the `Person`s that are read from a given file and inserts them into a list of `JsonAdaptedPerson`.
+* `ImportCommand#readPersons()`: Reads the `Person`s currently inside the file to be read. This command succeeds only if the application is able to read the file and if the file is in the correct JSON format.
+
+This command is implemented in the above manner in order to follow OOP principles more closely, more specifically to prevent any one method from doing too many tasks. Moreover, the reuse of `JsonAddressBookStorage` and other related classes is done in order to aid future development of the feature. Following the same spirit, the logic of this feature is implemented in similar ways to how the application reads its own main save file.
+
+There is initially an alternative considered to refit the entire logic of the model and saving mechanism to fit this import feature. However, the current implementation is chosen over this due to the possibility of rewriting many pieces of unrelated code and of unknowingly breaking other features in the process. Another alternative that was not followed was to only use Jackson-based features to implement the import feature, in order to have more control over the code itself. However, as this feature should integrate with the exporting feature of the application, it became apparent that code reuse should be prioritised.
+
+### Edit schedule feature
+
+#### Implementation
+
+The edit schedule feature is implemented through the use of `EditScheduleDescriptor`. Given a valid index to edit, this command will be able to edit the details of the `Schedule` in such index. The implementation of the feature is similar to that of `EditCommand`.
+
+This feature implements the following operations, other than the methods that it is already overriding:
+
+* `EditScheduleCommand#createEditedSchedule()`: Creates a new `Schedule` given an old schedule to edit as well as an `EditScheduleDescriptor`.
+
+This command is implemented in the above manner to improve its adherence to OOP principles, as well as to allow it to have similarities to the implementation of `EditCommand`. This would allow it to be more extensible and supportive of further development.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -444,6 +472,67 @@ Use case ends.
   * 2b1. The application notifies the user which files have format issues.
 
     Use case ends.
+
+**Use case: Adding a schedule**
+
+**MSS**
+
+1. User requests to add a schedule with the command add_schedule, specifying the title, description, start date and time, and end date and time.
+2. The application adds the schedule to the system.
+3. The application displays a message confirming the addition of the schedule.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid command format.
+
+    * 1a1. The application shows an error message about the incorrect command format.
+
+      Use case resumes at step 1.
+
+* 1b. The user enters an end date and time that is before the start date and time.
+
+    * 1b1. The application shows an error message about the incorrect time range.
+
+      Use case resumes at step 1.
+
+* 1c. The user tries to add a schedule that conflicts with an existing one.
+
+    * 1c1. The application shows an error message about the schedule conflict.
+
+      Use case resumes at step 1.
+
+* 2a. The application encounters an error while saving the new schedule.
+
+    * 2a1. The application alerts the user that the schedule could not be added.
+
+Use case ends.
+
+**Use case: Viewing schedules in a calendar**
+
+**MSS**
+
+1. User requests to view the calendar with the command `calendar_view`.
+2. The application displays a calendar for the current month, with all scheduled events marked or listed under their respective dates.
+3. User views the scheduled events on the calendar.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The current month has no scheduled events.
+
+    * 2a1. The application displays an empty calendar with no events marked.
+
+      Use case ends.
+
+* 2b. The user requests to view the calendar for a specific month.
+
+    * 2b1. The application displays the calendar for the specified month with events marked.
+
+      Use case ends.
+
 
 ### Non-Functional Requirements
 

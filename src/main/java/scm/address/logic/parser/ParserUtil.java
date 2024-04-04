@@ -1,6 +1,7 @@
 package scm.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static scm.address.logic.commands.FindAndExportCommand.DEFAULT_DATA_DIR;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -169,7 +170,7 @@ public class ParserUtil {
         if (!Filename.isValidFilename(trimmedFname)) {
             throw new ParseException(Filename.MESSAGE_CONSTRAINTS);
         }
-        trimmedFname = "./" + trimmedFname;
+        trimmedFname = "./" + DEFAULT_DATA_DIR + trimmedFname;
         return new File(trimmedFname);
     }
 

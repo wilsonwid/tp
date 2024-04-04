@@ -90,6 +90,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    /**
+     * Replaces schedule list data with the data in {@code scheduleList}.
+     */
+    void setScheduleList(ReadOnlyScheduleList scheduleList);
+
     /** Returns an unmodifiable view of available schedules. **/
     ReadOnlyScheduleList getScheduleList();
 

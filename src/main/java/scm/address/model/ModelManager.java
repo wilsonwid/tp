@@ -118,19 +118,30 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== ScheduleList ================================================================================
+
+    @Override
+    public void setScheduleList(ReadOnlyScheduleList scheduleList) {
+        this.scheduleList.resetData(scheduleList);
+    }
+
+    @Override
     public ReadOnlyScheduleList getScheduleList() {
         return this.scheduleList;
     }
 
+    @Override
     public void addSchedule(Schedule schedule) {
         scheduleList.addSchedule(schedule);
     }
 
+    @Override
     public void setSchedule(Schedule scheduleToEdit, Schedule editedSchedule) {
         requireAllNonNull(scheduleToEdit, editedSchedule);
         scheduleList.setSchedule(scheduleToEdit, editedSchedule);
     }
 
+    @Override
     public void removeSchedule(Schedule schedule) {
         scheduleList.removeSchedule(schedule);
     }
@@ -140,6 +151,7 @@ public class ModelManager implements Model {
      *
      * @param predicate The predicate to be used as a filter.
      */
+    @Override
     public void updateFilteredScheduleList(Predicate<Schedule> predicate) {
         requireNonNull(predicate);
         filteredSchedules.setPredicate(predicate);
