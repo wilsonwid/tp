@@ -15,17 +15,18 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
+    * To check whether you have the above installed, open the terminal, and then run `java -version`.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager.
+3. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar scm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -38,7 +39,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,7 +69,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>.
 
 ![help message](images/helpMessage.png)
 
@@ -77,9 +78,9 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the Student Contact Manager.
+Adds a person to the Student Contact Manager. Useful if you need to store a person's details for recording purposes. There are various details that must be added, including name, phone number, email, and address. Tags are optional.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ...`
 
 <box type="tip" seamless>
 
@@ -92,22 +93,29 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the contact manager.
+Shows a list of all persons in the contact manager. Useful if you need to view all contacts that you have recorded.
 
 Format: `list`
 
+![list image](images/listImage.png)
+
 ### Editing a person : `edit`
 
-Edits an existing person in the contact manager.
+Edits an existing person in the contact manager. Useful if you need to edit a person's details to be updated, or if you have inputted a wrong field. Existing values will be updated to the input values.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+<box type="info" seamless>
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer**, such as 1, 2, 3, ...
+* At least one of the optional fields must be provided. This means that either `NAME`, `PHONE`, `EMAIL`, `ADDRESS` or `TAG` needs to be provided.
+* When editing tags, the existing tags of the person will be removed i.e., adding of tags is not cumulative.
+
+</box>
+
+<box type="tip" seamless>
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -115,17 +123,21 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. Useful if you need to find a certain contact's details without going through the entire list of contacts.
 
 Format: `find [n/NAME] [a/ADDRESS] [t/TAG]`
 
+<box type="info" seamless>
+
 * `find` needs to have at least one of `n/NAME`, `a/ADDRESS`, or `t/TAG` to run.
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one keyword will be returned (i.e., it is an `OR` search).
+  * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If multiple attributes are given, then all given attributes must be matched for the contact to be returned.
+
+</box>
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -139,28 +151,32 @@ Exports the users that are filtered by a tag and other optional parameters.
 
 Format: `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`
 
-* `TAG` needs to be a tag
-* `NAME` needs to be a substring of a person's name
-* `ADDRESS` needs to be a substring of a person's address
-* `FILENAME` needs to be a valid filename
+* `TAG` needs to be a tag.
+* `NAME` needs to be a substring of a person's name.
+* `ADDRESS` needs to be a substring of a person's address.
+* `FILENAME` needs to be a valid filename, and can only have alphanumeric characters.
+
+<box type="info" seamless>
+* A substring is any part of a string.
+* A string is any combination of characters.
+</box>
 
 Examples:
 * `find_and_export cs2103t`
-* `find_and_export cs2103t n/john a/olive street 42 f/output1`
-
+* `find_and_export cs2103t n/john a/olive street 42 f/output1.json`
 
 ### Importing a datafile: `import`
-Imports contact details from a JSON file with filename specified.
 
-Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] …`
+Imports contact details from a specified CSV or JSON file.
+
+Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 
 * `FILENAME_n` needs to be a valid filename that is found in the `./data/` directory
 
 Examples:
-* import export
-* import contacts_export
-* import contacts_export1 contacts_export2
-
+* `import f/export.json`
+* `import f/contacts_export.json`
+* `import f/contacts_export1.json f/contacts_export2.json`
 
 ### Deleting a person : `delete`
 
@@ -178,9 +194,44 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the contact manager.
+Clears all contact entries from the contact manager.
 
 Format: `clear`
+
+### Editing an event : `edit_schedule`
+
+Edits the schedule at the specified index. Useful if you wish to edit a certain schedule's description or timings.
+
+Format: `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME] [end/END_DATETIME]`
+
+<box type="info" seamless>
+
+* `INDEX` has to be a positive number that is found as an index for the schedule.
+* Either one of `TITLE`, `DESCRIPTION`, `START_DATETIME` or `END_DATETIME` has to be provided for the command to run.
+* `TITLE` and `DESCRIPTION` must be alphanumeric
+* `START_DATETIME` and `END_DATETIME` are in `YYYY-MM-DD HH:mm` format and must be valid datetimes.
+
+</box>
+
+### Listing all events : `list_schedule`
+
+Lists all the events currently available. Useful if you wish to view all the events that are in the database.
+
+Format: `list_schedule`
+
+![listing schedules](images/listSchedule.png)
+
+### Deleting an event : `delete_schedule`
+
+Deletes the event at the given index. Useful if you wish to delete an event that is no longer needed.
+
+Format: `delete_schedule INDEX`
+
+<box type="info" seamless>
+
+* `INDEX` must be a positive number and a valid index of a schedule.
+
+</box>
 
 ### Exiting the program : `exit`
 
@@ -194,7 +245,7 @@ Student Contact Manager data are saved in the hard disk automatically after any 
 
 ### Editing the data file
 
-Student Contact Manager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Student Contact Manager data are saved automatically as a JSON file `[JAR file location]/data/scm.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -231,3 +282,8 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 | **Help**            | `help`                                                                                                                                                                |
 | **find_and_export** | `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`                                                                                                               |
 | **import**          | `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`                                                                                                               |
+| **add_schedule**    | `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                        |
+| **edit_schedule**   | `edit_schedule INDEX title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                 |
+| **list_schedule**   | `list_schedule`                                                                                                                                                       |
+| **delete_schedule** | `delete_schedule INDEX`                                                                                                                                               |
+
