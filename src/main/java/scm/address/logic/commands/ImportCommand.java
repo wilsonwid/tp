@@ -194,6 +194,7 @@ public class ImportCommand extends Command {
                 JsonAdaptedPerson person = new JsonAdaptedPerson(name, phone, email, address, tags);
                 persons.add(person);
             }
+            br.close();
         } catch (IOException e) {
             throw new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath()));
         }

@@ -36,8 +36,8 @@ public class ImportCommandTest {
     private static final String NO_FILE_EXTENSION = "./src/test/data/ImportCommandTest/contacts";
     private static final String UNKNOWN_CSV_FILE = "./src/test/data/ImportCommandTest/abcdefg.csv";
     private static final String ADDRESS_BOOK_CSV_PATH = "./src/test/data/ImportCommandTest/addressbook.csv";
-    private static final String ADDRESS_BOOK_CSV_NO_TAGS_PATH = "./src/test/data/ImportCommandTest/addressbookNoTags.csv";
-
+    private static final String ADDRESS_BOOK_CSV_NO_TAGS_PATH = "./src/test/data/ImportCommandTest"
+            + "/addressbookNoTags.csv";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
 
     @Test
@@ -55,6 +55,14 @@ public class ImportCommandTest {
         String expectedMessage = "Contacts from files imported";
         expectedModel.addPerson(JAMES);
         assertCommandSuccess(importCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void readPersonsFromCsv_invalidFileFormat_failure() {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(TEST_CSV_FILE_PATH));
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        assertThrows(CommandException.class, () -> importCommand.execute(model));
     }
 
     @Test
