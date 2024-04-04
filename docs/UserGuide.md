@@ -147,7 +147,7 @@ Examples:
 * `find a/Serangoon` will return `Bernice Yu` and `David Li`.
 
 ### Exporting a subset of data: `find_and_export`
-Exports the users that are filtered by a tag and other optional parameters.
+Exports the users that are filtered by a tag and other optional parameters. Useful if you want to transfer data regarding groups of people from one device to another.
 
 Format: `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`
 
@@ -167,7 +167,7 @@ Examples:
 
 ### Importing a datafile: `import`
 
-Imports contact details from a specified CSV or JSON file.
+Imports contact details from a specified CSV or JSON file. Useful if you have many contacts that you wish to add in one go.
 
 Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 
@@ -180,7 +180,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the contact manager.
+Deletes the specified person from the contact manager. Useful if you wish to remove contacts that you no longer need.
 
 Format: `delete INDEX`
 
@@ -194,13 +194,13 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all contact entries from the contact manager.
+Clears all contact entries from the contact manager. Useful to clean up contacts if all of them are no longer needed.
 
 Format: `clear`
 
 ### Adding an event : `add_schedule`
 
-Adds the schedule to the end of the list.
+Adds the schedule to the end of the list. Useful for recording details about events that occur.
 
 Format: `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`
 
@@ -239,7 +239,7 @@ Format: `delete_schedule INDEX`
 
 ### Calendar view of schedule : `calendar_view`
 
-Shows your schedule for the month in a pop up window.
+Shows your schedule for the month in a pop-up window. Useful to see an overall view of schedules in the month.
 
 Format: `calendar_view`
 
@@ -262,8 +262,9 @@ Student Contact Manager data are saved automatically as a JSON file `[JAR file l
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, Student Contact Manager will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, Student Contact Manager will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it. <br>
 Furthermore, certain edits can cause Student Contact Manager to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -298,4 +299,5 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 | **edit_schedule**   | `edit_schedule INDEX title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                 |
 | **list_schedule**   | `list_schedule`                                                                                                                                                       |
 | **delete_schedule** | `delete_schedule INDEX`                                                                                                                                               |
+| **calendar_view**   | `calendar_view`                                                                                                                                                       |
 
