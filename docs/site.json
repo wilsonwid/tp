@@ -1,7 +1,7 @@
 {
   "baseUrl": "",
   "titlePrefix": "Student Contact Manager",
-  "titleSuffix": "AddressBook Level-3",
+  "titleSuffix": "Student Contact Manager",
   "faviconPath": "images/SeEduLogo.png",
   "style": {
     "codeTheme": "light"

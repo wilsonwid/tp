@@ -23,7 +23,6 @@ import scm.address.model.UserPrefs;
 import scm.address.model.person.Person;
 
 public class FindAndExportCommandTest {
-
     @TempDir
     Path testFolder;
 

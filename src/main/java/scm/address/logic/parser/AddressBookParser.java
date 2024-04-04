@@ -10,7 +10,9 @@ import java.util.regex.Pattern;
 import scm.address.commons.core.LogsCenter;
 import scm.address.logic.commands.AddCommand;
 import scm.address.logic.commands.AddScheduleCommand;
+import scm.address.logic.commands.CalendarViewCommand;
 import scm.address.logic.commands.ClearCommand;
+import scm.address.logic.commands.ClearScheduleCommand;
 import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.DeleteScheduleCommand;
@@ -23,6 +25,7 @@ import scm.address.logic.commands.FindScheduleCommand;
 import scm.address.logic.commands.HelpCommand;
 import scm.address.logic.commands.ImportCommand;
 import scm.address.logic.commands.ListCommand;
+import scm.address.logic.commands.ListOngoingScheduleCommand;
 import scm.address.logic.commands.ListScheduleCommand;
 import scm.address.logic.commands.ThemeCommand;
 import scm.address.logic.parser.exceptions.ParseException;
@@ -94,6 +97,9 @@ public class AddressBookParser {
         case AddScheduleCommand.COMMAND_WORD:
             return new AddScheduleCommandParser().parse(arguments);
 
+        case ClearScheduleCommand.COMMAND_WORD:
+            return new ClearScheduleCommand();
+
         case EditScheduleCommand.COMMAND_WORD:
             return new EditScheduleCommandParser().parse(arguments);
 
@@ -103,11 +109,17 @@ public class AddressBookParser {
         case ListScheduleCommand.COMMAND_WORD:
             return new ListScheduleCommand();
 
+        case ListOngoingScheduleCommand.COMMAND_WORD:
+            return new ListOngoingScheduleCommand();
+
         case DeleteScheduleCommand.COMMAND_WORD:
             return new DeleteScheduleCommandParser().parse(arguments);
 
         case ThemeCommand.COMMAND_WORD:
             return new ThemeCommandParser().parse(arguments);
+
+        case CalendarViewCommand.COMMAND_WORD:
+            return new CalendarViewCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

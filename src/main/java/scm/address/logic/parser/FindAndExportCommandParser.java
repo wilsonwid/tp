@@ -1,6 +1,7 @@
 package scm.address.logic.parser;
 
 import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static scm.address.logic.commands.FindAndExportCommand.DEFAULT_FILEPATH;
 import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -32,7 +33,7 @@ public class FindAndExportCommandParser implements Parser<FindAndExportCommand> 
         String tag = argMultimap.getPreamble().trim();
         String name = argMultimap.getValue(PREFIX_NAME).orElse(null);
         String address = argMultimap.getValue(PREFIX_ADDRESS).orElse(null);
-        String filename = argMultimap.getValue(PREFIX_FILENAME).orElse("defaultFilename.json");
+        String filename = argMultimap.getValue(PREFIX_FILENAME).orElse(DEFAULT_FILEPATH);
 
         File file = parseFileForExport(filename);
 
