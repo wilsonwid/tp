@@ -20,7 +20,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager. 
+3. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -69,7 +69,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>. 
+Shows a message explaining how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>.
 
 ![help message](images/helpMessage.png)
 
@@ -131,7 +131,7 @@ Format: `find [n/NAME] [a/ADDRESS] [t/TAG]`
 * The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e., it is an `OR` search). 
+* Persons matching at least one keyword will be returned (i.e., it is an `OR` search).
   * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -210,7 +210,7 @@ Format: `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME
 
 ### Listing all events : `list_schedule`
 
-Lists all the events currently available. Useful if you wish to view all the events that are in the database. 
+Lists all the events currently available. Useful if you wish to view all the events that are in the database.
 
 Format: `list_schedule`
 
