@@ -22,4 +22,9 @@ class DarkTheme implements Theme {
     public String getThemeExtensionsCssPath() {
         return DARK_THEME_EXTENSIONS_CSS_PATH;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof DarkTheme;
+    }
 }
