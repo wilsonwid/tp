@@ -11,8 +11,7 @@ public class Filename {
             + "Example: 'myContacts.json' or 'myContacts2.csv'";
 
     public static final String MESSAGE_DUPLICATE = "Filenames should be unique.";
-
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+\\.json|\\p{Alnum}+.csv";
+    public static final String VALIDATION_REGEX = "(\\p{Alnum}+\\.json)|(\\p{Alnum}+\\.csv)";
 
     public final String filename;
 
