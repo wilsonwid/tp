@@ -5,6 +5,9 @@ import scm.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Command to change the theme of the application.
+ */
 public class ThemeCommand extends Command{
 
     public static final String COMMAND_WORD = "theme";
@@ -12,10 +15,16 @@ public class ThemeCommand extends Command{
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the theme of the application.\n"
             + "Parameters: "
             + "THEME\n"
-            + "Example: " + COMMAND_WORD + " light";
-
+            + "Example: " + COMMAND_WORD + " light"
+            + "Suppported themes: light, dark";
+    public static final String MESSAGE_INVALID_THEME = "Invalid theme value";
     private final String themeName;
 
+    /**
+     * Creates a ThemeCommand to change the theme of the application.
+     *
+     * @param themeName The name of the theme to change to.
+     */
     public ThemeCommand(String themeName) {
         assert themeName != null;
         this.themeName = themeName;
@@ -25,6 +34,6 @@ public class ThemeCommand extends Command{
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.setTheme(themeName);
-        return null;
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }
