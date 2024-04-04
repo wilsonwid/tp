@@ -5,16 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static scm.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static scm.address.logic.parser.CliSyntax.PREFIX_AFTER_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DURING_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static scm.address.logic.parser.ScheduleDateTimeFormatter.FORMATTER;
 import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -32,6 +40,7 @@ import scm.address.logic.commands.EditScheduleCommand;
 import scm.address.logic.commands.ExitCommand;
 import scm.address.logic.commands.FindAndExportCommand;
 import scm.address.logic.commands.FindCommand;
+import scm.address.logic.commands.FindScheduleCommand;
 import scm.address.logic.commands.HelpCommand;
 import scm.address.logic.commands.ImportCommand;
 import scm.address.logic.commands.ListCommand;
@@ -42,9 +51,14 @@ import scm.address.model.person.AddressContainsKeywordsPredicate;
 import scm.address.model.person.NameContainsKeywordsPredicate;
 import scm.address.model.person.Person;
 import scm.address.model.person.TagsContainKeywordsPredicate;
+import scm.address.model.schedule.AfterDateTimePredicate;
+import scm.address.model.schedule.BeforeDateTimePredicate;
 import scm.address.model.schedule.Description;
+import scm.address.model.schedule.DescriptionContainsKeywordsPredicate;
+import scm.address.model.schedule.DuringDateTimePredicate;
 import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
+import scm.address.model.schedule.TitleContainsKeywordsPredicate;
 import scm.address.testutil.EditPersonDescriptorBuilder;
 import scm.address.testutil.EditScheduleDescriptorBuilder;
 import scm.address.testutil.PersonBuilder;
@@ -121,9 +135,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename")
+        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename.json")
                 instanceof ImportCommand);
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename1 f/filename2")
+        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename1.json f/filename2.csv")
                 instanceof ImportCommand);
     }
 
@@ -151,12 +165,12 @@ public class AddressBookParserTest {
                 + PREFIX_ADDRESS + address + " "
                 + PREFIX_FILENAME + filename;
 
-        FindAndExportCommand expectedCommand = new FindAndExportCommand(tag, name, address, filename);
+        FindAndExportCommand expectedCommand = new FindAndExportCommand(tag, name, address, new File(filename));
 
         FindAndExportCommand resultCommand = (FindAndExportCommand) parser.parseCommand(input);
         assertEquals(expectedCommand.getName(), resultCommand.getName());
         assertEquals(expectedCommand.getAddress(), resultCommand.getAddress());
-        assertEquals(expectedCommand.getFilename(), resultCommand.getFilename());
+        assertEquals(expectedCommand.getFile().getName(), resultCommand.getFile().getName());
     }
 
     @Test
@@ -198,6 +212,44 @@ public class AddressBookParserTest {
                 + "end/2023-03-21 16:00";
         EditScheduleCommand parsedCommand = (EditScheduleCommand) parser.parseCommand(commandString);
         assertEquals(command, parsedCommand);
+    }
+
+    @Test
+    public void parseCommand_findScheduleCommand() throws Exception {
+        List<String> titleKeywords = Arrays.asList("meeting", "Zoom", "Party");
+        List<String> descriptionKeywords = Arrays.asList("project", "birthday", "exam");
+        Optional<LocalDateTime> beforePredicateDateTime = Optional.of(LocalDateTime.of(2024, 4, 20, 15, 0));
+        Optional<LocalDateTime> afterPredicateDateTime = Optional.of(LocalDateTime.of(2024, 4, 25, 23, 0));
+        Optional<LocalDateTime> duringPredicateDateTime = Optional.empty();
+
+        FindScheduleCommand firstCommand = (FindScheduleCommand) parser.parseCommand(
+                FindScheduleCommand.COMMAND_WORD + " "
+                        + PREFIX_TITLE + titleKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_DESCRIPTION + descriptionKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_BEFORE_DATETIME + beforePredicateDateTime.get().format(FORMATTER) + " "
+                        + PREFIX_AFTER_DATETIME + afterPredicateDateTime.get().format(FORMATTER));
+
+        assertEquals(new FindScheduleCommand(new TitleContainsKeywordsPredicate(titleKeywords),
+                new DescriptionContainsKeywordsPredicate(descriptionKeywords),
+                new BeforeDateTimePredicate(beforePredicateDateTime),
+                new AfterDateTimePredicate(afterPredicateDateTime),
+                new DuringDateTimePredicate(duringPredicateDateTime)), firstCommand);
+
+        beforePredicateDateTime = Optional.empty();
+        afterPredicateDateTime = Optional.empty();
+        duringPredicateDateTime = Optional.of(LocalDateTime.of(2024, 4, 23, 12, 0));
+
+        FindScheduleCommand secondCommand = (FindScheduleCommand) parser.parseCommand(
+                FindScheduleCommand.COMMAND_WORD + " "
+                        + PREFIX_TITLE + titleKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_DESCRIPTION + descriptionKeywords.stream().collect(Collectors.joining(" ")) + " "
+                        + PREFIX_DURING_DATETIME + duringPredicateDateTime.get().format(FORMATTER));
+
+        assertEquals(new FindScheduleCommand(new TitleContainsKeywordsPredicate(titleKeywords),
+                new DescriptionContainsKeywordsPredicate(descriptionKeywords),
+                new BeforeDateTimePredicate(beforePredicateDateTime),
+                new AfterDateTimePredicate(afterPredicateDateTime),
+                new DuringDateTimePredicate(duringPredicateDateTime)), secondCommand);
     }
 
     @Test

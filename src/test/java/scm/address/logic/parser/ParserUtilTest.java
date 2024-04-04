@@ -38,14 +38,35 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_FILENAME = "filename";
-    private static final String VALID_FILEPATH = "./data/" + VALID_FILENAME + ".json";
+    private static final String VALID_FILENAME = "filename.json";
+    private static final String VALID_FILEPATH = "./data/" + VALID_FILENAME;
 
     private static final String WHITESPACE = " \t\r\n";
     private static final String VALID_TITLE = "Meeting";
     private static final String VALID_DESCRIPTION = "Discuss project";
     private static final String VALID_START_DATETIME = "2023-03-21 15:00";
     private static final String VALID_END_DATETIME = "2023-03-21 16:00";
+
+    private static final String INVALID_FILE_FORMAT_FILENAME = "hello.xyz";
+    private static final String VALID_FILE_FORMAT_FILENAME_JSON = "filename.json";
+    private static final String VALID_FILE_FORMAT_FILENAME_CSV = "filename.csv";
+
+    @Test
+    public void parseFileForExport_validJsonFormat_success() throws Exception {
+        File expectedFile = new File(VALID_FILE_FORMAT_FILENAME_JSON);
+        assertEquals(expectedFile.getName(), ParserUtil.parseFileForExport(VALID_FILENAME).getName());
+    }
+
+    @Test
+    public void parseFileForExport_validCsvFormat_success() throws Exception {
+        File expectedFile = new File(VALID_FILE_FORMAT_FILENAME_CSV);
+        assertEquals(expectedFile.getName(), ParserUtil.parseFileForExport(VALID_FILE_FORMAT_FILENAME_CSV).getName());
+    }
+
+    @Test
+    public void parseFileForExport_invalidFormat_failure() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFileForExport(INVALID_FILE_FORMAT_FILENAME));
+    }
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {
