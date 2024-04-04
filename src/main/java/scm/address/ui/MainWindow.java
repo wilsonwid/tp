@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -198,5 +199,18 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Changes the CSS of the application.
+     *
+     * @param cssFilePath The file path of the CSS file.
+     */
+    public void setCss(String cssFilePath) {
+        System.out.println(cssFilePath);
+        //String css = this.getClass().getResource(cssFilePath).toExternalForm();
+        Scene scene = primaryStage.getScene();
+//        scene.getStylesheets().clear();
+        scene.getStylesheets().add(cssFilePath);
     }
 }
