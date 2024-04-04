@@ -35,7 +35,13 @@ public class EditScheduleCommand extends Command {
             + "[" + PREFIX_TITLE + "TITLE]"
             + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
             + "[" + PREFIX_START_DATETIME + "START_DATETIME]"
-            + "[" + PREFIX_END_DATETIME + "END_DATETIME]";
+            + "[" + PREFIX_END_DATETIME + "END_DATETIME]\n"
+            + "Note: All dates and times must be in the format of yyyy-MM-dd HH:mm.\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_TITLE + "Meeting "
+            + PREFIX_DESCRIPTION + "Discuss project details "
+            + PREFIX_START_DATETIME + "2024-03-01 22:00 "
+            + PREFIX_END_DATETIME + "2024-03-02 00:00";
 
     public static final String MESSAGE_EDIT_SCHEDULE_SUCCESS = "Edited schedule: %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided in the command.";
