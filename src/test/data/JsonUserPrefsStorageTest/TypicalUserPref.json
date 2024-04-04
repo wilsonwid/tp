@@ -5,8 +5,10 @@
     "windowCoordinates" : {
       "x" : 300,
       "y" : 100
-    }
+    },
+    "theme": "dark"
   },
   "addressBookFilePath" : "addressbook.json",
   "scheduleListFilePath": "schedulelist.json"
 }
+

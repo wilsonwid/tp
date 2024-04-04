@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -24,6 +25,7 @@ import scm.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String EXTENSIONS_CSS_FILE_PATH = "/view/Extensions.css";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -163,7 +165,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), logic.getGuiSettings().getTheme());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
@@ -192,11 +194,39 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isChangeTheme()) {
+                handleChangeTheme();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void handleChangeTheme() {
+
+        String theme = logic.getGuiSettings().getTheme();
+
+        if (theme.equals("light")) {
+            setCss("view/LightTheme.css");
+        } else if (theme.equals("dark")) {
+            setCss("view/DarkTheme.css");
+        }
+    }
+
+    /**
+     * Changes the CSS of the application.
+     *
+     * @param cssFilePath The file path of the CSS file.
+     */
+    public void setCss(String cssFilePath) {
+        System.out.println(cssFilePath);
+        Scene scene = primaryStage.getScene();
+        scene.getStylesheets().clear();
+        scene.getStylesheets().add(cssFilePath);
+        scene.getStylesheets().add(EXTENSIONS_CSS_FILE_PATH);
     }
 }

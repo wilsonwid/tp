@@ -30,6 +30,7 @@ import scm.address.commons.core.index.Index;
 import scm.address.logic.commands.AddCommand;
 import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
+import scm.address.logic.commands.ClearScheduleCommand;
 import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.DeleteScheduleCommand;
@@ -191,6 +192,12 @@ public class AddressBookParserTest {
 
         assertTrue(result instanceof AddScheduleCommand);
         assertEquals(command, result);
+    }
+
+    @Test
+    public void parseCommand_clearScheduleCommand() throws Exception {
+        assertTrue(parser.parseCommand(ClearScheduleCommand.COMMAND_WORD) instanceof ClearScheduleCommand);
+        assertTrue(parser.parseCommand(ClearScheduleCommand.COMMAND_WORD + " 10") instanceof ClearScheduleCommand);
     }
 
     @Test

@@ -473,6 +473,67 @@ Use case ends.
 
     Use case ends.
 
+**Use case: Adding a schedule**
+
+**MSS**
+
+1. User requests to add a schedule with the command add_schedule, specifying the title, description, start date and time, and end date and time.
+2. The application adds the schedule to the system.
+3. The application displays a message confirming the addition of the schedule.
+
+Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid command format.
+
+    * 1a1. The application shows an error message about the incorrect command format.
+
+      Use case resumes at step 1.
+
+* 1b. The user enters an end date and time that is before the start date and time.
+
+    * 1b1. The application shows an error message about the incorrect time range.
+
+      Use case resumes at step 1.
+
+* 1c. The user tries to add a schedule that conflicts with an existing one.
+
+    * 1c1. The application shows an error message about the schedule conflict.
+
+      Use case resumes at step 1.
+
+* 2a. The application encounters an error while saving the new schedule.
+
+    * 2a1. The application alerts the user that the schedule could not be added.
+
+Use case ends.
+
+**Use case: Viewing schedules in a calendar**
+
+**MSS**
+
+1. User requests to view the calendar with the command `calendar_view`.
+2. The application displays a calendar for the current month, with all scheduled events marked or listed under their respective dates.
+3. User views the scheduled events on the calendar.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The current month has no scheduled events.
+
+    * 2a1. The application displays an empty calendar with no events marked.
+
+      Use case ends.
+
+* 2b. The user requests to view the calendar for a specific month.
+
+    * 2b1. The application displays the calendar for the specified month with events marked.
+
+      Use case ends.
+
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
