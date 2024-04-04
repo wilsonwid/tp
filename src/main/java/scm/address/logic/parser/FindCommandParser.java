@@ -23,7 +23,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -56,6 +56,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns all keywords between the given prefix and the next prefix (if any)
+     * in the given ArgumentMultimap.
+     */
     private List<String> getKeywords(ArgumentMultimap argMultimap, Prefix prefix) {
         if (argMultimap.getValue(prefix).isEmpty()) {
             return Collections.emptyList();
