@@ -5,6 +5,9 @@ import scm.address.logic.parser.exceptions.ParseException;
 
 import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+/**
+ * Parses input arguments and creates a new ThemeCommand object.
+ */
 public class ThemeCommandParser implements Parser<ThemeCommand> {
     @Override
     public ThemeCommand parse(String args) throws ParseException {
