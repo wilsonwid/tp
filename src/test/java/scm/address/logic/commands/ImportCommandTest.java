@@ -60,9 +60,15 @@ public class ImportCommandTest {
     @Test
     public void readPersonsFromCsv_invalidFileFormat_failure() {
         HashSet<File> curHashSet = new HashSet<>();
-        curHashSet.add(new File(TEST_CSV_FILE_PATH));
+        curHashSet.add(new File(UNKNOWN_CSV_FILE));
         ImportCommand importCommand = new ImportCommand(curHashSet);
-        assertThrows(CommandException.class, () -> importCommand.execute(model));
+        try {
+            importCommand.execute(model);
+            //Fail if no exception thrown
+            assertTrue(false);
+        } catch (Exception e) {
+            assertEquals(e.getClass(), CommandException.class);
+        }
     }
 
     @Test
