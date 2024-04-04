@@ -76,13 +76,7 @@ public class Schedule {
      * Expresses the schedule's components in string form.
      */
     public String toStringCalendar() {
-        return title.toString()
-                + "\n"
-                + description.toString()
-                + "\n"
-                + startDateTime.toString()
-                + "\n"
-                + endDateTime.toString();
+        return title.toString();
     }
 
     @Override
