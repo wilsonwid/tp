@@ -36,6 +36,7 @@ public class ImportCommandTest {
     private static final String NO_FILE_EXTENSION = "./src/test/data/ImportCommandTest/contacts";
     private static final String UNKNOWN_CSV_FILE = "./src/test/data/ImportCommandTest/abcdefg.csv";
     private static final String ADDRESS_BOOK_CSV_PATH = "./src/test/data/ImportCommandTest/addressbook.csv";
+    private static final String ADDRESS_BOOK_CSV_NO_TAGS_PATH = "./src/test/data/ImportCommandTest/addressbookNoTags.csv";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
 
@@ -69,6 +70,19 @@ public class ImportCommandTest {
         expectedModel.addPerson(JAMES);
 
         assertEquals(testModel, expectedModel);
+    }
+
+    @Test
+    public void readPersonsFromCsv_validFileNoTags_success() throws CommandException {
+        HashSet<File> curHashSet = new HashSet<>();
+        curHashSet.add(new File(ADDRESS_BOOK_CSV_NO_TAGS_PATH));
+
+        Model testModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalScheduleList());
+        ImportCommand importCommand = new ImportCommand(curHashSet);
+        importCommand.execute(testModel);
+
+        //Success if no exceptions are thrown
+        assertTrue(true);
     }
 
 
