@@ -41,6 +41,10 @@ public class TitleContainsKeywordsPredicate implements Predicate<Schedule> {
         return keywords.equals(otherTitleContainsKeywordsPredicate.keywords);
     }
 
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();

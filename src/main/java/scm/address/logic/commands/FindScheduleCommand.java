@@ -6,6 +6,7 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static scm.address.logic.parser.CliSyntax.PREFIX_DURING_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static scm.address.logic.parser.ScheduleDateTimeFormatter.FORMATTER;
 
 import scm.address.commons.util.ToStringBuilder;
 import scm.address.logic.Messages;
@@ -74,8 +75,21 @@ public class FindScheduleCommand extends Command {
         model.updateFilteredScheduleList(titlePredicate.and(descriptionPredicate
                 .and(beforePredicate.and(afterPredicate.and(duringPredicate)))));
 
+        String titleMessage = titlePredicate.getKeywords().isEmpty()
+                ? "" : "\nTitle: " + String.join(" ", titlePredicate.getKeywords());
+        String descriptionMessage = descriptionPredicate.getKeywords().isEmpty()
+                ? "" : "\nDescription: " + String.join(" ", descriptionPredicate.getKeywords());
+        String beforeMessage = beforePredicate.getDateTime().isEmpty()
+                ? "" : "\nBefore: " + beforePredicate.getDateTime().get().format(FORMATTER);
+        String afterMessage = afterPredicate.getDateTime().isEmpty()
+                ? "" : "\nAfter: " + afterPredicate.getDateTime().get().format(FORMATTER);
+        String duringMessage = duringPredicate.getDateTime().isEmpty()
+                ? "" : "\nDuring: " + duringPredicate.getDateTime().get().format(FORMATTER);
+        String filterMessage = titleMessage + descriptionMessage + beforeMessage + afterMessage + duringMessage;
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
+                String.format(Messages.MESSAGE_SCHEDULES_FILTERED_OVERVIEW,
+                        model.getFilteredScheduleList().size(), filterMessage));
     }
 
     @Override

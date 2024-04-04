@@ -1,5 +1,6 @@
 package scm.address.logic.commands;
 
+import static scm.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,12 +30,14 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model,
+                String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7), expectedModel);
     }
 }
