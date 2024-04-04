@@ -72,6 +72,19 @@ public class Schedule {
         return endDateTime;
     }
 
+    /**
+     * Expresses the schedule's components in string form.
+     */
+    public String toStringCalendar() {
+        return title.toString()
+                + "\n"
+                + description.toString()
+                + "\n"
+                + startDateTime.toString()
+                + "\n"
+                + endDateTime.toString();
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
