@@ -15,10 +15,14 @@ import org.junit.jupiter.api.io.TempDir;
 import scm.address.commons.core.GuiSettings;
 import scm.address.commons.exceptions.DataLoadingException;
 import scm.address.model.UserPrefs;
+import scm.address.model.theme.Theme;
+import scm.address.model.theme.ThemeCollection;
 
 public class JsonUserPrefsStorageTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
+
+    private static final String DEFAULT_THEME = ThemeCollection.getDarkTheme().getThemeName();
 
     @TempDir
     public Path testFolder;
@@ -72,7 +76,7 @@ public class JsonUserPrefsStorageTest {
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100, "dark"));
+        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100, DEFAULT_THEME));
         userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
         return userPrefs;
     }
@@ -103,7 +107,7 @@ public class JsonUserPrefsStorageTest {
     public void saveUserPrefs_allInOrder_success() throws DataLoadingException, IOException {
 
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2, "dark"));
+        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2, DEFAULT_THEME));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
@@ -114,7 +118,7 @@ public class JsonUserPrefsStorageTest {
         assertEquals(original, readBack);
 
         //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5, "dark"));
+        original.setGuiSettings(new GuiSettings(5, 5, 5, 5, DEFAULT_THEME));
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);

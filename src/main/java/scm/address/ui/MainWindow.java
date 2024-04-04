@@ -18,6 +18,7 @@ import scm.address.logic.commands.CommandResult;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.logic.parser.exceptions.ParseException;
 import scm.address.model.theme.Theme;
+import scm.address.model.theme.ThemeCollection;
 
 import static java.util.Objects.requireNonNull;
 
@@ -210,9 +211,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleChangeTheme() {
-        Theme theme = logic.getGuiSettings().getTheme();
+
+        String themeName = logic.getGuiSettings().getTheme();
 
         try {
+            Theme theme = ThemeCollection.getTheme(themeName);
             setTheme(theme);
         } catch (Exception e) {
             logger.warning("Error changing theme: " + e.getMessage());

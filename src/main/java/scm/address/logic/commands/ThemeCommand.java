@@ -39,7 +39,7 @@ public class ThemeCommand extends Command {
         GuiSettings guiSettings = model.getGuiSettings();
 
         model.setGuiSettings(new GuiSettings(guiSettings.getWindowWidth(), guiSettings.getWindowHeight(),
-                guiSettings.getWindowCoordinates().x, guiSettings.getWindowCoordinates().y, theme));
+                guiSettings.getWindowCoordinates().x, guiSettings.getWindowCoordinates().y, theme.getThemeName()));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS), false, false, true);
     }

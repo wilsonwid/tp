@@ -17,12 +17,14 @@ import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.ReadOnlyScheduleList;
 import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
+import scm.address.model.theme.Theme;
+import scm.address.model.theme.ThemeCollection;
 
 public class StorageManagerTest {
 
+    private static final String DARK_THEME = ThemeCollection.getDarkTheme().getThemeName();
     @TempDir
     public Path testFolder;
-
     private StorageManager storageManager;
 
     @BeforeEach
@@ -45,7 +47,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(300, 600, 4, 6, "dark"));
+        original.setGuiSettings(new GuiSettings(300, 600, 4, 6, DARK_THEME));
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);

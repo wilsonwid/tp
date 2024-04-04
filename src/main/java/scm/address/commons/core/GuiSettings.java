@@ -17,11 +17,11 @@ public class GuiSettings implements Serializable {
     private static final double DEFAULT_HEIGHT = 600;
     private static final double DEFAULT_WIDTH = 740;
 
-    private static final Theme DEFAULT_THEME = ThemeCollection.getLightTheme();
+    private static final String DEFAULT_THEME_NAME = ThemeCollection.getDarkTheme().getThemeName();
     private final double windowWidth;
     private final double windowHeight;
     private final Point windowCoordinates;
-    private final Theme theme;
+    private final String theme;
 
     /**
      * Constructs a {@code GuiSettings} with the default height, width and position.
@@ -30,13 +30,13 @@ public class GuiSettings implements Serializable {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
         windowCoordinates = null; // null represent no coordinates
-        theme = DEFAULT_THEME;
+        theme = DEFAULT_THEME_NAME;
     }
 
     /**
      * Constructs a {@code GuiSettings} with the specified height, width and position.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, Theme theme) {
+    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, String theme) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         windowCoordinates = new Point(xPosition, yPosition);
@@ -55,7 +55,7 @@ public class GuiSettings implements Serializable {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
     }
 
-    public Theme getTheme() {
+    public String getTheme() {
         return theme;
     }
 
@@ -79,7 +79,7 @@ public class GuiSettings implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates, theme.getThemeName());
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates, theme);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class GuiSettings implements Serializable {
                 .add("windowWidth", windowWidth)
                 .add("windowHeight", windowHeight)
                 .add("windowCoordinates", windowCoordinates)
-                .add("theme", theme.getThemeName())
+                .add("theme", theme)
                 .toString();
     }
 }
