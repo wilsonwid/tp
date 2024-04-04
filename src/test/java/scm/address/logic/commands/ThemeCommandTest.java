@@ -1,6 +1,7 @@
 package scm.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -43,5 +44,10 @@ public class ThemeCommandTest {
         CommandResult commandResult = themeCommand.execute(model);
         assertEquals(String.format(ThemeCommand.MESSAGE_SUCCESS, theme.getThemeName()),
                 commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    void instantiate_nullTheme_failure() {
+        assertThrows(AssertionError.class, () -> new ThemeCommand(null));
     }
 }
