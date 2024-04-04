@@ -15,17 +15,18 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
+    * To check whether you have the above installed, open the terminal, and then run `java -version`.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager.
+3. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager. 
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -38,7 +39,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) section below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,7 +69,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>.
 
 ![help message](images/helpMessage.png)
 
@@ -157,9 +158,9 @@ Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] …`
 * `FILENAME_n` needs to be a valid filename that is found in the `./data/` directory
 
 Examples:
-* import export
-* import contacts_export
-* import contacts_export1 contacts_export2
+* `import export`
+* `import contacts_export`
+* `import contacts_export1 contacts_export2`
 
 
 ### Deleting a person : `delete`
