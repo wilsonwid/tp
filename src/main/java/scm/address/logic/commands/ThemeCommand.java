@@ -26,7 +26,7 @@ public class ThemeCommand extends Command {
     /**
      * Creates a ThemeCommand to change the theme of the application.
      *
-     * @param themeName The name of the theme to change to.
+     * @param theme The theme to change to.
      */
     public ThemeCommand(Theme theme) {
         assert theme != null;
