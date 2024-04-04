@@ -169,9 +169,9 @@ Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 * `FILENAME_n` needs to be a valid filename that is found in the `./data/` directory
 
 Examples:
-* `import export`
-* `import contacts_export`
-* `import contacts_export1 contacts_export2`
+* `import f/export.json`
+* `import f/contacts_export.json`
+* `import f/contacts_export1.json f/contacts_export2.json`
 
 ### Deleting a person : `delete`
 
