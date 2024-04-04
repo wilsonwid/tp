@@ -11,6 +11,7 @@ import scm.address.commons.core.LogsCenter;
 import scm.address.logic.commands.AddCommand;
 import scm.address.logic.commands.AddScheduleCommand;
 import scm.address.logic.commands.ClearCommand;
+import scm.address.logic.commands.ClearScheduleCommand;
 import scm.address.logic.commands.Command;
 import scm.address.logic.commands.DeleteCommand;
 import scm.address.logic.commands.DeleteScheduleCommand;
@@ -93,6 +94,9 @@ public class AddressBookParser {
 
         case AddScheduleCommand.COMMAND_WORD:
             return new AddScheduleCommandParser().parse(arguments);
+
+        case ClearScheduleCommand.COMMAND_WORD:
+            return new ClearScheduleCommand();
 
         case EditScheduleCommand.COMMAND_WORD:
             return new EditScheduleCommandParser().parse(arguments);
