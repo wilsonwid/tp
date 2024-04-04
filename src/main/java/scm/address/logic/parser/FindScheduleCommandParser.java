@@ -30,7 +30,7 @@ import scm.address.model.schedule.TitleContainsKeywordsPredicate;
 public class FindScheduleCommandParser implements Parser<FindScheduleCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindScheduleCommand
-     * and returns a FindCScheduleCommand object for execution.
+     * and returns a FindScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format
      */
     public FindScheduleCommand parse(String args) throws ParseException {
