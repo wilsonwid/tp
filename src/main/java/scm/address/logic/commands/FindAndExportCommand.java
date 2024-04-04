@@ -27,9 +27,8 @@ import scm.address.storage.JsonAddressBookStorage;
 public class FindAndExportCommand extends Command {
 
     public static final String COMMAND_WORD = "find_and_export";
-    public static final String DEFAULT_DATA_DIR = "./data/";
-    public static final String DEFAULT_FILEPATH = "default_filename";
-    public static final String DEFAULT_FILETYPE = ".json";
+    public static final String DEFAULT_DATA_DIR = "data/";
+    public static final String DEFAULT_FILEPATH = "defaultfilename.json";
 
     public static final String MESSAGE_USAGE = "find_and_export: Exports the users filtered by a tag "
             + "and other optional parameters.\n"
