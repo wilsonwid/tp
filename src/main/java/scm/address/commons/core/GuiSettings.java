@@ -79,7 +79,7 @@ public class GuiSettings implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates, theme);
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates, theme.getThemeName());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class GuiSettings implements Serializable {
                 .add("windowWidth", windowWidth)
                 .add("windowHeight", windowHeight)
                 .add("windowCoordinates", windowCoordinates)
-                .add("theme", theme)
+                .add("theme", theme.getThemeName())
                 .toString();
     }
 }
