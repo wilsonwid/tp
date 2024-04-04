@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,6 @@ import scm.address.model.schedule.Schedule;
 import scm.address.model.schedule.Title;
 
 public class AddScheduleCommandTest {
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Test
     public void execute_scheduleConstructed_success() {
