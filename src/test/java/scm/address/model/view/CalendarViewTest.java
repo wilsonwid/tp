@@ -25,7 +25,8 @@ public class CalendarViewTest {
 
         public List<Schedule> getSchedulesForDate(LocalDate date) {
             return schedules.stream()
-                    .filter(schedule -> !schedule.getStartDateTime().toLocalDate().isBefore(date) && !schedule.getStartDateTime().toLocalDate().isAfter(date))
+                    .filter(schedule -> !schedule.getStartDateTime().
+                            toLocalDate().isBefore(date) && !schedule.getStartDateTime().toLocalDate().isAfter(date))
                     .collect(Collectors.toList());
         }
     }
