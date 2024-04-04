@@ -28,7 +28,7 @@ public class ListScheduleCommandTest {
     }
 
     @Test
-    public void executeList_listIsNotFiltered_showsSameList() {
+    public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListScheduleCommand(), model,
                 ListScheduleCommand.MESSAGE_SUCCESS, expectedModel);
     }
