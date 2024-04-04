@@ -41,6 +41,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();

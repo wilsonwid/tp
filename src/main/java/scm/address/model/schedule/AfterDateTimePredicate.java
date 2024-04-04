@@ -41,6 +41,10 @@ public class AfterDateTimePredicate implements Predicate<Schedule> {
         return dateTime.equals(otherAfterDateTimePredicate.dateTime);
     }
 
+    public Optional<LocalDateTime> getDateTime() {
+        return dateTime;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("dateTime", dateTime).toString();

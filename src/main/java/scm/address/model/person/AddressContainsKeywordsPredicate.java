@@ -43,6 +43,10 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.equals(otherAddressContainsKeywordsPredicate.keywords);
     }
 
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();

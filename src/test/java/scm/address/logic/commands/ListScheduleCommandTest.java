@@ -1,5 +1,6 @@
 package scm.address.logic.commands;
 
+import static scm.address.logic.Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static scm.address.testutil.TypicalSchedules.getTypicalScheduleList;
@@ -30,7 +31,7 @@ public class ListScheduleCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListScheduleCommand(), model,
-                ListScheduleCommand.MESSAGE_SUCCESS, expectedModel);
+                String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 5), expectedModel);
     }
 
     @Test
@@ -38,6 +39,6 @@ public class ListScheduleCommandTest {
         Schedule schedule = model.getFilteredScheduleList().get(0);
         model.updateFilteredScheduleList((x) -> x.getTitle().equals(schedule.getTitle()));
         assertCommandSuccess(new ListScheduleCommand(), model,
-                ListScheduleCommand.MESSAGE_SUCCESS, expectedModel);
+                String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 5), expectedModel);
     }
 }

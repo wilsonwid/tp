@@ -2,7 +2,7 @@ package scm.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static scm.address.logic.Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW;
+import static scm.address.logic.Messages.MESSAGE_SCHEDULES_FILTERED_OVERVIEW;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static scm.address.testutil.TypicalSchedules.DOCTOR_APPOINTMENT;
@@ -80,7 +80,7 @@ public class FindScheduleCommandTest {
 
     @Test
     public void execute_zeroCriteria_allSchedulesFound() {
-        String expectedMessage = String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 5);
+        String expectedMessage = String.format(MESSAGE_SCHEDULES_FILTERED_OVERVIEW, 5, "");
         TitleContainsKeywordsPredicate titlePredicate = prepareTitlePredicate(" ");
         DescriptionContainsKeywordsPredicate descriptionPredicate = prepareDescriptionPredicate(" ");
         BeforeDateTimePredicate beforePredicate = prepareBeforePredicate(Optional.empty());
@@ -98,7 +98,8 @@ public class FindScheduleCommandTest {
 
     @Test
     public void execute_multipleCriteria_multipleSchedulesFound() {
-        String expectedMessage = String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_SCHEDULES_FILTERED_OVERVIEW, 3,
+                "\nTitle: Study Meeting\nBefore: 2024-04-01 00:00\nAfter: 2024-03-01 00:00");
         TitleContainsKeywordsPredicate titlePredicate = prepareTitlePredicate("Study Meeting");
         DescriptionContainsKeywordsPredicate descriptionPredicate = prepareDescriptionPredicate(" ");
         BeforeDateTimePredicate beforePredicate =
@@ -115,7 +116,8 @@ public class FindScheduleCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING, STUDY_SESSION, TEAM_MEETING), model.getFilteredScheduleList());
 
-        expectedMessage = String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 2);
+        expectedMessage = String.format(MESSAGE_SCHEDULES_FILTERED_OVERVIEW, 2,
+                "\nDescription: with");
         titlePredicate = prepareTitlePredicate(" ");
         descriptionPredicate = prepareDescriptionPredicate("with");
         beforePredicate = prepareBeforePredicate(Optional.empty());
@@ -129,7 +131,8 @@ public class FindScheduleCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MEETING, EXERCISE), model.getFilteredScheduleList());
 
-        expectedMessage = String.format(MESSAGE_SCHEDULES_LISTED_OVERVIEW, 1);
+        expectedMessage = String.format(MESSAGE_SCHEDULES_FILTERED_OVERVIEW, 1,
+                "\nDuring: 2024-03-12 09:30");
         descriptionPredicate = prepareDescriptionPredicate(" ");
         duringPredicate = prepareDuringPredicate(Optional.of(LocalDateTime.of(2024, 3, 12, 9, 30)));
         command = new FindScheduleCommand(titlePredicate, descriptionPredicate,

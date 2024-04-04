@@ -1,6 +1,9 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import scm.address.commons.util.ToStringBuilder;
 import scm.address.logic.Messages;
@@ -12,16 +15,22 @@ import scm.address.model.person.TagsContainKeywordsPredicate;
 /**
  * Finds and lists all persons in contact manager whose name, address, and any
  * of its tags contain any of the specified argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attributes match any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: "
+            + "[" + PREFIX_NAME + "NAME KEYWORDS]"
+            + "[" + PREFIX_ADDRESS + "ADDRESS KEYWORDS]"
+            + "[" + PREFIX_TAG + "TAG KEYWORDS]\n"
+            + "Example: " + COMMAND_WORD
+            + PREFIX_NAME + " alice bob charlie"
+            + PREFIX_ADDRESS + " Clementi"
+            + PREFIX_TAG + " friends";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final AddressContainsKeywordsPredicate addressPredicate;
@@ -44,8 +53,17 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(namePredicate.and(addressPredicate.and(tagsPredicate)));
 
+        String nameMessage = namePredicate.getKeywords().isEmpty()
+                ? "" : "\nName: " + String.join(" ", namePredicate.getKeywords());
+        String addressMessage = addressPredicate.getKeywords().isEmpty()
+                ? "" : "\nAddress: " + String.join(" ", addressPredicate.getKeywords());
+        String tagsMessage = tagsPredicate.getKeywords().isEmpty()
+                ? "" : "\nTags: " + String.join(" ", tagsPredicate.getKeywords());
+        String filterMessage = nameMessage + addressMessage + tagsMessage;
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_FILTERED_OVERVIEW,
+                        model.getFilteredPersonList().size(), filterMessage));
     }
 
     @Override

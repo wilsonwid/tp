@@ -1,6 +1,12 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static scm.address.logic.parser.CliSyntax.PREFIX_AFTER_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DURING_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static scm.address.logic.parser.ScheduleDateTimeFormatter.FORMATTER;
 
 import scm.address.commons.util.ToStringBuilder;
 import scm.address.logic.Messages;
@@ -23,10 +29,22 @@ public class FindScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "find_schedule";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all schedules whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all schedules whose attributes match any of "
+            + "the specified keywords (case-insensitive) and date/time constraints, "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: "
+            + "[" + PREFIX_TITLE + "TITLE KEYWORDS]"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION KEYWORDS]"
+            + "[" + PREFIX_BEFORE_DATETIME + "BEFORE DATE TIME]"
+            + "[" + PREFIX_AFTER_DATETIME + "AFTER DATE TIME]"
+            + "[" + PREFIX_DURING_DATETIME + "DURING DATE TIME]\n"
+            + "Note: All dates and times must be in the format of yyyy-MM-dd HH:mm.\n"
+            + "Example: " + COMMAND_WORD
+            + PREFIX_TITLE + " meeting"
+            + PREFIX_DESCRIPTION + " project"
+            + PREFIX_BEFORE_DATETIME + " 2023-12-31 23:59"
+            + PREFIX_AFTER_DATETIME + " 2025-01-01 00:00"
+            + PREFIX_DURING_DATETIME + " 2024-06-01 00:00";
 
     private final TitleContainsKeywordsPredicate titlePredicate;
     private final DescriptionContainsKeywordsPredicate descriptionPredicate;
@@ -57,8 +75,21 @@ public class FindScheduleCommand extends Command {
         model.updateFilteredScheduleList(titlePredicate.and(descriptionPredicate
                 .and(beforePredicate.and(afterPredicate.and(duringPredicate)))));
 
+        String titleMessage = titlePredicate.getKeywords().isEmpty()
+                ? "" : "\nTitle: " + String.join(" ", titlePredicate.getKeywords());
+        String descriptionMessage = descriptionPredicate.getKeywords().isEmpty()
+                ? "" : "\nDescription: " + String.join(" ", descriptionPredicate.getKeywords());
+        String beforeMessage = beforePredicate.getDateTime().isEmpty()
+                ? "" : "\nBefore: " + beforePredicate.getDateTime().get().format(FORMATTER);
+        String afterMessage = afterPredicate.getDateTime().isEmpty()
+                ? "" : "\nAfter: " + afterPredicate.getDateTime().get().format(FORMATTER);
+        String duringMessage = duringPredicate.getDateTime().isEmpty()
+                ? "" : "\nDuring: " + duringPredicate.getDateTime().get().format(FORMATTER);
+        String filterMessage = titleMessage + descriptionMessage + beforeMessage + afterMessage + duringMessage;
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_SCHEDULES_LISTED_OVERVIEW, model.getFilteredScheduleList().size()));
+                String.format(Messages.MESSAGE_SCHEDULES_FILTERED_OVERVIEW,
+                        model.getFilteredScheduleList().size(), filterMessage));
     }
 
     @Override

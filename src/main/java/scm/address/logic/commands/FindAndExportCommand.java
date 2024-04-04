@@ -1,6 +1,9 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static scm.address.model.file.FileFormat.CSV_FILE;
 import static scm.address.model.file.FileFormat.JSON_FILE;
 import static scm.address.model.file.FileFormat.getFileFormat;
@@ -30,10 +33,18 @@ public class FindAndExportCommand extends Command {
     public static final String DEFAULT_DATA_DIR = "data/";
     public static final String DEFAULT_FILEPATH = "defaultfilename.json";
 
-    public static final String MESSAGE_USAGE = "find_and_export: Exports the users filtered by a tag "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the users filtered by a tag "
             + "and other optional parameters.\n"
-            + "Parameters: TAG [n/NAME] [a/ADDRESS] [f/FILENAME] \n"
-            + "Example: find_and_export cs2103t n/john a/olive street 42 o/output1.json";
+            + "Parameters: "
+            + "TAG"
+            + "[" + PREFIX_NAME + "NAME]"
+            + "[" + PREFIX_ADDRESS + "ADDRESS]"
+            + "[" + PREFIX_FILENAME + "FILENAME]\n"
+            + "Example: " + COMMAND_WORD
+            + "cs2103t"
+            + PREFIX_NAME + " john"
+            + PREFIX_ADDRESS + " olive street 42"
+            + PREFIX_FILENAME + " f/output1.json";
     public static final String FILE_NOT_WRITABLE_MESSAGE = "File exists but is not writable: ";
     public static final String MESSAGE_UNSUPPORTED_FILE_FORMAT = "Unsupported file format: ";
     private final String tag;

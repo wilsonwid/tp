@@ -3,7 +3,7 @@ package scm.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static scm.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static scm.address.logic.Messages.MESSAGE_PERSONS_FILTERED_OVERVIEW;
 import static scm.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static scm.address.testutil.TypicalPersons.ALICE;
 import static scm.address.testutil.TypicalPersons.ELLE;
@@ -70,7 +70,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_allPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_PERSONS_FILTERED_OVERVIEW, 7, "");
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         AddressContainsKeywordsPredicate addressPredicate = prepareAddressPredicate(" ");
         TagsContainKeywordsPredicate tagsPredicate = prepareTagsPredicate(" ");
@@ -83,7 +83,9 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedFilterMessage = "\nName: Kurz Elle Kunz Alice"
+            + "\nAddress: Little Jurong Michegan\nTags: relatives friends";
+        String expectedMessage = String.format(MESSAGE_PERSONS_FILTERED_OVERVIEW, 3, expectedFilterMessage);
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz Alice");
         AddressContainsKeywordsPredicate addressPredicate = prepareAddressPredicate("Little Jurong Michegan");
         TagsContainKeywordsPredicate tagsPredicate = prepareTagsPredicate("relatives friends");
