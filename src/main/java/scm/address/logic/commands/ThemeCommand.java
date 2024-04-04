@@ -33,6 +33,10 @@ public class ThemeCommand extends Command {
         this.theme = theme;
     }
 
+    public Theme getTheme() {
+        return theme;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
