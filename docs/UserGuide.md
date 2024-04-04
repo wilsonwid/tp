@@ -284,20 +284,23 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 
 ## Command summary
 
-| Action              | Format, Examples                                                                                                                                                      |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**           | `clear`                                                                                                                                                               |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
-| **Find**            | `find [n/NAME] [a/ADDRESS] [t/TAG]` <br> e.g., `find n/James Jake`                                                                                                    |
-| **List**            | `list`                                                                                                                                                                |
-| **Help**            | `help`                                                                                                                                                                |
-| **find_and_export** | `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`                                                                                                               |
-| **import**          | `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`                                                                                                               |
-| **add_schedule**    | `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                        |
-| **edit_schedule**   | `edit_schedule INDEX title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                 |
-| **list_schedule**   | `list_schedule`                                                                                                                                                       |
-| **delete_schedule** | `delete_schedule INDEX`                                                                                                                                               |
-| **calendar_view**   | `calendar_view`                                                                                                                                                       |
+| Action                      | Format, Examples                                                                                                                                                      |
+|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear Persons**           | `clear`                                                                                                                                                               |
+| **Delete Person**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit Person**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
+| **Find Persons**            | `find [n/NAME] [a/ADDRESS] [t/TAG]` <br> e.g., `find n/James Jake`                                                                                                    |
+| **List Persons**            | `list`                                                                                                                                                                |
+| **Help**                    | `help`                                                                                                                                                                |
+| **Find and Export to File** | `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`                                                                                                               |
+| **Import from File**        | `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`                                                                                                               |
+| **Add Schedule**            | `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                        |
+| **Clear Schedules**         | `clear_schedule`                                                                                                                                                      |
+| **Delete Schedule**         | `delete_schedule INDEX`                                                                                                                                               |
+| **Edit Schedule**           | `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME] [end/END_DATETIME]`                                                                         |
+| **Find Schedules**          | `find_schedule [title/TITLE] [d/DESCRIPTION] [before/BEFORE_DATETIME] [after/AFTER_DATETIME] [during/DURING_DATETIME]`                                                |
+| **List Schedules**          | `list_schedule`                                                                                                                                                       |
+| **List Ongoing Schedule**   | `list_ongoing_schedule`                                                                                                                                               |
+| **Calendar View**           | `calendar_view`                                                                                                                                                       |
 
