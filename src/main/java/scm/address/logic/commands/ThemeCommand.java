@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import scm.address.commons.core.GuiSettings;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
+import scm.address.model.theme.Theme;
 
 
 /**
@@ -20,24 +21,25 @@ public class ThemeCommand extends Command {
             + "Example: " + COMMAND_WORD + " light\n"
             + "Supported themes: light, dark";
     public static final String MESSAGE_INVALID_THEME = "Invalid theme value";
-    private final String themeName;
+    private final Theme theme;
 
     /**
      * Creates a ThemeCommand to change the theme of the application.
      *
      * @param themeName The name of the theme to change to.
      */
-    public ThemeCommand(String themeName) {
-        assert themeName != null;
-        this.themeName = themeName;
+    public ThemeCommand(Theme theme) {
+        assert theme != null;
+        this.theme = theme;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         GuiSettings guiSettings = model.getGuiSettings();
+
         model.setGuiSettings(new GuiSettings(guiSettings.getWindowWidth(), guiSettings.getWindowHeight(),
-                guiSettings.getWindowCoordinates().x, guiSettings.getWindowCoordinates().y, themeName));
+                guiSettings.getWindowCoordinates().x, guiSettings.getWindowCoordinates().y, theme));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS), false, false, true);
     }
