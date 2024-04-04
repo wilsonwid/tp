@@ -8,7 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import scm.address.commons.core.LogsCenter;
-import scm.address.logic.commands.*;
+import scm.address.logic.commands.AddCommand;
+import scm.address.logic.commands.AddScheduleCommand;
+import scm.address.logic.commands.ClearCommand;
+import scm.address.logic.commands.Command;
+import scm.address.logic.commands.DeleteCommand;
+import scm.address.logic.commands.DeleteScheduleCommand;
+import scm.address.logic.commands.EditCommand;
+import scm.address.logic.commands.EditScheduleCommand;
+import scm.address.logic.commands.ExitCommand;
+import scm.address.logic.commands.FindAndExportCommand;
+import scm.address.logic.commands.FindCommand;
+import scm.address.logic.commands.FindScheduleCommand;
+import scm.address.logic.commands.HelpCommand;
+import scm.address.logic.commands.ImportCommand;
+import scm.address.logic.commands.ListCommand;
+import scm.address.logic.commands.ListScheduleCommand;
+import scm.address.logic.commands.ThemeCommand;
 import scm.address.logic.parser.exceptions.ParseException;
 
 /**

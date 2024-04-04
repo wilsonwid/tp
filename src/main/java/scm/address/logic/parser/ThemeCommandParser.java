@@ -1,9 +1,10 @@
 package scm.address.logic.parser;
 
+import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import scm.address.logic.commands.ThemeCommand;
 import scm.address.logic.parser.exceptions.ParseException;
 
-import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new ThemeCommand object.
