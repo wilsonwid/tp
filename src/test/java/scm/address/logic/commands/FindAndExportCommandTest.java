@@ -8,6 +8,7 @@ import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,20 +23,18 @@ import scm.address.model.UserPrefs;
 import scm.address.model.person.Person;
 
 public class FindAndExportCommandTest {
-
-    @TempDir
-    Path testFolder;
+    private static final Path TEST_DATA_FOLDER = Paths.get("data");
+    private static final Path OUTPUT_FILE = TEST_DATA_FOLDER.resolve("output.json");
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new ScheduleList());
 
     @Test
     public void execute_validTagAndFilename_success() throws Exception {
-        Path filePath = testFolder.resolve("output.json");
-        FindAndExportCommand command = new FindAndExportCommand("friends", null, null, filePath.toString());
+        FindAndExportCommand command = new FindAndExportCommand("friends", null, null, "output");
 
         command.execute(model);
 
-        assertTrue(Files.exists(filePath), "The file was not created.");
+        assertTrue(Files.exists(OUTPUT_FILE), "The file was not created.");
     }
 
     @Test
