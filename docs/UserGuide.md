@@ -69,7 +69,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>.
+Shows a message explaining how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>. 
 
 ![help message](images/helpMessage.png)
 
@@ -78,9 +78,9 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the Student Contact Manager.
+Adds a person to the Student Contact Manager. Useful if you need to store a person's details for recording purposes. There are various details that must be added, including name, phone number, email, and address. Tags are optional.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ...`
 
 <box type="tip" seamless>
 
@@ -93,22 +93,26 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the contact manager.
+Shows a list of all persons in the contact manager. Useful if you need to view all contacts that you have recorded.
 
 Format: `list`
 
+![list image](images/listImage.png)
+
 ### Editing a person : `edit`
 
-Edits an existing person in the contact manager.
+Edits an existing person in the contact manager. Useful if you need to edit a person's details to be updated, or if you have inputted a wrong field.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<box type="tip" seamless>
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+</box>
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
