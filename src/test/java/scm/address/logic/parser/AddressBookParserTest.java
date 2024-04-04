@@ -19,7 +19,6 @@ import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +44,7 @@ import scm.address.logic.commands.FindScheduleCommand;
 import scm.address.logic.commands.HelpCommand;
 import scm.address.logic.commands.ImportCommand;
 import scm.address.logic.commands.ListCommand;
+import scm.address.logic.commands.ListOngoingScheduleCommand;
 import scm.address.logic.commands.ListScheduleCommand;
 import scm.address.logic.commands.descriptors.EditScheduleDescriptor;
 import scm.address.logic.parser.exceptions.ParseException;
@@ -68,7 +68,6 @@ import scm.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @Test
     public void parseCommand_add() throws Exception {
@@ -264,6 +263,14 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD) instanceof ListScheduleCommand);
 
         assertTrue(parser.parseCommand(ListScheduleCommand.COMMAND_WORD + " 5") instanceof ListScheduleCommand);
+    }
+
+    @Test
+    public void parseCommand_listOngoingScheduleCommand() throws Exception {
+        assertTrue(parser.parseCommand(ListOngoingScheduleCommand.COMMAND_WORD) instanceof ListOngoingScheduleCommand);
+
+        assertTrue(parser.parseCommand(ListOngoingScheduleCommand.COMMAND_WORD + " 8")
+                instanceof ListOngoingScheduleCommand);
     }
 
     @Test
