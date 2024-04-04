@@ -127,12 +127,17 @@ Finds persons whose names contain any of the given keywords. Useful if you need 
 
 Format: `find [n/NAME] [a/ADDRESS] [t/TAG]`
 
+<box type="info" seamless>
+
 * `find` needs to have at least one of `n/NAME`, `a/ADDRESS`, or `t/TAG` to run.
 * The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e., it is an `OR` search).
   * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If multiple attributes are given, then all given attributes must be matched for the contact to be returned.
+
+</box>
 
 Examples:
 * `find n/John` returns `john` and `John Doe`

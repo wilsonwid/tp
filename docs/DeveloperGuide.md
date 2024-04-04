@@ -146,7 +146,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both contact manager data, user preference data, and schedule list data in JSON format, and read them back into corresponding objects.
-* inherits from `AddressBookStorage`, `UserPrefStorage`, and `ScheduleStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from `AddressBookStorage`, `UserPrefStorage`, and `ScheduleStorage`, which means it can be treated as any one of these (if the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes

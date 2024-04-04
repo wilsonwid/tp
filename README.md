@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* This is **a project to help students able to easily to manage contacts and schedules.**<br>
+* This is **a project to help students easily manage contacts and schedules.**<br>
   Example usages:
   * recall a classmate's project role
   * schedule a meeting with a study group
