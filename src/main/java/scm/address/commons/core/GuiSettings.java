@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import scm.address.commons.util.ToStringBuilder;
-import scm.address.model.theme.Theme;
 import scm.address.model.theme.ThemeCollection;
 
 /**

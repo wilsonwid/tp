@@ -15,7 +15,6 @@ import org.junit.jupiter.api.io.TempDir;
 import scm.address.commons.core.GuiSettings;
 import scm.address.commons.exceptions.DataLoadingException;
 import scm.address.model.UserPrefs;
-import scm.address.model.theme.Theme;
 import scm.address.model.theme.ThemeCollection;
 
 public class JsonUserPrefsStorageTest {

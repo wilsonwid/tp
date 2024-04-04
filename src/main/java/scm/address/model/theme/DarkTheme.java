@@ -2,12 +2,11 @@ package scm.address.model.theme;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
 
 /**
  * Represents the Dark Theme of the application.
  */
-class DarkTheme implements Theme, Serializable {
+class DarkTheme implements Theme {
     private static final String DARK_THEME_NAME = "dark";
     private static final String DARK_THEME_CSS_PATH = "/view/DarkTheme.css";
     private static final String DARK_THEME_EXTENSIONS_CSS_PATH = "/view/Extensions.css";

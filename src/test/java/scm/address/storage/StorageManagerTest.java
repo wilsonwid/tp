@@ -17,7 +17,6 @@ import scm.address.model.ReadOnlyAddressBook;
 import scm.address.model.ReadOnlyScheduleList;
 import scm.address.model.ScheduleList;
 import scm.address.model.UserPrefs;
-import scm.address.model.theme.Theme;
 import scm.address.model.theme.ThemeCollection;
 
 public class StorageManagerTest {

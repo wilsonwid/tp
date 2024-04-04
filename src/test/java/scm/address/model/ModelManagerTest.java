@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import scm.address.commons.core.GuiSettings;
 import scm.address.model.person.NameContainsKeywordsPredicate;
-import scm.address.model.theme.Theme;
 import scm.address.model.theme.ThemeCollection;
 import scm.address.testutil.AddressBookBuilder;
 
