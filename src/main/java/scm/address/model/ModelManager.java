@@ -173,16 +173,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String getTheme() {
-        return "none";
-    }
-
-    @Override
-    public void setTheme(String theme) {
-        System.out.println("Theme set to: " + theme);
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
