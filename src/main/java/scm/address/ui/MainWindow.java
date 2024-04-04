@@ -210,6 +210,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Changes the theme of the application.
+     */
+    // GCOVR_EXCL_START
+    // This method cannot be tested as it works on the UI. It is excluded from testing.
     private void handleChangeTheme() {
 
         String themeName = logic.getGuiSettings().getTheme();
@@ -222,12 +227,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser("Error changing theme: " + e.getMessage());
         }
     }
+    // GCOVR_EXCL_STOP
 
     /**
-     * Changes the CSS of the application.
+     * Changes the CSS of the application
      *
      * @param theme The theme to be set
      */
+    // GCOVR_EXCL_START
+    // This method cannot be tested as it works on the UI. It is excluded from testing.
     private void setTheme(Theme theme) {
         requireNonNull(theme);
 
@@ -239,4 +247,5 @@ public class MainWindow extends UiPart<Stage> {
         scene.getStylesheets().add(cssFilePath);
         scene.getStylesheets().add(extensionsCssPath);
     }
+    // GCOVR_EXCL_STOP
 }
