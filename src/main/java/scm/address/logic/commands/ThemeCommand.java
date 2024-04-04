@@ -1,14 +1,15 @@
 package scm.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Command to change the theme of the application.
  */
-public class ThemeCommand extends Command{
+public class ThemeCommand extends Command {
 
     public static final String COMMAND_WORD = "theme";
     public static final String MESSAGE_SUCCESS = "Theme changed";
