@@ -2,9 +2,16 @@ package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
+import static scm.address.model.file.FileFormat.CSV_FILE;
+import static scm.address.model.file.FileFormat.JSON_FILE;
+import static scm.address.model.file.FileFormat.MESSAGE_UNSUPPORTED_FILE_FORMAT;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -17,8 +24,10 @@ import scm.address.commons.exceptions.IllegalValueException;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
 import scm.address.model.ReadOnlyAddressBook;
+import scm.address.model.file.FileFormat;
 import scm.address.model.person.Person;
 import scm.address.storage.JsonAdaptedPerson;
+import scm.address.storage.JsonAdaptedTag;
 import scm.address.storage.JsonAddressBookStorage;
 
 /**
@@ -40,6 +49,7 @@ public class ImportCommand extends Command {
             + "already exists in the contact manager.";
 
     public static final String MESSAGE_FILE_NOT_FOUND = "Filename %s is not found!";
+    public static final String MESSAGE_FILE_LOADING_ERROR = "Couldn't load data in: ";
 
     private static final Logger logger = LogsCenter.getLogger(ImportCommand.class);
     private final Set<File> files;
@@ -102,11 +112,25 @@ public class ImportCommand extends Command {
                 logger.info(String.format(MESSAGE_FILE_NOT_FOUND, file.getPath()));
                 throw new IllegalValueException(String.format(MESSAGE_FILE_NOT_FOUND, file.getPath()));
             }
-
             try {
-                savedPersons.addAll(readPersons(file));
+                switch (FileFormat.getFileFormat(file)) {
+                case JSON_FILE:
+                    logger.info("Reading from json file: " + file.getPath());
+                    savedPersons.addAll(readPersons(file));
+                    break;
+                case CSV_FILE:
+                    logger.info("Reading from csv file: " + file.getPath());
+                    savedPersons.addAll(readPersonsFromCsv(file));
+                    break;
+                default:
+                    logger.info(MESSAGE_UNSUPPORTED_FILE_FORMAT);
+                    throw new IllegalValueException(MESSAGE_UNSUPPORTED_FILE_FORMAT);
+                }
+            } catch (IllegalValueException e) {
+                logger.info(e.getMessage());
+                throw e;
             } catch (DataLoadingException dle) {
-                logger.info("Data loading exception in: " + file.getPath());
+                logger.info(MESSAGE_FILE_LOADING_ERROR + file.getPath());
                 throw dle;
             }
         }
@@ -119,17 +143,76 @@ public class ImportCommand extends Command {
      * @return A List of JsonAdaptedPerson present inside the {@code file}.
      * @throws DataLoadingException If the {@code file} is unable to be loaded.
      */
-    public List<JsonAdaptedPerson> readPersons(File file)
+    private List<JsonAdaptedPerson> readPersons(File file)
             throws DataLoadingException {
         JsonAddressBookStorage curStorage = new JsonAddressBookStorage(file.toPath());
         Optional<ReadOnlyAddressBook> readOnlyAddressBook = curStorage.readAddressBook();
         return readOnlyAddressBook
                 .orElseThrow(() ->
-                        new DataLoadingException(new Exception("Cannot load file: " + file.getPath())))
+                        new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath())))
                 .getPersonList()
                 .stream()
                 .map(JsonAdaptedPerson::new)
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Reads the csv data inside {@code file} and returns a List of JsonAdaptedPersons.
+     *
+     * @param file A csv file.
+     * @return A List of JsonAdaptedPerson present inside the {@code file}.
+     * @throws DataLoadingException If the {@code file} is unable to be loaded.
+     */
+    private List<JsonAdaptedPerson> readPersonsFromCsv(File file) throws DataLoadingException {
+        String filePath = file.getPath();
+        List<JsonAdaptedPerson> persons = new ArrayList<>();
+        try {
+            persons = getPersonsFromCsv(filePath);
+        } catch (IOException e) {
+            throw new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath()));
+        }
+        return persons;
+    }
+
+    /**
+     * Reads the csv data inside {@code filePath} and returns a List of JsonAdaptedPersons.
+     * It acts as a helper function for {@link #readPersonsFromCsv(File)}.
+     *
+     * @param filePath A csv file path.
+     * @return A List of JsonAdaptedPerson present inside the {@code file}.
+     * @throws IOException If the {@code file} is unable to be loaded.
+     */
+    private List<JsonAdaptedPerson> getPersonsFromCsv(String filePath) throws IOException {
+        List<JsonAdaptedPerson> persons = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        String line = "";
+        String splitBy = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
+        String headers = br.readLine();
+        while ((line = br.readLine()) != null) {
+            String[] info = line.split(splitBy);
+            String name = info[0];
+            String phone = info[1];
+            String email = info[2];
+            String address = info[3];
+            address = address.replaceFirst("^\"", "");
+            address = address.replaceFirst("\"$", "");
+
+            // If there are no tags, add the person without tags
+            if (info.length < 5) {
+                persons.add(new JsonAdaptedPerson(name, phone, email, address, new ArrayList<JsonAdaptedTag>()));
+                continue;
+            }
+
+            List<JsonAdaptedTag> tags = Arrays.stream(info[4].split(" \\| "))
+                    .map(String::trim)
+                    .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList());
+
+            JsonAdaptedPerson person = new JsonAdaptedPerson(name, phone, email, address, tags);
+            persons.add(person);
+        }
+        br.close();
+        return persons;
     }
 
     @Override

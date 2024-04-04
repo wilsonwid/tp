@@ -1,4 +1,4 @@
-package scm.address.model.filename;
+package scm.address.model.file;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,10 +7,12 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; filename is valid as declared in {@link #isValidFilename(String)}
  */
 public class Filename {
-    public static final String MESSAGE_CONSTRAINTS = "Filenames should be alphanumeric.";
+    public static final String MESSAGE_CONSTRAINTS = "Filenames should be alphanumeric and .json or .csv files. "
+            + "Example: 'myContacts.json' or 'myContacts2.csv'";
 
     public static final String MESSAGE_DUPLICATE = "Filenames should be unique.";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}_\\-]+";
+    public static final String VALIDATION_REGEX = "(\\p{Alnum}+\\.json)|(\\p{Alnum}+\\.csv)";
+
     public final String filename;
 
     /**

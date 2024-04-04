@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static scm.address.testutil.TypicalPersons.ALICE;
 import static scm.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,25 +32,42 @@ public class FindAndExportCommandTest {
     @Test
     public void execute_validTagAndFilename_success() throws Exception {
         Path filePath = testFolder.resolve("output.json");
-        FindAndExportCommand command = new FindAndExportCommand("friends", null, null, filePath.toString());
+        File file = new File(filePath.toString());
+        FindAndExportCommand command = new FindAndExportCommand("friends", null, null, file);
 
-        command.execute(model);
-
+        CommandResult result = command.execute(model);
         assertTrue(Files.exists(filePath), "The file was not created.");
     }
 
     @Test
-    public void execute_exportSuccessful() throws Exception {
+    public void execute_exportAsJsonSuccessful() throws Exception {
         Model model = new ModelManager();
         model.addPerson(ALICE);
 
         String tag = "friends";
         String name = ALICE.getName().toString();
         String address = ALICE.getAddress().toString();
-        Path tempFile = Files.createTempFile("testExport", ".txt");
+        Path tempFile = Files.createTempFile("testExport", ".json");
         String filename = tempFile.toString();
 
-        FindAndExportCommand command = new FindAndExportCommand(tag, name, address, filename);
+        FindAndExportCommand command = new FindAndExportCommand(tag, name, address, new File(filename));
+        CommandResult result = command.execute(model);
+        assertTrue(Files.exists(tempFile));
+        Files.deleteIfExists(tempFile);
+    }
+
+    @Test
+    public void execute_exportAsCsvSuccessful() throws Exception {
+        Model model = new ModelManager();
+        model.addPerson(ALICE);
+
+        String tag = "friends";
+        String name = ALICE.getName().toString();
+        String address = ALICE.getAddress().toString();
+        Path tempFile = Files.createTempFile("testExport", ".csv");
+        String filename = tempFile.toString();
+
+        FindAndExportCommand command = new FindAndExportCommand(tag, name, address, new File(filename));
         CommandResult result = command.execute(model);
         assertTrue(Files.exists(tempFile));
         Files.deleteIfExists(tempFile);
@@ -62,7 +80,7 @@ public class FindAndExportCommandTest {
         Path tempFile = Files.createTempFile("testExport", ".txt");
         String filename = tempFile.toString();
         FindAndExportCommand command = new FindAndExportCommand(ALICE.getTags().toString(),
-                ALICE.getName().toString(), ALICE.getAddress().toString(), filename);
+                ALICE.getName().toString(), ALICE.getAddress().toString(), new File(filename));
         assertThrows(CommandException.class, () -> command.execute(emptyModel));
     }
 
@@ -85,7 +103,7 @@ public class FindAndExportCommandTest {
          * @param filename The name of the file to which the filtered users are exported.
          */
         public FindAndExportCommandStub(String tag, String name, String address, String filename) {
-            super(tag, name, address, filename);
+            super(tag, name, address, new File(filename));
         }
 
         private void exportData(List<Person> users, String fileName) throws IOException {

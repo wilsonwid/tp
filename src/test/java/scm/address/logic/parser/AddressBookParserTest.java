@@ -17,6 +17,7 @@ import static scm.address.logic.parser.ScheduleDateTimeFormatter.FORMATTER;
 import static scm.address.testutil.Assert.assertThrows;
 import static scm.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -134,9 +135,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename")
+        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename.json")
                 instanceof ImportCommand);
-        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename1 f/filename2")
+        assertTrue(parser.parseCommand(ImportCommand.COMMAND_WORD + " f/filename1.json f/filename2.csv")
                 instanceof ImportCommand);
     }
 
@@ -164,12 +165,12 @@ public class AddressBookParserTest {
                 + PREFIX_ADDRESS + address + " "
                 + PREFIX_FILENAME + filename;
 
-        FindAndExportCommand expectedCommand = new FindAndExportCommand(tag, name, address, filename);
+        FindAndExportCommand expectedCommand = new FindAndExportCommand(tag, name, address, new File(filename));
 
         FindAndExportCommand resultCommand = (FindAndExportCommand) parser.parseCommand(input);
         assertEquals(expectedCommand.getName(), resultCommand.getName());
         assertEquals(expectedCommand.getAddress(), resultCommand.getAddress());
-        assertEquals(expectedCommand.getFilename(), resultCommand.getFilename());
+        assertEquals(expectedCommand.getFile().getName(), resultCommand.getFile().getName());
     }
 
     @Test
