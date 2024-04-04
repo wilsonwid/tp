@@ -28,8 +28,25 @@ public class ThemeCommandParserTest {
     }
 
     @Test
+    void parse_validThemeWithUpperCase_success() throws ParseException {
+        // Test that the dark theme is returned successfully
+        ThemeCommand darkTheme = themeCommandParser.parse(DARK_THEME_NAME.toUpperCase());
+        assertEquals(DARK_THEME_NAME, darkTheme.getTheme().getThemeName());
+
+        // Test that the light theme is returned successfully
+        ThemeCommand lightTheme = themeCommandParser.parse(LIGHT_THEME_NAME.toUpperCase());
+        assertEquals(LIGHT_THEME_NAME, lightTheme.getTheme().getThemeName());
+    }
+
+    @Test
     void parse_invalidTheme_throwsParseException() {
         // Test that an invalid theme name throws a ParseException
         assertThrows(ParseException.class, () -> themeCommandParser.parse(INVALID_THEME_NAME));
+    }
+
+    @Test
+    void parse_nullTheme_throwsNullPointerException() {
+        // Test that a null theme name throws a NullPointerException
+        assertThrows(NullPointerException.class, () -> themeCommandParser.parse(null));
     }
 }
