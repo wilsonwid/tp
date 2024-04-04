@@ -27,6 +27,7 @@ import scm.address.logic.commands.ImportCommand;
 import scm.address.logic.commands.ListCommand;
 import scm.address.logic.commands.ListOngoingScheduleCommand;
 import scm.address.logic.commands.ListScheduleCommand;
+import scm.address.logic.commands.ThemeCommand;
 import scm.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -113,6 +114,9 @@ public class AddressBookParser {
 
         case DeleteScheduleCommand.COMMAND_WORD:
             return new DeleteScheduleCommandParser().parse(arguments);
+
+        case ThemeCommand.COMMAND_WORD:
+            return new ThemeCommandParser().parse(arguments);
 
         case CalendarViewCommand.COMMAND_WORD:
             return new CalendarViewCommand();
