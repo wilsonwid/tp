@@ -1,7 +1,9 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static scm.address.logic.parser.CliSyntax.*;
+import static scm.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static scm.address.logic.parser.CliSyntax.PREFIX_FILENAME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static scm.address.model.file.FileFormat.CSV_FILE;
 import static scm.address.model.file.FileFormat.JSON_FILE;
 import static scm.address.model.file.FileFormat.getFileFormat;

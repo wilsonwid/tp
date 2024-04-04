@@ -53,8 +53,17 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(namePredicate.and(addressPredicate.and(tagsPredicate)));
 
+        String nameMessage = namePredicate.getKeywords().isEmpty()
+                ? "" : "\nName: " + String.join(" ", namePredicate.getKeywords());
+        String addressMessage = addressPredicate.getKeywords().isEmpty()
+                ? "" : "\nAddress: " + String.join(" ", addressPredicate.getKeywords());
+        String tagsMessage = tagsPredicate.getKeywords().isEmpty()
+                ? "" : "\nTags: " + String.join(" ", tagsPredicate.getKeywords());
+        String filterMessage = nameMessage + addressMessage + tagsMessage;
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_FILTERED_OVERVIEW,
+                        model.getFilteredPersonList().size(), filterMessage));
     }
 
     @Override

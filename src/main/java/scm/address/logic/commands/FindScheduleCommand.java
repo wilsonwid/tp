@@ -1,8 +1,11 @@
 package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static scm.address.logic.parser.CliSyntax.*;
-import static scm.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static scm.address.logic.parser.CliSyntax.PREFIX_AFTER_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_BEFORE_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static scm.address.logic.parser.CliSyntax.PREFIX_DURING_DATETIME;
+import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import scm.address.commons.util.ToStringBuilder;
 import scm.address.logic.Messages;

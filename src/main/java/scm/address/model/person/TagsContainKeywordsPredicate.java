@@ -46,6 +46,10 @@ public class TagsContainKeywordsPredicate implements Predicate<Person> {
         return keywords.equals(otherTagsContainKeywordsPredicate.keywords);
     }
 
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
