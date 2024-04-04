@@ -189,9 +189,44 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the contact manager.
+Clears all contact entries from the contact manager.
 
 Format: `clear`
+
+### Editing an event : `edit_schedule`
+
+Edits the schedule at the specified index. Useful if you wish to edit a certain schedule's description or timings.
+
+Format: `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME] [end/END_DATETIME]`
+
+<box type="info" seamless>
+
+* `INDEX` has to be a positive number that is found as an index for the schedule.
+* Either one of `TITLE`, `DESCRIPTION`, `START_DATETIME` or `END_DATETIME` has to be provided for the command to run.
+* `TITLE` and `DESCRIPTION` must be alphanumeric
+* `START_DATETIME` and `END_DATETIME` are in `YYYY-MM-DD HH:mm` format and must be valid datetimes.
+
+</box>
+
+### Listing all events : `list_schedule`
+
+Lists all the events currently available. Useful if you wish to view all the events that are in the database. 
+
+Format: `list_schedule`
+
+![listing schedules](images/listSchedule.png)
+
+### Deleting an event : `delete_schedule`
+
+Deletes the event at the given index. Useful if you wish to delete an event that is no longer needed.
+
+Format: `delete_schedule INDEX`
+
+<box type="info" seamless>
+
+* `INDEX` must be a positive number and a valid index of a schedule.
+
+</box>
 
 ### Exiting the program : `exit`
 
@@ -205,7 +240,7 @@ Student Contact Manager data are saved in the hard disk automatically after any 
 
 ### Editing the data file
 
-Student Contact Manager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Student Contact Manager data are saved automatically as a JSON file `[JAR file location]/data/scm.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -242,3 +277,8 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 | **Help**            | `help`                                                                                                                                                                |
 | **find_and_export** | `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`                                                                                                               |
 | **import**          | `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`                                                                                                               |
+| **add_schedule**    | `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                        |
+| **edit_schedule**   | `edit_schedule INDEX title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                 |
+| **list_schedule**   | `list_schedule`                                                                                                                                                       |
+| **delete_schedule** | `delete_schedule INDEX`                                                                                                                                               |
+
