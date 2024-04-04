@@ -2,6 +2,7 @@ package scm.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import scm.address.commons.core.GuiSettings;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.model.Model;
 
@@ -34,7 +35,10 @@ public class ThemeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.setTheme(themeName);
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        GuiSettings guiSettings = model.getGuiSettings();
+        model.setGuiSettings(new GuiSettings(guiSettings.getWindowWidth(), guiSettings.getWindowHeight(),
+                guiSettings.getWindowCoordinates().x, guiSettings.getWindowCoordinates().y, themeName));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS), false, false, true);
     }
 }
