@@ -2,12 +2,12 @@ package scm.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 import scm.address.logic.commands.FindAndExportCommand;
 import scm.address.logic.parser.exceptions.ParseException;
-
-import java.io.File;
 
 public class FindAndExportCommandParserTest {
 
