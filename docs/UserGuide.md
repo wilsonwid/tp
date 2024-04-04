@@ -101,15 +101,18 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the contact manager. Useful if you need to edit a person's details to be updated, or if you have inputted a wrong field.
+Edits an existing person in the contact manager. Useful if you need to edit a person's details to be updated, or if you have inputted a wrong field. Existing values will be updated to the input values.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
+<box type="info" seamless>
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer**, such as 1, 2, 3, ...
+* At least one of the optional fields must be provided. This means that either `NAME`, `PHONE`, `EMAIL`, `ADDRESS` or `TAG` needs to be provided.
+* When editing tags, the existing tags of the person will be removed i.e., adding of tags is not cumulative.
+
+</box>
+
 <box type="tip" seamless>
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 </box>
@@ -120,17 +123,16 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords. Useful if you need to find a certain contact's details without going through the entire list of contacts.
 
 Format: `find [n/NAME] [a/ADDRESS] [t/TAG]`
 
 * `find` needs to have at least one of `n/NAME`, `a/ADDRESS`, or `t/TAG` to run.
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Persons matching at least one keyword will be returned (i.e., it is an `OR` search). 
+  * e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
@@ -144,20 +146,25 @@ Exports the users that are filtered by a tag and other optional parameters.
 
 Format: `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`
 
-* `TAG` needs to be a tag
-* `NAME` needs to be a substring of a person's name
-* `ADDRESS` needs to be a substring of a person's address
-* `FILENAME` needs to be a valid filename
+* `TAG` needs to be a tag.
+* `NAME` needs to be a substring of a person's name.
+* `ADDRESS` needs to be a substring of a person's address.
+* `FILENAME` needs to be a valid filename, and can only have alphanumeric characters.
+
+<box type="info" seamless>
+* A substring is any part of a string.
+* A string is any combination of characters.
+</box>
 
 Examples:
 * `find_and_export cs2103t`
-* `find_and_export cs2103t n/john a/olive street 42 f/output1`
-
+* `find_and_export cs2103t n/john a/olive street 42 f/output1.json`
 
 ### Importing a datafile: `import`
-Imports contact details from a JSON file with filename specified.
 
-Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] …`
+Imports contact details from a specified CSV or JSON file.
+
+Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 
 * `FILENAME_n` needs to be a valid filename that is found in the `./data/` directory
 
@@ -165,7 +172,6 @@ Examples:
 * `import export`
 * `import contacts_export`
 * `import contacts_export1 contacts_export2`
-
 
 ### Deleting a person : `delete`
 
