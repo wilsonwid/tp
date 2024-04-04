@@ -167,37 +167,51 @@ public class ImportCommand extends Command {
         String filePath = file.getPath();
         List<JsonAdaptedPerson> persons = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            String line = "";
-            String splitBy = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
-            String headers = br.readLine();
-            while ((line = br.readLine()) != null) {
-                String[] info = line.split(splitBy);
-                String name = info[0];
-                String phone = info[1];
-                String email = info[2];
-                String address = info[3];
-                address = address.replaceFirst("^\"", "");
-                address = address.replaceFirst("\"$", "");
-
-                // If there are no tags, add the person without tags
-                if (info.length < 5) {
-                    persons.add(new JsonAdaptedPerson(name, phone, email, address, new ArrayList<JsonAdaptedTag>()));
-                    continue;
-                }
-
-                List<JsonAdaptedTag> tags = Arrays.stream(info[4].split(" \\| "))
-                        .map(String::trim)
-                        .map(JsonAdaptedTag::new)
-                        .collect(Collectors.toList());
-
-                JsonAdaptedPerson person = new JsonAdaptedPerson(name, phone, email, address, tags);
-                persons.add(person);
-            }
-            br.close();
+            persons = getPersonsFromCsv(filePath);
         } catch (IOException e) {
             throw new DataLoadingException(new Exception(MESSAGE_FILE_LOADING_ERROR + file.getPath()));
         }
+        return persons;
+    }
+
+    /**
+     * Reads the csv data inside {@code filePath} and returns a List of JsonAdaptedPersons.
+     * It acts as a helper function for {@link #readPersonsFromCsv(File)}.
+     *
+     * @param filePath A csv file path.
+     * @return A List of JsonAdaptedPerson present inside the {@code file}.
+     * @throws IOException If the {@code file} is unable to be loaded.
+     */
+    private List<JsonAdaptedPerson> getPersonsFromCsv(String filePath) throws IOException {
+        List<JsonAdaptedPerson> persons = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        String line = "";
+        String splitBy = ",(?=([^\"]*\"[^\"]*\")*[^\"]*$)";
+        String headers = br.readLine();
+        while ((line = br.readLine()) != null) {
+            String[] info = line.split(splitBy);
+            String name = info[0];
+            String phone = info[1];
+            String email = info[2];
+            String address = info[3];
+            address = address.replaceFirst("^\"", "");
+            address = address.replaceFirst("\"$", "");
+
+            // If there are no tags, add the person without tags
+            if (info.length < 5) {
+                persons.add(new JsonAdaptedPerson(name, phone, email, address, new ArrayList<JsonAdaptedTag>()));
+                continue;
+            }
+
+            List<JsonAdaptedTag> tags = Arrays.stream(info[4].split(" \\| "))
+                    .map(String::trim)
+                    .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList());
+
+            JsonAdaptedPerson person = new JsonAdaptedPerson(name, phone, email, address, tags);
+            persons.add(person);
+        }
+        br.close();
         return persons;
     }
 
