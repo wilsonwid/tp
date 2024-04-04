@@ -37,7 +37,8 @@ public class ThemeCollectionTest {
     @Test
     void getTheme_invalidTheme_throwsIllegalArgumentException() {
         // Test that an invalid theme name throws an IllegalArgumentException
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> ThemeCollection.getTheme("invalid"));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()
+                -> ThemeCollection.getTheme("invalid"));
         assertEquals(ThemeCollection.MESSAGE_INVALID_THEME_NAME, exception.getMessage());
     }
 }

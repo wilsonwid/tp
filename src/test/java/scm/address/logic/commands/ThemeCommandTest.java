@@ -28,7 +28,8 @@ public class ThemeCommandTest {
         ThemeCommand themeCommand = new ThemeCommand(theme);
         System.out.println(model.getGuiSettings().getWindowCoordinates());
         CommandResult commandResult = themeCommand.execute(model);
-        assertEquals(String.format(ThemeCommand.MESSAGE_SUCCESS, theme.getThemeName()), commandResult.getFeedbackToUser());
+        assertEquals(String.format(ThemeCommand.MESSAGE_SUCCESS, theme.getThemeName()),
+                commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -40,6 +41,7 @@ public class ThemeCommandTest {
         Theme theme = ThemeCollection.getLightTheme();
         ThemeCommand themeCommand = new ThemeCommand(theme);
         CommandResult commandResult = themeCommand.execute(model);
-        assertEquals(String.format(ThemeCommand.MESSAGE_SUCCESS, theme.getThemeName()), commandResult.getFeedbackToUser());
+        assertEquals(String.format(ThemeCommand.MESSAGE_SUCCESS, theme.getThemeName()),
+                commandResult.getFeedbackToUser());
     }
 }
