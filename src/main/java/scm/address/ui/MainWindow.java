@@ -17,6 +17,9 @@ import scm.address.logic.Logic;
 import scm.address.logic.commands.CommandResult;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.logic.parser.exceptions.ParseException;
+import scm.address.model.theme.Theme;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -207,26 +210,30 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleChangeTheme() {
+        Theme theme = logic.getGuiSettings().getTheme();
 
-        String theme = logic.getGuiSettings().getTheme();
-
-        if (theme.equals("light")) {
-            setCss("view/LightTheme.css");
-        } else if (theme.equals("dark")) {
-            setCss("view/DarkTheme.css");
+        try {
+            setTheme(theme);
+        } catch (Exception e) {
+            logger.warning("Error changing theme: " + e.getMessage());
+            resultDisplay.setFeedbackToUser("Error changing theme: " + e.getMessage());
         }
     }
 
     /**
      * Changes the CSS of the application.
      *
-     * @param cssFilePath The file path of the CSS file.
+     * @param theme The theme to be set
      */
-    public void setCss(String cssFilePath) {
-        System.out.println(cssFilePath);
+    private void setTheme(Theme theme) {
+        requireNonNull(theme);
+
+        String cssFilePath = theme.getThemeCssPath();
+        String extensionsCssPath = theme.getThemeExtensionsCssPath();
+
         Scene scene = primaryStage.getScene();
         scene.getStylesheets().clear();
         scene.getStylesheets().add(cssFilePath);
-        scene.getStylesheets().add(EXTENSIONS_CSS_FILE_PATH);
+        scene.getStylesheets().add(extensionsCssPath);
     }
 }
