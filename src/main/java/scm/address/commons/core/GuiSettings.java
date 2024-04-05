@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import scm.address.commons.util.ToStringBuilder;
+import scm.address.model.theme.ThemeCollection;
 
 /**
  * A Serializable class that contains the GUI settings.
@@ -15,9 +16,7 @@ public class GuiSettings implements Serializable {
     private static final double DEFAULT_HEIGHT = 600;
     private static final double DEFAULT_WIDTH = 740;
 
-    private static final String THEME_LIGHT = "light";
-    private static final String THEME_DARK = "dark";
-
+    private static final String DEFAULT_THEME_NAME = ThemeCollection.getDarkTheme().getThemeName();
     private final double windowWidth;
     private final double windowHeight;
     private final Point windowCoordinates;
@@ -30,7 +29,7 @@ public class GuiSettings implements Serializable {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
         windowCoordinates = null; // null represent no coordinates
-        theme = THEME_LIGHT;
+        theme = DEFAULT_THEME_NAME;
     }
 
     /**
@@ -39,7 +38,7 @@ public class GuiSettings implements Serializable {
     public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition, String theme) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
-        windowCoordinates = new Point(xPosition, yPosition);
+        this.windowCoordinates = new Point(xPosition, yPosition);
         this.theme = theme;
     }
 

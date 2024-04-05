@@ -4,6 +4,8 @@ import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import scm.address.logic.commands.ThemeCommand;
 import scm.address.logic.parser.exceptions.ParseException;
+import scm.address.model.theme.Theme;
+import scm.address.model.theme.ThemeCollection;
 
 
 /**
@@ -19,7 +21,7 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
 
         String themeValue = argMultimap.getPreamble().trim();
 
-        String theme = "";
+        Theme theme;
         try {
             theme = parseTheme(themeValue);
         } catch (ParseException e) {
@@ -35,11 +37,17 @@ public class ThemeCommandParser implements Parser<ThemeCommand> {
      * @return The theme.
      * @throws ParseException If the theme value is invalid.
      */
-    private String parseTheme(String theme) throws ParseException {
-        if (theme.equals("light") || theme.equals("dark")) {
-            return theme;
-        } else {
-            throw new ParseException("Invalid theme value");
+    private Theme parseTheme(String theme) throws ParseException {
+        String temp = theme.trim().toLowerCase();
+
+        switch (temp) {
+        case "light":
+            return ThemeCollection.getLightTheme();
+        case "dark":
+            return ThemeCollection.getDarkTheme();
+        default:
+            //Message does not matter as exception is caught and rethrown
+            throw new ParseException(ThemeCommand.MESSAGE_INVALID_THEME);
         }
     }
 }
