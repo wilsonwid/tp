@@ -1,5 +1,7 @@
 package scm.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -17,6 +19,8 @@ import scm.address.logic.Logic;
 import scm.address.logic.commands.CommandResult;
 import scm.address.logic.commands.exceptions.CommandException;
 import scm.address.logic.parser.exceptions.ParseException;
+import scm.address.model.theme.Theme;
+import scm.address.model.theme.ThemeCollection;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -206,27 +210,42 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Changes the theme of the application.
+     */
+    // GCOVR_EXCL_START
+    // This method cannot be tested as it works on the UI. It is excluded from testing.
     private void handleChangeTheme() {
 
-        String theme = logic.getGuiSettings().getTheme();
+        String themeName = logic.getGuiSettings().getTheme();
 
-        if (theme.equals("light")) {
-            setCss("view/LightTheme.css");
-        } else if (theme.equals("dark")) {
-            setCss("view/DarkTheme.css");
+        try {
+            Theme theme = ThemeCollection.getTheme(themeName);
+            setTheme(theme);
+        } catch (Exception e) {
+            logger.warning("Error changing theme: " + e.getMessage());
+            resultDisplay.setFeedbackToUser("Error changing theme: " + e.getMessage());
         }
     }
+    // GCOVR_EXCL_STOP
 
     /**
-     * Changes the CSS of the application.
+     * Changes the CSS of the application
      *
-     * @param cssFilePath The file path of the CSS file.
+     * @param theme The theme to be set
      */
-    public void setCss(String cssFilePath) {
-        System.out.println(cssFilePath);
+    // GCOVR_EXCL_START
+    // This method cannot be tested as it works on the UI. It is excluded from testing.
+    private void setTheme(Theme theme) {
+        requireNonNull(theme);
+
+        String cssFilePath = theme.getThemeCssPath();
+        String extensionsCssPath = theme.getThemeExtensionsCssPath();
+
         Scene scene = primaryStage.getScene();
         scene.getStylesheets().clear();
         scene.getStylesheets().add(cssFilePath);
-        scene.getStylesheets().add(EXTENSIONS_CSS_FILE_PATH);
+        scene.getStylesheets().add(extensionsCssPath);
     }
+    // GCOVR_EXCL_STOP
 }
