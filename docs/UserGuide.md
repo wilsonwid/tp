@@ -75,6 +75,18 @@ Shows a message explaining how to access the help page. The help page is located
 
 Format: `help`
 
+### Changing the theme : `theme`
+
+Changes the theme of the application. Useful if you wish to change the appearance of the application. Currently supports `light` and `dark` themes.
+
+![light theme](images/lightTheme.png)
+
+Format: `theme THEME_NAME`
+
+Examples:
+* `theme light`
+* `theme dark`
+
 
 ### Adding a person: `add`
 
@@ -164,6 +176,10 @@ Format: `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`
 Examples:
 * `find_and_export cs2103t`
 * `find_and_export cs2103t n/john a/olive street 42 f/output1.json`
+* `find_and_export cs2103t n/john a/olive street 42 f/output1.csv`
+
+Tip: `FILENAME` is optional. If not provided, has to be a valid filename with a `.json` or `.csv` extension.
+
 
 ### Importing a datafile: `import`
 
@@ -175,8 +191,9 @@ Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 
 Examples:
 * `import f/export.json`
-* `import f/contacts_export.json`
-* `import f/contacts_export1.json f/contacts_export2.json`
+* `import f/contactsExport.csv`
+* `import f/contactsExport1.json f/contacts_export2.csv`
+
 
 ### Deleting a person : `delete`
 
