@@ -5,7 +5,6 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
