@@ -166,7 +166,7 @@ public class AddScheduleCommandParserTest {
         String endDateTime = "2023-03-21 16:00";
         String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
 
-        assertThrows(DateTimeException.class, () -> parser.parse(input));
+        assertThrows(ParseException.class, () -> parser.parse(input));
     }
 
     @Test
@@ -176,7 +176,7 @@ public class AddScheduleCommandParserTest {
         String endDateTime = "2023-03-21 16:00";
         String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
 
-        assertThrows(DateTimeException.class, () -> parser.parse(input));
+        assertThrows(ParseException.class, () -> parser.parse(input));
     }
 
     @Test
@@ -187,6 +187,6 @@ public class AddScheduleCommandParserTest {
 
         String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
 
-        assertThrows(DateTimeException.class, () -> parser.parse(input));
+        assertThrows(ParseException.class, () -> parser.parse(input));
     }
 }
