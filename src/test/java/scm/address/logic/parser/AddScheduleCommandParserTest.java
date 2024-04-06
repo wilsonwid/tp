@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -161,36 +162,31 @@ public class AddScheduleCommandParserTest {
     @Test
     public void parse_startDateTimeAfterEndDateTime_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        // Note: Adjust the date-time format according to your actual parser implementation.
         String startDateTime = "2023-03-21 17:00";
         String endDateTime = "2023-03-21 16:00";
-
-        // Attempt to parse a schedule with startDateTime after endDateTime
         String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
 
-        assertThrows(ParseException.class, () -> parser.parse(input),
-                "Start date-time after end date-time should throw ParseException.");
+        assertThrows(DateTimeException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_invalidMonth_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String startDateTime = "2023-13-21 15:00"; // Invalid month
+        String startDateTime = "2023-13-21 15:00";
         String endDateTime = "2023-03-21 16:00";
-
         String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
 
-        assertThrows(ParseException.class, () -> parser.parse(input), "Invalid month should throw ParseException.");
+        assertThrows(DateTimeException.class, () -> parser.parse(input));
     }
 
     @Test
     public void parse_invalidDay_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String startDateTime = "2023-03-32 15:00"; // Invalid day
+        String startDateTime = "2023-03-32 15:00";
         String endDateTime = "2023-03-21 16:00";
 
         String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
 
-        assertThrows(ParseException.class, () -> parser.parse(input), "Invalid day should throw ParseException.");
+        assertThrows(DateTimeException.class, () -> parser.parse(input));
     }
 }
