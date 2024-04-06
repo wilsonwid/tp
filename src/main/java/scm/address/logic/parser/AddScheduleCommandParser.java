@@ -5,6 +5,7 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -68,10 +69,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         String endMinute = endDateTime.substring(14, 16);
         String start = startYear + "-" + startMonth + "-" + startDay + "T" + startHour + ":" + startMinute;
         String end = endYear + "-" + endMonth + "-" + endDay + "T" + endHour + ":" + endMinute;
-        if (!comparator.isFirstDateTimeBeforeSecond(start, end)) {
-            throw new DateTimeException("Before date and/or time is after the after date and/or time,"
-                    + " or invalid values were added.");
-        }
 
         try {
             LocalDateTime dateTime1 = LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
@@ -79,7 +76,11 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
             LocalDateTime dateTime2 = LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
                     Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute));
         } catch (DateTimeException e) {
-            throw new DateTimeException("Date or time are out of range.");
+            throw new ParseException("Date or time are out of range.", e);
+        }
+
+        if (!comparator.isFirstDateTimeBeforeSecond(start, end)) {
+            throw new ParseException("Before date and/or time is after the after date and/or time");
         }
 
         Schedule schedule = new Schedule(title, description,
