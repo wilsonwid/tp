@@ -5,6 +5,7 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
@@ -66,6 +67,29 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         String endDay = endDateTime.substring(8, 10);
         String endHour = endDateTime.substring(11, 13);
         String endMinute = endDateTime.substring(14, 16);
+        String start = startYear + "-" + startMonth + "-" + startDay + "T" + startHour + ":" + startMinute;
+        String end = endYear + "-" + endMonth + "-" + endDay + "T" + endHour + ":" + endMinute;
+        System.out.println(start);
+        System.out.println(end);
+        if (!comparator.isFirstDateTimeBeforeSecond(start, end)) {
+            throw new ParseException("Before date and/or time is after the after date and/or time," +
+                    " or invalid values were added.");
+        }
+
+        try {
+            LocalDateTime dateTime1 = LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
+                    Integer.parseInt(startDay), Integer.parseInt(startHour), Integer.parseInt(startMinute));
+        } catch (DateTimeException e) {
+            throw new ParseException("Date or time are out of range.");
+        }
+
+        try {
+            LocalDateTime dateTime2 = LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
+                    Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+        } catch (DateTimeException e) {
+            throw new ParseException("Date or time are out of range.");
+        }
+
         Schedule schedule = new Schedule(title, description,
                 LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
                         Integer.parseInt(startDay), Integer.parseInt(startHour), Integer.parseInt(startMinute)),

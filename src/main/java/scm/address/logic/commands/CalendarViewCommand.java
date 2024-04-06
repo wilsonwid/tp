@@ -26,7 +26,7 @@ public class CalendarViewCommand extends Command {
 
             Scene scene = new Scene(calendarView, 600, 400);
             stage.setScene(scene);
-
+            stage.setResizable(false);
             stage.show();
         });
 
