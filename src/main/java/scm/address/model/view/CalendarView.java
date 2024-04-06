@@ -75,7 +75,6 @@ public class CalendarView extends GridPane {
 
             for (Schedule schedule : schedulesForDay) {
                 Label scheduleLabel = new Label(schedule.toStringCalendar());
-                scheduleLabel.setWrapText(true);
                 dayCell.getChildren().add(scheduleLabel);
             }
         }
