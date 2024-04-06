@@ -159,32 +159,38 @@ public class AddScheduleCommandParserTest {
     }
 
     @Test
-    public void isFirstDateTimeBeforeSecond_validDateTimes_firstIsAfterThrows() {
+    public void parse_startDateTimeAfterEndDateTime_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String dateTimeStr1 = "2023-03-21 17:00";
-        String dateTimeStr2 = "2023-03-21 16:00";
+        // Note: Adjust the date-time format according to your actual parser implementation.
+        String startDateTime = "2023-03-21 17:00";
+        String endDateTime = "2023-03-21 16:00";
 
-        assertThrows(ParseException.class, () -> parser.parse(" add_schedule title/title d/description"
-                + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
+        // Attempt to parse a schedule with startDateTime after endDateTime
+        String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
+
+        assertThrows(ParseException.class, () -> parser.parse(input),
+                "Start date-time after end date-time should throw ParseException.");
     }
 
     @Test
-    public void invalidDateTimes_outOfRangeStart() {
+    public void parse_invalidMonth_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String dateTimeStr1 = "2023-03-41 15:00";
-        String dateTimeStr2 = "2023-03-21 16:00";
+        String startDateTime = "2023-13-21 15:00"; // Invalid month
+        String endDateTime = "2023-03-21 16:00";
 
-        assertThrows(ParseException.class, () -> parser.parse(" add_schedule title/title d/description"
-                + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
+        String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
+
+        assertThrows(ParseException.class, () -> parser.parse(input), "Invalid month should throw ParseException.");
     }
 
     @Test
-    public void invalidDateTimes_outOfRangeEnd() {
+    public void parse_invalidDay_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String dateTimeStr1 = "2023-03-21 15:00";
-        String dateTimeStr2 = "2023-03-41 16:00";
+        String startDateTime = "2023-03-32 15:00"; // Invalid day
+        String endDateTime = "2023-03-21 16:00";
 
-        assertThrows(ParseException.class, () -> parser.parse(" add_schedule title/title d/description"
-                + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
+        String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
+
+        assertThrows(ParseException.class, () -> parser.parse(input), "Invalid day should throw ParseException.");
     }
 }
