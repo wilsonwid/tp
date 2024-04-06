@@ -48,7 +48,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TITLE,
                 PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)) {
-            System.out.println("Error 3.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
         }
@@ -70,7 +69,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         String start = startYear + "-" + startMonth + "-" + startDay + "T" + startHour + ":" + startMinute;
         String end = endYear + "-" + endMonth + "-" + endDay + "T" + endHour + ":" + endMinute;
         if (!comparator.isFirstDateTimeBeforeSecond(start, end)) {
-            System.out.println("Error 1.");
             throw new DateTimeException("Before date and/or time is after the after date and/or time,"
                     + " or invalid values were added.");
         }
@@ -81,7 +79,6 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
             LocalDateTime dateTime2 = LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
                     Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute));
         } catch (DateTimeException e) {
-            System.out.println("Error 2.");
             throw new DateTimeException("Date or time are out of range.");
         }
 
