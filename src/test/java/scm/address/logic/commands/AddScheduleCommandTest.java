@@ -45,7 +45,7 @@ public class AddScheduleCommandTest {
         Schedule scheduleToAdd = new Schedule(title, description,
                 startDateTime, endDateTime);
 
-        CommandResult expectedCommandResult = new CommandResult("Schedule added successfully.");
+        CommandResult expectedCommandResult = new CommandResult("Added schedule: " + scheduleToAdd);
         AddScheduleCommand command = new AddScheduleCommand(scheduleToAdd);
 
         assertEquals(expectedCommandResult, command.execute(model));
