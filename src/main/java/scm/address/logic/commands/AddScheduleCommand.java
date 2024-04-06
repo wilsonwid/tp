@@ -26,7 +26,7 @@ public class AddScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         model.addSchedule(schedule);
-        return new CommandResult("Schedule added successfully.");
+        return new CommandResult("Added schedule: " + schedule);
     }
 
     public boolean scheduleExists() {
