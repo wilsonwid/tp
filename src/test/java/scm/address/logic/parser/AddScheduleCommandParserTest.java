@@ -161,8 +161,8 @@ public class AddScheduleCommandParserTest {
     @Test
     public void isFirstDateTimeBeforeSecond_validDateTimes_firstIsAfterThrows() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String dateTimeStr1 = "2023-03-21T15:00";
-        String dateTimeStr2 = "2023-03-21T16:00";
+        String dateTimeStr1 = "2023-03-21 15:00";
+        String dateTimeStr2 = "2023-03-21 16:00";
 
         assertThrows(ParseException.class, () -> parser.parse("add_schedule title/title d/description"
                 + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
@@ -171,8 +171,8 @@ public class AddScheduleCommandParserTest {
     @Test
     public void invalidDateTimes_outOfRangeStart() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String dateTimeStr1 = "2023-03-41T17:00";
-        String dateTimeStr2 = "2023-03-21T16:00";
+        String dateTimeStr1 = "2023-03-41 17:00";
+        String dateTimeStr2 = "2023-03-21 16:00";
 
         assertThrows(ParseException.class, () -> parser.parse("add_schedule title/title d/description"
                 + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
@@ -181,8 +181,8 @@ public class AddScheduleCommandParserTest {
     @Test
     public void invalidDateTimes_outOfRangeEnd() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String dateTimeStr1 = "2023-03-21T17:00";
-        String dateTimeStr2 = "2023-03-41T16:00";
+        String dateTimeStr1 = "2023-03-21 17:00";
+        String dateTimeStr2 = "2023-03-41 16:00";
 
         assertThrows(ParseException.class, () -> parser.parse("add_schedule title/title d/description"
                 + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
