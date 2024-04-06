@@ -164,7 +164,7 @@ public class AddScheduleCommandParserTest {
         String dateTimeStr1 = "2023-03-21 17:00";
         String dateTimeStr2 = "2023-03-21 16:00";
 
-        assertThrows(ParseException.class, () -> parser.parse("add_schedule title/title d/description"
+        assertThrows(ParseException.class, () -> parser.parse(" add_schedule title/title d/description"
                 + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
     }
 
@@ -174,7 +174,7 @@ public class AddScheduleCommandParserTest {
         String dateTimeStr1 = "2023-03-41 15:00";
         String dateTimeStr2 = "2023-03-21 16:00";
 
-        assertThrows(ParseException.class, () -> parser.parse("add_schedule title/title d/description"
+        assertThrows(ParseException.class, () -> parser.parse(" add_schedule title/title d/description"
                 + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
     }
 
@@ -184,7 +184,7 @@ public class AddScheduleCommandParserTest {
         String dateTimeStr1 = "2023-03-21 15:00";
         String dateTimeStr2 = "2023-03-41 16:00";
 
-        assertThrows(ParseException.class, () -> parser.parse("add_schedule title/title d/description"
+        assertThrows(ParseException.class, () -> parser.parse(" add_schedule title/title d/description"
                 + " start/" + dateTimeStr1 + " end/" + dateTimeStr2));
     }
 }
