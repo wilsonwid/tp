@@ -72,8 +72,8 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         System.out.println(start);
         System.out.println(end);
         if (!comparator.isFirstDateTimeBeforeSecond(start, end)) {
-            throw new ParseException("Before date and/or time is after the after date and/or time," +
-                    " or invalid values were added.");
+            throw new ParseException("Before date and/or time is after the after date and/or time,"
+                    + " or invalid values were added.");
         }
 
         try {
