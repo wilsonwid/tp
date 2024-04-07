@@ -159,16 +159,6 @@ public class AddScheduleCommandParserTest {
     }
 
     @Test
-    public void parse_startDateTimeAfterEndDateTime_throwsParseException() {
-        AddScheduleCommandParser parser = new AddScheduleCommandParser();
-        String startDateTime = "2023-03-21 17:00";
-        String endDateTime = "2023-03-21 16:00";
-        String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
-
-        assertThrows(ParseException.class, () -> parser.parse(input));
-    }
-
-    @Test
     public void parse_invalidMonth_throwsParseException() {
         AddScheduleCommandParser parser = new AddScheduleCommandParser();
         String startDateTime = "2023-13-21 15:00";

@@ -75,11 +75,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
             LocalDateTime dateTime2 = LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
                     Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute));
         } catch (DateTimeException e) {
-            throw new ParseException("Date or time are out of range.", e);
-        }
-
-        if (!comparator.isFirstDateTimeBeforeSecond(start, end)) {
-            throw new ParseException("Before date and/or time is after the after date and/or time");
+            throw new ParseException("Invalid date and/or time.", e);
         }
 
         Schedule schedule = new Schedule(title, description,
