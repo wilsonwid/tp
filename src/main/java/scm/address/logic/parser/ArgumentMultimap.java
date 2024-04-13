@@ -75,4 +75,13 @@ public class ArgumentMultimap {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
     }
+
+    /**
+     * Throws a {@code ParseException} if all prefixes given in {@code prefixes} contain empty values.
+     */
+    public void verifyNotAllValuesEmpty(Prefix... prefixes) throws ParseException {
+        if (Stream.of(prefixes).allMatch(prefix -> getValue(prefix).isEmpty() || getValue(prefix).get().isBlank())) {
+            throw new ParseException(Messages.MESSAGE_ALL_INPUT_VALUES_EMPTY);
+        }
+    }
 }
