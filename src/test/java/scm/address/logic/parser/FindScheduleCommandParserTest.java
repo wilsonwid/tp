@@ -1,5 +1,6 @@
 package scm.address.logic.parser;
 
+import static scm.address.logic.Messages.MESSAGE_ALL_INPUT_VALUES_EMPTY;
 import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static scm.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static scm.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -27,6 +28,12 @@ public class FindScheduleCommandParserTest {
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindScheduleCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyValues_throwsParseException() {
+        assertParseFailure(parser, " title/ d/ t/ before/ after/",
+                String.format(MESSAGE_ALL_INPUT_VALUES_EMPTY, FindScheduleCommand.MESSAGE_USAGE));
     }
 
     @Test

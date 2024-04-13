@@ -33,18 +33,18 @@ public class FindScheduleCommand extends Command {
             + "the specified keywords (case-insensitive) and date/time constraints, "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "[" + PREFIX_TITLE + "TITLE KEYWORDS]"
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION KEYWORDS]"
-            + "[" + PREFIX_BEFORE_DATETIME + "BEFORE DATE TIME]"
-            + "[" + PREFIX_AFTER_DATETIME + "AFTER DATE TIME]"
+            + "[" + PREFIX_TITLE + "TITLE KEYWORDS] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION KEYWORDS] "
+            + "[" + PREFIX_BEFORE_DATETIME + "BEFORE DATE TIME] "
+            + "[" + PREFIX_AFTER_DATETIME + "AFTER DATE TIME] "
             + "[" + PREFIX_DURING_DATETIME + "DURING DATE TIME]\n"
             + "Note: All dates and times must be in the format of yyyy-MM-dd HH:mm.\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_TITLE + " meeting"
-            + PREFIX_DESCRIPTION + " project"
-            + PREFIX_BEFORE_DATETIME + " 2023-12-31 23:59"
-            + PREFIX_AFTER_DATETIME + " 2025-01-01 00:00"
-            + PREFIX_DURING_DATETIME + " 2024-06-01 00:00";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_TITLE + "meeting "
+            + PREFIX_DESCRIPTION + "project "
+            + PREFIX_BEFORE_DATETIME + "2023-12-31 23:59 "
+            + PREFIX_AFTER_DATETIME + "2025-01-01 00:00 "
+            + PREFIX_DURING_DATETIME + "2024-06-01 00:00";
 
     private final TitleContainsKeywordsPredicate titlePredicate;
     private final DescriptionContainsKeywordsPredicate descriptionPredicate;
