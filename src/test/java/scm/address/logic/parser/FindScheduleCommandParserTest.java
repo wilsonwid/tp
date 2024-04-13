@@ -32,7 +32,7 @@ public class FindScheduleCommandParserTest {
 
     @Test
     public void parse_emptyValues_throwsParseException() {
-        assertParseFailure(parser, " title/ d/ t/ before/ after/",
+        assertParseFailure(parser, " title/ d/ before/ after/",
                 String.format(MESSAGE_ALL_INPUT_VALUES_EMPTY, FindScheduleCommand.MESSAGE_USAGE));
     }
 
