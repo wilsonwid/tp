@@ -5,6 +5,7 @@ import static scm.address.logic.parser.CliSyntax.PREFIX_END_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_START_DATETIME;
 import static scm.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
@@ -47,7 +48,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TITLE,
                 PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
         }
@@ -55,22 +56,18 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         String startDateTime = argMultimap.getValue(PREFIX_START_DATETIME).get();
-        String startYear = startDateTime.substring(0, 4);
-        String startMonth = startDateTime.substring(5, 7);
-        String startDay = startDateTime.substring(8, 10);
-        String startHour = startDateTime.substring(11, 13);
-        String startMinute = startDateTime.substring(14, 16);
         String endDateTime = argMultimap.getValue(PREFIX_END_DATETIME).get();
-        String endYear = endDateTime.substring(0, 4);
-        String endMonth = endDateTime.substring(5, 7);
-        String endDay = endDateTime.substring(8, 10);
-        String endHour = endDateTime.substring(11, 13);
-        String endMinute = endDateTime.substring(14, 16);
-        Schedule schedule = new Schedule(title, description,
-                LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
-                        Integer.parseInt(startDay), Integer.parseInt(startHour), Integer.parseInt(startMinute)),
-                LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
-                        Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute)));
+
+        try {
+            LocalDateTime start = LocalDateTime.parse(startDateTime, FORMATTER);
+            LocalDateTime end = LocalDateTime.parse(endDateTime, FORMATTER);
+        } catch (DateTimeException e) {
+            throw new ParseException("Invalid date and/or time.", e);
+        }
+
+        LocalDateTime start = LocalDateTime.parse(startDateTime, FORMATTER);
+        LocalDateTime end = LocalDateTime.parse(endDateTime, FORMATTER);
+        Schedule schedule = new Schedule(title, description, start, end);
 
         return new AddScheduleCommand(schedule);
     }

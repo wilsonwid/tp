@@ -24,13 +24,13 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose attributes match any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME KEYWORDS]"
-            + "[" + PREFIX_ADDRESS + "ADDRESS KEYWORDS]"
+            + "[" + PREFIX_NAME + "NAME KEYWORDS] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS KEYWORDS] "
             + "[" + PREFIX_TAG + "TAG KEYWORDS]\n"
-            + "Example: " + COMMAND_WORD
-            + PREFIX_NAME + " alice bob charlie"
-            + PREFIX_ADDRESS + " Clementi"
-            + PREFIX_TAG + " friends";
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "alice bob charlie "
+            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_TAG + "friends";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final AddressContainsKeywordsPredicate addressPredicate;

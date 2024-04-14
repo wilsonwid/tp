@@ -36,15 +36,15 @@ public class FindAndExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the users filtered by a tag "
             + "and other optional parameters.\n"
             + "Parameters: "
-            + "TAG"
-            + "[" + PREFIX_NAME + "NAME]"
-            + "[" + PREFIX_ADDRESS + "ADDRESS]"
+            + "TAG "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_FILENAME + "FILENAME]\n"
-            + "Example: " + COMMAND_WORD
-            + "cs2103t"
-            + PREFIX_NAME + " john"
-            + PREFIX_ADDRESS + " olive street 42"
-            + PREFIX_FILENAME + " f/output1.json";
+            + "Example: " + COMMAND_WORD + " "
+            + "cs2103t "
+            + PREFIX_NAME + "john "
+            + PREFIX_ADDRESS + "olive street 42 "
+            + PREFIX_FILENAME + "output1.json";
     public static final String FILE_NOT_WRITABLE_MESSAGE = "File exists but is not writable: ";
     public static final String MESSAGE_UNSUPPORTED_FILE_FORMAT = "Unsupported file format: ";
     private final String tag;
@@ -104,7 +104,7 @@ public class FindAndExportCommand extends Command {
     }
 
     private Predicate<Person> createPredicateForFiltering(String tag, String name, String address) {
-        Predicate<Person> predicate = person -> true; // start with a predicate that always returns true
+        Predicate<Person> predicate = person -> true;
 
         if (tag != null && !tag.isBlank()) {
             predicate = predicate.and(person -> person.getTags().stream().anyMatch(t -> t.tagName.equals(tag)));

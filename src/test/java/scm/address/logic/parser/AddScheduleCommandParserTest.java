@@ -157,4 +157,25 @@ public class AddScheduleCommandParserTest {
 
         assertFalse(result, "First date-time should not be before the second date-time");
     }
+
+    @Test
+    public void parse_invalidMonth_throwsParseException() {
+        AddScheduleCommandParser parser = new AddScheduleCommandParser();
+        String startDateTime = "2023-13-21 15:00";
+        String endDateTime = "2023-03-21 16:00";
+        String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
+
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
+
+    @Test
+    public void parse_invalidDay_throwsParseException() {
+        AddScheduleCommandParser parser = new AddScheduleCommandParser();
+        String startDateTime = "2023-03-32 15:00";
+        String endDateTime = "2023-03-21 16:00";
+
+        String input = "add_schedule title/Meeting d/Discussion start/" + startDateTime + " end/" + endDateTime;
+
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
 }

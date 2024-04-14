@@ -1,5 +1,6 @@
 package scm.address.logic.parser;
 
+import static scm.address.logic.Messages.MESSAGE_ALL_INPUT_VALUES_EMPTY;
 import static scm.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static scm.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static scm.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -21,6 +22,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyValues_throwsParseException() {
+        assertParseFailure(parser, " n/ t/", MESSAGE_ALL_INPUT_VALUES_EMPTY);
     }
 
     @Test
