@@ -73,6 +73,8 @@ This user guide aims to aid you in your usage of our application, as well as to 
 
 </box>
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page. The help page is located at <https://ay2324s2-cs2103t-w08-3.github.io/tp/UserGuide.html>.
@@ -80,6 +82,8 @@ Shows a message explaining how to access the help page. The help page is located
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Changing the theme : `theme`
 
@@ -95,6 +99,7 @@ Examples:
 * `theme light`
 * `theme dark`
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Adding a person: `add`
 
@@ -111,6 +116,8 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the contact manager. Useful if you need to view all contacts that you have recorded.
@@ -118,6 +125,8 @@ Shows a list of all persons in the contact manager. Useful if you need to view a
 Format: `list`
 
 ![list image](images/listImage.png)
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Editing a person : `edit`
 
@@ -140,6 +149,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags. This is because the new tag list is empty.
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Locating persons by name: `find`
 
@@ -166,6 +177,8 @@ Examples:
 * `find n/alex david t/friends` will only return `Alex Yeoh`.
 * `find a/Serangoon` will return `Bernice Yu` and `David Li`.
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Exporting a subset of data: `find_and_export`
 Exports the users that are filtered by a tag and other optional parameters. Useful if you want to transfer data regarding groups of people from one device to another. Filenames can only be alphanumeric with either `.csv` or `.json` extensions.
 
@@ -188,6 +201,7 @@ Examples:
 
 Tip: `FILENAME` is optional. If provided, it has to be a valid filename with a `.json` or `.csv` extension.
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Importing a datafile: `import`
 
@@ -207,6 +221,7 @@ Examples:
 * `import f/contactsExport.csv`
 * `import f/contactsExport1.json f/contacts_export2.csv`
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Deleting a person : `delete`
 
@@ -223,11 +238,15 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contact manager.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Clearing all entries : `clear`
 
 Clears all contact entries from the contact manager. Useful to clean up contacts if all of them are no longer needed.
 
 Format: `clear`
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Adding an event : `add_schedule`
 
@@ -247,6 +266,8 @@ Format: `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DAT
 
 </box>
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Editing an event : `edit_schedule`
 
 Edits the schedule at the specified index. Useful if you wish to edit a certain schedule's description or timings.
@@ -262,6 +283,8 @@ Format: `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME
 
 </box>
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Listing all events : `list_schedule`
 
 Lists all the events currently available. Useful if you wish to view all the events that are in the database.
@@ -270,11 +293,15 @@ Format: `list_schedule`
 
 ![listing schedules](images/listSchedule.png)
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Listing ongoing events : `list_ongoing_schedule`
 
 Lists all the events that are currently ongoing. Useful if you wish to view all the events that are currently ongoing.
 
 Format: `list_ongoing_schedule`
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Finding events : `find_schedule`
 
@@ -302,6 +329,8 @@ Format: `find_schedule [title/TITLE] [d/DESCRIPTION] [before/BEFORE_DATETIME] [a
 
 </box>
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Deleting an event : `delete_schedule`
 
 Deletes the event at the given index. Useful if you wish to delete an event that is no longer needed.
@@ -312,11 +341,15 @@ Format: `delete_schedule INDEX`
 
 * `INDEX` must be a positive integer and not greater than the number of schedules in the displayed schedule list.
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Clearing all events : `clear_schedule`
 
 Clears all events from the schedule list. Useful if you wish to clear all events that are no longer needed.
 
 Format: `clear_schedule`
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Calendar view of schedule : `calendar_view`
 
@@ -326,15 +359,21 @@ Format: `calendar_view`
 
 </box>
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 ### Saving the data
 
 Student Contact Manager data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Editing the data file
 
@@ -348,6 +387,8 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 
 </box>
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -355,11 +396,15 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Student Contact Manager home folder.
 
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -384,4 +429,4 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 | **List Schedules**          | `list_schedule`                                                                                                                                                                      |
 | **List Ongoing Schedule**   | `list_ongoing_schedule`                                                                                                                                                              |
 | **Calendar View**           | `calendar_view`                                                                                                                                                                      |
-
+Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
