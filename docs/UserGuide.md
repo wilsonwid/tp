@@ -195,7 +195,12 @@ Imports contact details from a specified CSV or JSON file. Useful if you have ma
 
 Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 
+<box type="info" seamless>
+
 * `FILENAME_n` needs to be a valid filename that is found in the `./data/` directory
+* Persons that exist in any data file to be imported should not be duplicates of each other or of persons already existing inside the contact manager.
+
+</box>
 
 Examples:
 * `import f/export.json`
