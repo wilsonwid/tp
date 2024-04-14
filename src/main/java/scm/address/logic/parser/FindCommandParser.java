@@ -37,6 +37,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG);
 
+        argMultimap.verifyNotAllValuesEmpty(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_TAG);
+
         List<String> nameKeywords = getKeywords(argMultimap, PREFIX_NAME);
         List<String> addressKeywords = getKeywords(argMultimap, PREFIX_ADDRESS);
         List<String> tagsKeywords = getKeywords(argMultimap, PREFIX_TAG);
@@ -55,6 +57,8 @@ public class FindCommandParser implements Parser<FindCommand> {
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
+
+
 
     /**
      * Returns all keywords between the given prefix and the next prefix (if any)

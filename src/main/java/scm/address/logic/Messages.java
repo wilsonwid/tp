@@ -26,6 +26,11 @@ public class Messages {
                 "%1$d schedules listed matching the following attributes: %2$s";
 
     public static final String MESSAGE_INVALID_SCHEDULE_DISPLAYED_INDEX = "The schedule index provided is invalid.";
+    public static final String MESSAGE_INVALID_SCHEDULE_DATETIME_RANGE =
+                "The end date time must be after the start date time.";
+    public static final String MESSAGE_INVALID_SCHEDULE_DATETIME_FORMAT =
+                "The date time format is invalid. Please follow the format: yyyy-MM-dd HH:mm";
+    public static final String MESSAGE_ALL_INPUT_VALUES_EMPTY = "All input values are empty.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

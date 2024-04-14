@@ -48,6 +48,9 @@ public class FindScheduleCommandParser implements Parser<FindScheduleCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_BEFORE_DATETIME,
                 PREFIX_AFTER_DATETIME, PREFIX_DURING_DATETIME);
 
+        argMultimap.verifyNotAllValuesEmpty(PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_BEFORE_DATETIME,
+                PREFIX_AFTER_DATETIME, PREFIX_DURING_DATETIME);
+
         List<String> titleKeywords = getKeywords(argMultimap, PREFIX_TITLE);
         List<String> descriptionKeywords = getKeywords(argMultimap, PREFIX_DESCRIPTION);
         Optional<LocalDateTime> beforePredicateDateTime = getDateTime(argMultimap, PREFIX_BEFORE_DATETIME);
