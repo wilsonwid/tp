@@ -55,34 +55,18 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         Title title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         String startDateTime = argMultimap.getValue(PREFIX_START_DATETIME).get();
-        String startYear = startDateTime.substring(0, 4);
-        String startMonth = startDateTime.substring(5, 7);
-        String startDay = startDateTime.substring(8, 10);
-        String startHour = startDateTime.substring(11, 13);
-        String startMinute = startDateTime.substring(14, 16);
         String endDateTime = argMultimap.getValue(PREFIX_END_DATETIME).get();
-        String endYear = endDateTime.substring(0, 4);
-        String endMonth = endDateTime.substring(5, 7);
-        String endDay = endDateTime.substring(8, 10);
-        String endHour = endDateTime.substring(11, 13);
-        String endMinute = endDateTime.substring(14, 16);
-        String start = startYear + "-" + startMonth + "-" + startDay + "T" + startHour + ":" + startMinute;
-        String end = endYear + "-" + endMonth + "-" + endDay + "T" + endHour + ":" + endMinute;
 
         try {
-            LocalDateTime dateTime1 = LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
-                    Integer.parseInt(startDay), Integer.parseInt(startHour), Integer.parseInt(startMinute));
-            LocalDateTime dateTime2 = LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
-                    Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute));
+            LocalDateTime start = LocalDateTime.parse(startDateTime, FORMATTER);
+            LocalDateTime end = LocalDateTime.parse(endDateTime, FORMATTER);
         } catch (DateTimeException e) {
             throw new ParseException("Invalid date and/or time.", e);
         }
 
-        Schedule schedule = new Schedule(title, description,
-                LocalDateTime.of(Integer.parseInt(startYear), Integer.parseInt(startMonth),
-                        Integer.parseInt(startDay), Integer.parseInt(startHour), Integer.parseInt(startMinute)),
-                LocalDateTime.of(Integer.parseInt(endYear), Integer.parseInt(endMonth),
-                        Integer.parseInt(endDay), Integer.parseInt(endHour), Integer.parseInt(endMinute)));
+        LocalDateTime start = LocalDateTime.parse(startDateTime, FORMATTER);
+        LocalDateTime end = LocalDateTime.parse(endDateTime, FORMATTER);
+        Schedule schedule = new Schedule(title, description, start, end);
 
         return new AddScheduleCommand(schedule);
     }
