@@ -6,7 +6,7 @@
 
 # Student Contact Manager User Guide
 
-Student Contact Manager is a student-designed app made for students who are in need of managing their daily activities.
+Student Contact Manager is a student-designed app made for students who are in need of managing their daily activities. It contains many features that help with the management of contacts and events.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -16,18 +16,18 @@ Student Contact Manager is a student-designed app made for students who are in n
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your computer.
-    * To check whether you have the above installed, open the terminal, and then run `java -version`.
+    * To check whether you have the above installed, open the terminal on your device, and then run `java -version`.
 
-2. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `scm.jar` from [here](https://github.com/AY2324S2-CS2103T-W08-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Student Contact Manager.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar scm.jar` command to run the application.<br>
+4. Open a command terminal, change the directory (`cd`) into the folder you put the `.jar` file in, and use the `java -jar scm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. Type the command you want to run inside the command box and press `Enter` to execute it. As an example, typing **`help`** and pressing `Enter` will open the help window.<br>
+   There are some example commands you can try:
 
    * `list` : Lists all contacts.
 
@@ -39,7 +39,7 @@ Student Contact Manager is a student-designed app made for students who are in n
 
    * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) section below for details of each command.
+6. Refer to the [Features](#features) section below for the complete list of commands as of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,16 +47,17 @@ Student Contact Manager is a student-designed app made for students who are in n
 
 <box type="info" seamless>
 
-**Notes about the command format:**<br>
+**Notes about the command format and application:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  * **Note**: Sometimes, commands require the presence of at least one optional item. This will be made clear in the description of each individual command.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `...` after them can be used multiple times, including zero times.<br>
+  e.g. `[t/TAG] ...` can be used as ` ` (i.e., 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -65,6 +66,9 @@ Student Contact Manager is a student-designed app made for students who are in n
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+* The application is only able to work properly using ASCII characters (i.e., standard characters found on an English keyboard). The use of other character sets is currently unsupported.
+
 </box>
 
 ### Viewing help : `help`
@@ -77,7 +81,9 @@ Format: `help`
 
 ### Changing the theme : `theme`
 
-Changes the theme of the application. Useful if you wish to change the appearance of the application. Currently supports `light` and `dark` themes.
+Changes the theme of the application. Useful if you wish to change the appearance of the application. The application currently supports `light` and `dark` themes. 
+
+Below is a picture of how the light theme is supposed to look like:
 
 ![light theme](images/lightTheme.png)
 
@@ -131,7 +137,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags. This is because the new tag list is empty.
 
 ### Locating persons by name: `find`
 
@@ -313,7 +319,7 @@ Student Contact Manager data are saved in the hard disk automatically after any 
 
 ### Editing the data file
 
-Student Contact Manager data are saved automatically as a JSON file `[JAR file location]/data/scm.json`. Advanced users are welcome to update data directly by editing that data file.
+Student Contact Manager data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
