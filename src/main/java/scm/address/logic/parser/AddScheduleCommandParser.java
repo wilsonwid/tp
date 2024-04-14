@@ -47,7 +47,8 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                         PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TITLE,
-                PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)) {
+                PREFIX_DESCRIPTION, PREFIX_START_DATETIME, PREFIX_END_DATETIME)
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
         }
