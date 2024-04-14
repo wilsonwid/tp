@@ -36,18 +36,14 @@ public class FindAndExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the users filtered by a tag "
             + "and other optional parameters.\n"
             + "Parameters: "
-            + "TAG, "
-            + "[" + PREFIX_NAME + "NAME], "
-            + "[" + PREFIX_ADDRESS + "ADDRESS], "
+            + "TAG "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_FILENAME + "FILENAME]\n"
-            + "Example: " + COMMAND_WORD
-            + " "
-            + "cs2103t"
-            + " "
-            + PREFIX_NAME + "john"
-            + " "
-            + PREFIX_ADDRESS + "olive street 42"
-            + " "
+            + "Example: " + COMMAND_WORD + " "
+            + "cs2103t "
+            + PREFIX_NAME + "john "
+            + PREFIX_ADDRESS + "olive street 42 "
             + PREFIX_FILENAME + "output1.json";
     public static final String FILE_NOT_WRITABLE_MESSAGE = "File exists but is not writable: ";
     public static final String MESSAGE_UNSUPPORTED_FILE_FORMAT = "Unsupported file format: ";
