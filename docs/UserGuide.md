@@ -119,8 +119,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 <box type="info" seamless>
 
-* Edits the person at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed person list. 
+* Edits the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer**, such as 1, 2, 3, ...
 * At least one of the optional fields must be provided. This means that either `NAME`, `PHONE`, `EMAIL`, `ADDRESS` or `TAG` needs to be provided.
 * When editing tags, the existing tags of the person will be removed i.e., adding of tags is not cumulative.
