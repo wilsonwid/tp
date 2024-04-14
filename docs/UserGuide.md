@@ -6,7 +6,9 @@
 
 # Student Contact Manager User Guide
 
-Student Contact Manager is a student-designed app made for students who are in need of managing their daily activities. It contains many features that help with the management of contacts and events.
+Hi there! Welcome to our user guide for Student Contact Manager, a student-designed application made for busy university students who are in need of managing their daily activities. It contains many features that help with the management of contacts and events, such as adding, deleting, editing, viewing, and finding of contacts, as well as adding, deleting, editing, viewing, and listing ongoing events. The application also helps with importing and exporting of contacts for better portability.
+
+This user guide aims to aid you in your usage of our application, as well as to explore its various features that can help you manage your own daily activities. To navigate the application, you can use the table of contents placed below. There are also links posted throughout the application that lead back to the table of contents to ease navigability.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -26,7 +28,7 @@ Student Contact Manager is a student-designed app made for students who are in n
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command you want to run inside the command box and press `Enter` to execute it. As an example, typing **`help`** and pressing `Enter` will open the help window.<br>
+5. Type the command you want to run inside the command box and press `Enter` to execute it. As an example, typing `help` and pressing `Enter` will open the help window.<br>
    There are some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -57,7 +59,7 @@ Student Contact Manager is a student-designed app made for students who are in n
   * **Note**: Sometimes, commands require the presence of at least one optional item. This will be made clear in the description of each individual command.
 
 * Items with `...` after them can be used multiple times, including zero times.<br>
-  e.g. `[t/TAG] ...` can be used as ` ` (i.e., 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG] ...` can be used as ` ` (i.e., 0 times), `t/friend`, `t/friend t/family`, etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -96,7 +98,7 @@ Examples:
 
 ### Adding a person: `add`
 
-Adds a person to the Student Contact Manager. Useful if you need to store a person's details for recording purposes. There are various details that must be added, including name, phone number, email, and address. Tags are optional.
+Adds a person to the Student Contact Manager. Useful if you need to store a person's details for recording purposes. There are various details that must be added, including name, phone number, email, and address. Tags are optional. The name must be alphanumeric (i.e., no punctuations are allowed).
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ...`
 
@@ -121,7 +123,7 @@ Format: `list`
 
 Edits an existing person in the contact manager. Useful if you need to edit a person's details to be updated, or if you have inputted a wrong field. Existing values will be updated to the input values.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`
 
 <box type="info" seamless>
 
@@ -165,7 +167,7 @@ Examples:
 * `find a/Serangoon` will return `Bernice Yu` and `David Li`.
 
 ### Exporting a subset of data: `find_and_export`
-Exports the users that are filtered by a tag and other optional parameters. Useful if you want to transfer data regarding groups of people from one device to another.
+Exports the users that are filtered by a tag and other optional parameters. Useful if you want to transfer data regarding groups of people from one device to another. Filenames can only be alphanumeric with either `.csv` or `.json` extensions.
 
 Format: `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`
 
@@ -184,12 +186,12 @@ Examples:
 * `find_and_export cs2103t n/john a/olive street 42 f/output1.json`
 * `find_and_export cs2103t n/john a/olive street 42 f/output1.csv`
 
-Tip: `FILENAME` is optional. If not provided, has to be a valid filename with a `.json` or `.csv` extension.
+Tip: `FILENAME` is optional. If provided, it has to be a valid filename with a `.json` or `.csv` extension.
 
 
 ### Importing a datafile: `import`
 
-Imports contact details from a specified CSV or JSON file. Useful if you have many contacts that you wish to add in one go.
+Imports contact details from a specified CSV or JSON file. Useful if you have many contacts that you wish to add in one go. Filenames can only be alphanumeric with either `.csv` or `.json` extensions.
 
 Format: `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`
 
@@ -209,12 +211,12 @@ Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, ...
 * The index must be not greater than the number of persons in the contact manager.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contact manager.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -227,6 +229,18 @@ Format: `clear`
 Adds the schedule to the end of the list. Useful for recording details about events that occur.
 
 Format: `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`
+
+<box type="info" seamless>
+
+* Both `START_DATETIME` and `END_DATETIME` need to be in `YYYY-MM-DD HH:mm` format.
+  * `YYYY` refers to the year (in 4-digit format).
+  * `MM` refers to the month (in 2-digit format). As an example, March would be translated to `03`.
+  * `DD` refers to the date (in 2-digit format).
+  * `HH` refers to the hour (in 24-hour format).
+  * `mm` refers to the minute.
+  * As an example, 4PM on March 5th, 2024 would be entered in as `2024-03-05 16:00`.
+
+</box>
 
 ### Editing an event : `edit_schedule`
 
@@ -333,7 +347,7 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Student Contact Manager home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -346,23 +360,23 @@ Furthermore, certain edits can cause Student Contact Manager to behave in unexpe
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                                                                                      |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Person**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear Persons**           | `clear`                                                                                                                                                               |
-| **Delete Person**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit Person**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                         |
-| **Find Persons**            | `find [n/NAME] [a/ADDRESS] [t/TAG]` <br> e.g., `find n/James Jake`                                                                                                    |
-| **List Persons**            | `list`                                                                                                                                                                |
-| **Help**                    | `help`                                                                                                                                                                |
-| **Find and Export to File** | `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]`                                                                                                               |
-| **Import from File**        | `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...`                                                                                                               |
-| **Add Schedule**            | `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`                                                                                        |
-| **Clear Schedules**         | `clear_schedule`                                                                                                                                                      |
-| **Delete Schedule**         | `delete_schedule INDEX`                                                                                                                                               |
-| **Edit Schedule**           | `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME] [end/END_DATETIME]`                                                                         |
-| **Find Schedules**          | `find_schedule [title/TITLE] [d/DESCRIPTION] [before/BEFORE_DATETIME] [after/AFTER_DATETIME] [during/DURING_DATETIME]`                                                |
-| **List Schedules**          | `list_schedule`                                                                                                                                                       |
-| **List Ongoing Schedule**   | `list_ongoing_schedule`                                                                                                                                               |
-| **Calendar View**           | `calendar_view`                                                                                                                                                       |
+| Action                      | Format, Examples                                                                                                                                                                     |
+|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**              | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`               |
+| **Clear Persons**           | `clear`                                                                                                                                                                              |
+| **Delete Person**           | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                  |
+| **Edit Person**             | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                        |
+| **Find Persons**            | `find [n/NAME] [a/ADDRESS] [t/TAG]` <br> e.g., `find n/James Jake`                                                                                                                   |
+| **List Persons**            | `list`                                                                                                                                                                               |
+| **Help**                    | `help`                                                                                                                                                                               |
+| **Find and Export to File** | `find_and_export TAG [n/NAME] [a/ADDRESS] [f/FILENAME]` <br> e.g., `find_and_export friends`                                                                                         |
+| **Import from File**        | `import f/FILENAME_1 [f/FILENAME_2] [f/FILENAME_3] ...` <br> e.g., `import f/export_file.json`                                                                                       |
+| **Add Schedule**            | `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME` <br> e.g., `add_schedule title/Meeting d/Project Meeting start/2024-03-10 16:00 end/2024-03-10 18:00` |
+| **Clear Schedules**         | `clear_schedule`                                                                                                                                                                     |
+| **Delete Schedule**         | `delete_schedule INDEX` <br> e.g., `delete_schedule 1`                                                                                                                               |
+| **Edit Schedule**           | `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME] [end/END_DATETIME]` <br> e.g., `edit_schedule 1 title/Project meeting`                                     |
+| **Find Schedules**          | `find_schedule [title/TITLE] [d/DESCRIPTION] [before/BEFORE_DATETIME] [after/AFTER_DATETIME] [during/DURING_DATETIME]` <br> e.g., `find_schedule title/Meeting`                      |
+| **List Schedules**          | `list_schedule`                                                                                                                                                                      |
+| **List Ongoing Schedule**   | `list_ongoing_schedule`                                                                                                                                                              |
+| **Calendar View**           | `calendar_view`                                                                                                                                                                      |
 
