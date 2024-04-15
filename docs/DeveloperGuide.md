@@ -140,7 +140,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -151,7 +151,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `scm.addressbook.commons` package.
+Classes used by multiple components are in the `scm.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -318,7 +318,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a/an …​             | I want to …​                                                     | So that I can…​                                                  |
+| Priority | As a/an ...            | I want to ...                                                    | So that I can ...                                                |
 |----------|------------------------|------------------------------------------------------------------|------------------------------------------------------------------|
 | `* * *`  | new user               | receive help messages and instructions for using the application | learn how to use its features effectively                        |
 | `* * *`  | user                   | add a new contact                                                |                                                                  |
@@ -331,19 +331,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                   | import contacts                                                  | easily add multiple contacts at once from another source.        |
 | `* * *`  | user                   | export contacts                                                  | easily integrate with existing data.                             |
 | `*`      | user                   | have my information be secure                                    | so that my contacts are not leaked to others.                    |
-| `* *`    | busy user              | set reminders for specific contacts                              | connect with them better.                                        |
-| `* *`    | efficient user         | use keyboard shortcuts for frequently-used actions               | work more efficiently.                                           |
+| `*`      | busy user              | set reminders for specific contacts                              | connect with them better.                                        |
+| `*`      | efficient user         | use keyboard shortcuts for frequently-used actions               | work more efficiently.                                           |
 | `*`      | user                   | track the history of interactions with specific contacts         | personalize my communication and build stronger relationships.   |
 | `* *`    | user                   | have a user-friendly interface                                   | easily navigate the application.                                 |
 | `* * *`  | user with many friends | know which people are in which friend groups                     | keep track of my friend groups.                                  |
 | `* * *`  | user                   | import/export my contact list in a common format                 | back up my data and export/import it from/to other applications. |
 | `* *`    | user                   | change deadlines                                                 | manage my schedule more effectively.                             |
-| `* *`    | forgetful user         | use commands (possibly with aliases) that are easily remembered  | find the application easier to use.                              |
+| `*`      | forgetful user         | use commands (possibly with aliases) that are easily remembered  | find the application easier to use.                              |
 | `*`      | user                   | find the people I have not interacted with in a long time        | maintain a good relationship with them.                          |
 | `*`      | user                   | look at the people I interact with the most                      | know who I spend the most time with.                             |
 | `*`      | user                   | set data validation rules for certain fields                     | ensure the accuracy of my contact information.                   |
 | `* *`    | user                   | make a clear schedule of what I will do in the future            | plan my schedule well.                                           |
-| `* *`    | user                   | set recurring tasks or reminders associated with contacts        | maintain the connections I have.                                 |
+| `*`      | user                   | set recurring tasks or reminders associated with contacts        | maintain the connections I have.                                 |
 
 ### Use cases
 
@@ -533,7 +533,6 @@ Use case ends.
 
       Use case ends.
 
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -545,7 +544,7 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux (and its various distributions), MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Tag**: A keyword or label assigned to a contact to categorize them based on certain criteria or characteristics. Tags allow users to filter and organize contacts more efficiently.
 * **Command**: A specific instruction given by the user to the application to perform a particular operation, such as searching, exporting, or importing data.
@@ -609,3 +608,15 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Appendix: Planned Enhancements
+
+Team size: 4
+
+1. Make the `calendar_view` window output more precise: The current `calendar_view` command does not support events that extend beyond one day very well: an event is only displayed on the starting day of the event. We plan to make the event to have specific colour bars that are able to extend beyond one day, allowing the user to better visualise multi-day events better.
+2. Allow for symbols inside person names, event titles, and event descriptions: this allows individuals to use their full legal name, as well as allows users to be more flexible with the content of their events titles and descriptions. We plan to allow for symbols such as `/`, `-`, and `@` inside the aforementioned fields to better accommodate users.
+3. Allow for more variety on input formats: the use of `add` and `add_schedule` can be somewhat cumbersome as the user has to type out several fields in order for the application to accept the user input. We plan to allow for more flexibility on the required fields, such as by reducing the requirement to add a person to only a phone number or email. For schedules, we plan to have descriptions, start time, and end time to be optional fields.
+4. Exporting people according to any searchable criteria: Currently, `find_and_export` only supports finding and exporting persons with the same tag. We plan to create another `export` command that would allow the exporting of individuals with any criteria, such as names, contact numbers, addresses, etc.
+5. Overflow when adding schedules: There is an issue with regards to medium- and long-length titles for schedules. We plan to accommodate longer event titles by adding scrolling and text wrapping up to a certain length (e.g., 30 characters for titles, 200 characters for descriptions).
+6. Overflow when adding contacts: there may be UI overflow issues when adding contacts that have long names, phone numbers, or addresses. We plan to fix this by both having text wrapping and limiting the length of such fields to reasonable lengths (e.g., 50 characters for names, 20 characters for phone numbers, and 200 characters for addresses).)
+
