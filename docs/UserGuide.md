@@ -71,6 +71,8 @@ This user guide aims to aid you in your usage of our application, as well as to 
 
 * The application is only able to work properly using ASCII characters (i.e., standard characters found on an English keyboard). The use of other character sets is currently unsupported.
 
+* All commands are case-sensitive. As an example, listing contacts requires the `list` command (with all lowercase characters). Variants such as `LIST` or `List` will not be accepted by the application.
+
 </box>
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
