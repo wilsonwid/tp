@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Student Contact Manager Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This Developer Guide (DG) has been adapted from the AB-3 developer guide found [here](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
