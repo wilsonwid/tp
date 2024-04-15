@@ -14,6 +14,7 @@ Class ResultDisplay
 Class PersonListPanel
 Class ScheduleListPanel
 Class PersonCard
+Class ScheduleListPanel
 Class ScheduleCard
 Class StatusBarFooter
 Class CommandBox
@@ -49,6 +50,7 @@ CommandBox --|> UiPart
 PersonListPanel --|> UiPart
 ScheduleListPanel --|> UiPart
 PersonCard --|> UiPart
+ScheduleListPanel --|> UiPart
 ScheduleCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart

@@ -186,6 +186,15 @@ This feature implements the following operations, other than the methods that it
 
 This command is implemented in the above manner to improve its adherence to OOP principles, as well as to allow it to have similarities to the implementation of `EditCommand`. This would allow it to be more extensible and supportive of further development.
 
+### Find schedule feature
+
+#### Implementation
+
+The find schedule feature is implemented through the use of `FindScheduleCommand`. Given a set of attributes (title, description, beforeDateTime, afterDateTime, duringDateTime) to search for, this command will be able to find all schedules that match the all attributes input by the user. The implementation of the feature is similar to that of `FindCommand`.
+
+This command is implemented in the above manner to improve its adherence to OOP principles, as well as to allow it to have similarities to the implementation of `FindCommand`. This would allow it to be more extensible and supportive of further development.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
