@@ -161,6 +161,30 @@ Classes used by multiple components are in the `scm.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Finding and Exporting feature
+
+#### Implementation
+
+The `FindAndExportCommand` feature is implemented to find users based on specified criteria and export their information. The command allows filtering of users by tags, name, and address, and exports the filtered list to a specified file, in a specified format.
+
+This feature implements the following significant operations:
+
+* `FindAndExportCommand#createPredicateForFiltering()`: This method creates a predicate for filtering users based on the provided tag, name, and address. It returns a predicate that can be used to filter the list of users.
+
+* `FindAndExportCommand#execute()`: This method executes the command. It first updates the filtered person list in the model based on the predicate created by `createPredicateForFiltering()`. Then, it exports the filtered list to the specified file.
+
+* `FindAndExportCommand#exportData()`: This method exports the filtered list of users to the specified file. It determines the file format based on the file extension and calls the appropriate method to export the data in that format.
+
+* `FindAndExportCommand#exportDataAsJson()`: This method exports the filtered list of users to a JSON file. It uses `JsonAddressBookStorage` to save the list of users to the file.
+
+* `FindAndExportCommand#exportDataAsCsv()`: This method exports the filtered list of users to a CSV file. It manually constructs the CSV data and writes it to the file.
+
+The implementation of this feature follows Object-Oriented Programming (OOP) principles closely to prevent any one method from doing too many tasks. The logic of this feature is implemented in similar ways to how the application saves its own main save file.
+
+Below is a sequence diagram on how the `FindAndExportCommand` feature works:
+
+<puml src="diagrams/FindAndExportSequenceDiagram.puml" width="550" />
+
 ### Importing feature
 
 #### Implementation
