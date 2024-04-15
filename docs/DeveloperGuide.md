@@ -67,7 +67,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
@@ -319,7 +319,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts and events
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -457,8 +457,6 @@ Use case ends.
 
     Use case resumes at step 1.
 
-
-
 **Use case: Importing contacts**
 
 **MSS**
@@ -526,6 +524,69 @@ Use case ends.
 
 Use case ends.
 
+**Use case: Editing a schedule**
+
+**MSS**
+
+1. User requests to edit a schedule in a particular index.
+2. The application edits the wanted schedule and changes the fields given by the user.
+3. The application displays a message confirming the edit.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. The current view does not have the index the user requested.
+
+  * 2a1. The application displays an error message and no changes are made.
+  
+    Use case ends.
+  
+* 2b. The user does not give any fields for editing.
+
+  * 2b1. The application displays an error message and no changes are made.
+
+    Use case ends.
+
+* 2c. The user provides invalid values for the fields to be edited.
+
+  * 2c1. The application displays an error message and no changes are made.
+
+    Use case ends.
+
+**Use case: Listing schedules**
+
+**MSS**
+
+1. User requests to view all schedules currently stored.
+2. The application displays all schedules that are currently stored.
+
+Use case ends.
+
+**Extensions**
+
+* 2a. There are no schedules currently stored.
+
+  * The application displays no schedules and informs the user.
+
+    Use case ends.
+
+**Deleting a schedule**
+
+**MSS**
+
+1. User requests to delete a schedule currently stored in the application with a currently available index.
+2. The application deletes the desired schedule.
+3. The application informs the user that the deletion is successful.
+
+**Extensions**
+
+* 2a. The current index is nonexistent in the current view.
+
+  * 2a1. The application displays an error message and does not delete any schedule.
+
+    Use case ends.
+
 **Use case: Viewing schedules in a calendar**
 
 **MSS**
@@ -569,7 +630,7 @@ Use case ends.
 * **Filter Criteria**: The conditions or parameters (such as tag, name, or address) used to search for specific contacts within the application. These criteria help in refining search results to match the user's requirements more closely.
 * **Export**: The process of saving data from the application to a file, which can then be used outside the application. This can be particularly useful for creating backups or for using the contact information in other software or services.
 * **Import**: The process of adding or updating contacts in the application by loading them from an external file, typically in a structured format like JSON. This allows users to quickly populate the application with a large number of contacts.
-* **Contact Manager**: The component or feature of the application that handles the storage, retrieval, organization, and modification of contact information. It is central to the application's functionality regarding managing contact details.
+* **Contact Manager**: The component or feature of the application that handles the storage, retrieval, organization, and modification of contact information. It is central to the application's functionality regarding managing contact details. In this context, this term also refers to the management of schedule information.
 * **Data Directory**: A specific folder or location within the system where the application stores its data files, such as contact exports or imports. The `./data/` directory is an example where JSON files might be found for import operations.
 --------------------------------------------------------------------------------------------------------------------
 
@@ -590,16 +651,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -607,24 +666,20 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ## Appendix: Planned Enhancements
 
@@ -636,4 +691,3 @@ Team size: 4
 4. Exporting people according to any searchable criteria: Currently, `find_and_export` only supports finding and exporting persons with the same tag. We plan to create another `export` command that would allow the exporting of individuals with any criteria, such as names, contact numbers, addresses, etc.
 5. Overflow when adding schedules: There is an issue with regards to medium- and long-length titles for schedules. We plan to accommodate longer event titles by adding scrolling and text wrapping up to a certain length (e.g., 30 characters for titles, 200 characters for descriptions).
 6. Overflow when adding contacts: there may be UI overflow issues when adding contacts that have long names, phone numbers, or addresses. We plan to fix this by both having text wrapping and limiting the length of such fields to reasonable lengths (e.g., 50 characters for names, 20 characters for phone numbers, and 200 characters for addresses).)
-
