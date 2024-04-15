@@ -31,7 +31,7 @@ public class GuiSettings implements Serializable {
     public GuiSettings() {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
-        windowCoordinates = new Point(DEFAULT_X_POS, DEFAULT_Y_POS); // null represent no coordinates
+        windowCoordinates = new Point(DEFAULT_X_POS, DEFAULT_Y_POS);
         theme = DEFAULT_THEME_NAME;
     }
 
