@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# Student Contact Manager Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -13,7 +13,7 @@
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+This Developer Guide (DG) has been adapted from the AB-3 developer guide found [here](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -71,20 +71,20 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts (e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, etc.) All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `Ui` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `Ui` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* keeps a reference to the `Logic` component, because the `Ui` relies on the `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Person` and `Schedule` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -102,10 +102,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -116,14 +116,14 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
 
 The `Model` component,
 
-* stores the contact manager data i.e., all `Person` objects (which are contained in a `UniquePersonList` object), as well as all schedule list data (i.e., all `Schedule` objects).)
+* stores the contact manager data, i.e., all `Person` objects (which are contained in a `UniquePersonList` object), as well as all schedule list data (i.e., all `Schedule` objects, which are contained in a `ScheduleList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the currently 'selected' `Schedule` objects in a manner analogous to the above 'selected' `Person` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -131,7 +131,7 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model for the `AddressBook` part of `Model` is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -140,7 +140,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-W08-3/tp/blob/master/src/main/java/scm/address/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -151,7 +151,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `scm.addressbook.commons` package.
+Classes used by multiple components are in the `scm.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -327,7 +327,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a/an …​             | I want to …​                                                     | So that I can…​                                                  |
+| Priority | As a/an ...            | I want to ...                                                    | So that I can ...                                                |
 |----------|------------------------|------------------------------------------------------------------|------------------------------------------------------------------|
 | `* * *`  | new user               | receive help messages and instructions for using the application | learn how to use its features effectively                        |
 | `* * *`  | user                   | add a new contact                                                |                                                                  |
@@ -340,19 +340,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                   | import contacts                                                  | easily add multiple contacts at once from another source.        |
 | `* * *`  | user                   | export contacts                                                  | easily integrate with existing data.                             |
 | `*`      | user                   | have my information be secure                                    | so that my contacts are not leaked to others.                    |
-| `* *`    | busy user              | set reminders for specific contacts                              | connect with them better.                                        |
-| `* *`    | efficient user         | use keyboard shortcuts for frequently-used actions               | work more efficiently.                                           |
+| `*`      | busy user              | set reminders for specific contacts                              | connect with them better.                                        |
+| `*`      | efficient user         | use keyboard shortcuts for frequently-used actions               | work more efficiently.                                           |
 | `*`      | user                   | track the history of interactions with specific contacts         | personalize my communication and build stronger relationships.   |
 | `* *`    | user                   | have a user-friendly interface                                   | easily navigate the application.                                 |
 | `* * *`  | user with many friends | know which people are in which friend groups                     | keep track of my friend groups.                                  |
 | `* * *`  | user                   | import/export my contact list in a common format                 | back up my data and export/import it from/to other applications. |
 | `* *`    | user                   | change deadlines                                                 | manage my schedule more effectively.                             |
-| `* *`    | forgetful user         | use commands (possibly with aliases) that are easily remembered  | find the application easier to use.                              |
+| `*`      | forgetful user         | use commands (possibly with aliases) that are easily remembered  | find the application easier to use.                              |
 | `*`      | user                   | find the people I have not interacted with in a long time        | maintain a good relationship with them.                          |
 | `*`      | user                   | look at the people I interact with the most                      | know who I spend the most time with.                             |
 | `*`      | user                   | set data validation rules for certain fields                     | ensure the accuracy of my contact information.                   |
 | `* *`    | user                   | make a clear schedule of what I will do in the future            | plan my schedule well.                                           |
-| `* *`    | user                   | set recurring tasks or reminders associated with contacts        | maintain the connections I have.                                 |
+| `*`      | user                   | set recurring tasks or reminders associated with contacts        | maintain the connections I have.                                 |
 
 ### Use cases
 
@@ -542,7 +542,6 @@ Use case ends.
 
       Use case ends.
 
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -554,7 +553,7 @@ Use case ends.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux (and its various distributions), MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Tag**: A keyword or label assigned to a contact to categorize them based on certain criteria or characteristics. Tags allow users to filter and organize contacts more efficiently.
 * **Command**: A specific instruction given by the user to the application to perform a particular operation, such as searching, exporting, or importing data.
@@ -618,3 +617,15 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## Appendix: Planned Enhancements
+
+Team size: 4
+
+1. Make the `calendar_view` window output more precise: The current `calendar_view` command does not support events that extend beyond one day very well: an event is only displayed on the starting day of the event. We plan to make the event to have specific colour bars that are able to extend beyond one day, allowing the user to better visualise multi-day events better.
+2. Allow for symbols inside person names, event titles, and event descriptions: this allows individuals to use their full legal name, as well as allows users to be more flexible with the content of their events titles and descriptions. We plan to allow for symbols such as `/`, `-`, and `@` inside the aforementioned fields to better accommodate users.
+3. Allow for more variety on input formats: the use of `add` and `add_schedule` can be somewhat cumbersome as the user has to type out several fields in order for the application to accept the user input. We plan to allow for more flexibility on the required fields, such as by reducing the requirement to add a person to only a phone number or email. For schedules, we plan to have descriptions, start time, and end time to be optional fields.
+4. Exporting people according to any searchable criteria: Currently, `find_and_export` only supports finding and exporting persons with the same tag. We plan to create another `export` command that would allow the exporting of individuals with any criteria, such as names, contact numbers, addresses, etc.
+5. Overflow when adding schedules: There is an issue with regards to medium- and long-length titles for schedules. We plan to accommodate longer event titles by adding scrolling and text wrapping up to a certain length (e.g., 30 characters for titles, 200 characters for descriptions).
+6. Overflow when adding contacts: there may be UI overflow issues when adding contacts that have long names, phone numbers, or addresses. We plan to fix this by both having text wrapping and limiting the length of such fields to reasonable lengths (e.g., 50 characters for names, 20 characters for phone numbers, and 200 characters for addresses).)
+
