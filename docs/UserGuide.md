@@ -138,9 +138,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] ...`
 
 <box type="info" seamless>
 
-* Edits the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer**, such as 1, 2, 3, ...
+* Edits the person at the specified `INDEX`, where`INDEX` refers to the index number shown in the displayed person list.
+* `INDEX` **must be a positive integer**, such as 1, 2, 3, ..., **found** as an index for the displayed person list.
 * At least one of the optional fields must be provided. This means that either `NAME`, `PHONE`, `EMAIL`, `ADDRESS` or `TAG` needs to be provided.
 * When editing tags, the existing tags of the person will be removed i.e., adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
@@ -154,15 +153,15 @@ Examples:
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
-### Locating persons by name: `find`
+### Finding persons by name, address, or tag: `find`
 
-Finds persons whose names contain any of the given keywords. Useful if you need to find a certain contact's details without going through the entire list of contacts.
+Finds persons whose names, addresses, or tags contain any of the given keywords. Useful if you need to find a certain contact's details without going through the entire list of contacts.
 
 Format: `find [n/NAME] [a/ADDRESS] [t/TAG]`
 
 <box type="info" seamless>
 
-* `find` needs to have at least one of `n/NAME`, `a/ADDRESS`, or `t/TAG` to run.
+* `find` needs to have **at least one** of `n/NAME`, `a/ADDRESS`, or `t/TAG` to run.
 * The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -232,8 +231,8 @@ Deletes the specified person from the contact manager. Useful if you wish to rem
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
+* The index refers to the index number shown in the **displayed person list**.
+* The index **must be a positive integer** (e.g., 1, 2, 3, ...)
 * The index must be not greater than the number of persons in the contact manager.
 
 Examples:
@@ -258,32 +257,42 @@ Format: `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DAT
 
 <box type="info" seamless>
 
+* Both `TITLE` and `DESCRIPTION` can contain alphanumeric characters, spaces, and punctuations.    
 * Both `START_DATETIME` and `END_DATETIME` need to be in `YYYY-MM-DD HH:mm` format.
   * `YYYY` refers to the year (in 4-digit format).
   * `MM` refers to the month (in 2-digit format). As an example, March would be translated to `03`.
   * `DD` refers to the date (in 2-digit format).
-  * `HH` refers to the hour (in 24-hour format).
-  * `mm` refers to the minute.
+  * `HH` refers to the hour (in 24-hour and 2-digit format).
+  * `mm` refers to the minute (in 2-digit format).
   * As an example, 4PM on March 5th, 2024 would be entered in as `2024-03-05 16:00`.
 
 </box>
+
+Examples:
+* `add_schedule title/Meeting d/CS2103T start/2024-04-13 21:00 end/2024-04-13 22:00`
+* `add_schedule title/Internship Interview @Google d/Google Interview start/2024-04-13 14:00 end/2024-04-13 15:00`
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
 ### Editing an event : `edit_schedule`
 
-Edits the schedule at the specified index. Useful if you wish to edit a certain schedule's description or timings.
+Edits an existing schedule in the schedule list. Useful if you wish to edit a certain schedule's description or timings.
 
 Format: `edit_schedule INDEX [title/TITLE] [d/DESCRIPTION] [start/START_DATETIME] [end/END_DATETIME]`
 
 <box type="info" seamless>
 
-* `INDEX` has to be a positive number that is found as an index for the schedule.
-* Either one of `TITLE`, `DESCRIPTION`, `START_DATETIME` or `END_DATETIME` has to be provided for the command to run.
-* `TITLE` and `DESCRIPTION` must be alphanumeric
-* `START_DATETIME` and `END_DATETIME` are in `YYYY-MM-DD HH:mm` format and must be valid datetimes.
+* Edits the schedule at the specified `INDEX`, where `INDEX` refers to the index number shown in the **displayed** schedule list.
+* `INDEX` has to be a positive integer that is **found** as an index for the schedule.
+* **At least one** of `TITLE`, `DESCRIPTION`, `START_DATETIME` or `END_DATETIME` has to be provided for the command to run.
+* `TITLE` and `DESCRIPTION` must be alphanumeric.
+* `START_DATETIME` and `END_DATETIME` must be in `YYYY-MM-DD HH:mm` format and must be valid datetimes.
 
 </box>
+
+Examples:
+* `edit_schedule 1 title/Project meeting` Edits the title of the 1st schedule to be `Project meeting`.
+* `edit_schedule 2 d/Project meeting start/2024-04-13 21:00 end/2024-04-13 22:00` Edits the description, start datetime, and end datetime of the 2nd schedule.
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
@@ -305,7 +314,7 @@ Format: `list_ongoing_schedule`
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
-### Finding events : `find_schedule`
+### Finding events by certain attributes: `find_schedule`
 
 Finds all events that match the given attributes. Useful if you wish to find events that match certain criteria.
 
@@ -315,21 +324,25 @@ Format: `find_schedule [title/TITLE] [d/DESCRIPTION] [before/BEFORE_DATETIME] [a
 
 * `find_schedule` needs to have at least one of `TITLE`, `DESCRIPTION`, `BEFORE_DATETIME`, `AFTER_DATETIME` or `DURING_DATETIME` to run.
 * For `TITLE` and `DESCRIPTION`:
-    * The search is case-insensitive. e.g., `Meeting` will match `meeting`.
-    * The order of the keywords does not matter. e.g. `Meeting Project` will match `Project Meeting`.
-    * Only full words will be matched e.g. `Meet` will not match `Meeting`
-    * Schedules matching at least one keyword will be matched for that attribute (i.e., it is an `OR` search).
+    * The search is **case-insensitive**. e.g., `Meeting` will match `meeting`.
+    * The **order** of the keywords **does not matter**. e.g. `Meeting Project` will match `Project Meeting`.
+    * Only **full words** will be matched e.g. `Meet` will not match `Meeting`
+    * Schedules matching **at least one keyword** will be matched for that attribute (i.e., it is an `OR` search).
         * e.g. `Meeting Project` will be matched by `Zoom Meeting`, `Coding Project`.
 * For `BEFORE_DATETIME`, `AFTER_DATETIME` and `DURING_DATETIME`:
     * The datetime must be a valid datetime in `YYYY-MM-DD HH:mm` format.
     * Schedules matching all given datetime attributes will be returned (i.e., it is an `AND` search).
         * e.g. `before/2021-10-10 12:00 after/2021-10-10 10:00` will return schedules that are between `10:00` and `12:00` on `2021-10-10`.
-    * The `BEFORE_DATETIME` attribute is matched if the schedule ends on or before the given datetime.
-    * The `AFTER_DATETIME` attribute is matched if the schedule starts on or after the given datetime.
-    * The `DURING_DATETIME` attribute is matched if the given datetime is between the start datetime and end datetime of the schedule, inclusive.
+    * The `BEFORE_DATETIME` attribute is matched if the schedule **ends on or before** the given datetime.
+    * The `AFTER_DATETIME` attribute is matched if the schedule **starts on or after** the given datetime.
+    * The `DURING_DATETIME` attribute is matched if the given datetime is **between** the start datetime and end datetime of the schedule, **inclusive**.
 * If multiple attributes are given, then all given attributes must be matched for the event to be returned.
 
 </box>
+
+Examples:
+* `find_schedule title/Meeting` returns all schedules with the title `Meeting`.
+* `find_schedule before/2024-04-13 21:00 after/2024-04-13 20:00` returns all schedules that are between `20:00` and `21:00` on `2024-04-13`.
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
@@ -342,6 +355,8 @@ Format: `delete_schedule INDEX`
 <box type="info" seamless>
 
 * `INDEX` must be a positive integer and not greater than the number of schedules in the displayed schedule list.
+
+</box>
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
@@ -358,8 +373,6 @@ Click [here](#student-contact-manager-user-guide) to go back to the top of this 
 Shows your schedule for the month in a pop-up window. Useful to see an overall view of schedules in the month.
 
 Format: `calendar_view`
-
-</box>
 
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
 
