@@ -17,7 +17,6 @@ public class GuiSettings implements Serializable {
     private static final double DEFAULT_WIDTH = 740;
 
     private static final int DEFAULT_X_POS = 600;
-
     private static final int DEFAULT_Y_POS = 740;
 
     private static final String DEFAULT_THEME_NAME = ThemeCollection.getDarkTheme().getThemeName();
