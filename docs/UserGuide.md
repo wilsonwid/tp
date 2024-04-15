@@ -431,4 +431,7 @@ Click [here](#student-contact-manager-user-guide) to go back to the top of this 
 | **List Schedules**          | `list_schedule`                                                                                                                                                                      |
 | **List Ongoing Schedule**   | `list_ongoing_schedule`                                                                                                                                                              |
 | **Calendar View**           | `calendar_view`                                                                                                                                                                      |
+
+
+
 Click [here](#student-contact-manager-user-guide) to go back to the top of this user guide.
