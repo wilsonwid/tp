@@ -15,7 +15,7 @@
 
 This Developer Guide (DG) has been adapted from the AB-3 developer guide found [here](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
-GitHub Copilot was used throughout the project to assist write Javadocs, Test Cases and implement some methods (by Tahsin, Sarji).
+GitHub Copilot (autocomplete feature) was used throughout the project to assist write Javadocs, Test Cases and implement some methods (by Tahsin, Sarji).
 
 --------------------------------------------------------------------------------------------------------------------
 
