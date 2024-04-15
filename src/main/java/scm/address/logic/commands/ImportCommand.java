@@ -182,7 +182,7 @@ public class ImportCommand extends Command {
      * @return A List of JsonAdaptedPerson present inside the {@code file}.
      * @throws IOException If the {@code file} is unable to be loaded.
      */
-    private List<JsonAdaptedPerson> getPersonsFromCsv(String filePath) throws IOException, DataLoadingException {
+    private List<JsonAdaptedPerson> getPersonsFromCsv(String filePath) throws IOException {
         List<JsonAdaptedPerson> persons = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         String line = "";
