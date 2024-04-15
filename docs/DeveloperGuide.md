@@ -202,6 +202,12 @@ The find schedule feature is implemented through the use of `FindScheduleCommand
 
 This command is implemented in the above manner to improve its adherence to OOP principles, as well as to allow it to have similarities to the implementation of `FindCommand`. This would allow it to be more extensible and supportive of further development.
 
+### Change theme feature
+
+The change theme feature is implemented through the use of `ThemeCommand`. Given a valid theme (dark or light), the command will be able to change the `Theme` to the given theme name. The implementation of the feature is similar to that of `HelpCommand`, in order to be consistent with the codebase of the project. 
+
+When this command is `executed`, it changes the GUI Setting by calling the `Model#setGuiSettings()` method (which changes the gui theme) and instantiates a `CommandResult` with `changeTheme` parameter being `True`. The `MainWindow`, being responsible for executing all commands, executes this command and checks whether the `CommandResult#isChangeTheme()` is `True`. When the condition is met, it executes the `MainWindow#handleChangeTheme()` to change `CSS` of the Views to effectively change the theme.
+
 
 ### \[Proposed\] Undo/redo feature
 

@@ -182,7 +182,7 @@ public class ImportCommand extends Command {
      * @return A List of JsonAdaptedPerson present inside the {@code file}.
      * @throws IOException If the {@code file} is unable to be loaded.
      */
-    private List<JsonAdaptedPerson> getPersonsFromCsv(String filePath) throws IOException {
+    private List<JsonAdaptedPerson> getPersonsFromCsv(String filePath) throws IOException, DataLoadingException {
         List<JsonAdaptedPerson> persons = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         String line = "";
@@ -190,6 +190,11 @@ public class ImportCommand extends Command {
         String headers = br.readLine();
         while ((line = br.readLine()) != null) {
             String[] info = line.split(splitBy);
+
+            if (info.length < 4) {
+                throw new IOException("Incorrect Data Format!");
+            }
+
             String name = info[0];
             String phone = info[1];
             String email = info[2];

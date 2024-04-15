@@ -49,4 +49,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/tahsinhasem.md)]
 
 * Role: Developer
-* Responsibilities: Search by Tags, Exporting Data
+* Responsibilities: Search by Tags, Exporting Data, Importing Data, Changing Theme
