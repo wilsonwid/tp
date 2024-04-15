@@ -103,7 +103,7 @@ Click [here](#student-contact-manager-user-guide) to go back to the top of this 
 
 ### Adding a person: `add`
 
-Adds a person to the Student Contact Manager. Useful if you need to store a person's details for recording purposes. There are various details that must be added, including name, phone number, email, and address. Tags are optional. The name must be alphanumeric (i.e., no punctuations are allowed).
+Adds a person to the Student Contact Manager. Useful if you need to store a person's details for recording purposes. There are various details that must be added, including name, phone number, email, and address. Tags are optional. The name must be alphanumeric (i.e., no punctuations are allowed) and can contain spaces after the first character.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ...`
 
@@ -250,7 +250,7 @@ Click [here](#student-contact-manager-user-guide) to go back to the top of this 
 
 ### Adding an event : `add_schedule`
 
-Adds the schedule to the end of the list. Useful for recording details about events that occur.
+Adds the schedule to the end of the list. Useful for recording details about events that occur. The schedule title and description must be alphanumeric and can contain spaces after the first character.
 
 Format: `add_schedule title/TITLE d/DESCRIPTION start/START_DATETIME end/END_DATETIME`
 
