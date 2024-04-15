@@ -15,6 +15,8 @@
 
 This Developer Guide (DG) has been adapted from the AB-3 developer guide found [here](https://se-education.org/addressbook-level3/DeveloperGuide.html).
 
+GitHub Copilot (autocomplete feature) was used throughout the project to assist write Javadocs, Test Cases and implement some methods (by Tahsin, Sarji).
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -163,12 +165,13 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The import feature is implemented through the use of `JsonAddressBookStorage`. Given that the user of the application has a JSON file containing contacts in a format similar to the save file of the application, they will be able to import such contacts by providing the filename of the JSON file. The implementation of the feature is somewhat similar to how the application natively reads its own contact manager data, and as such uses similar functions.
+The import feature is implemented through the use of `JsonAddressBookStorage` . Given that the user of the application has a JSON file (containing contacts in a format similar to the save file of the application) or a CSV file (containing contacts in a format similar to how data is exported as a CSV file), they will be able to import such contacts by providing the filename of the JSON or CSV file. The implementation of the feature is somewhat similar to how the application natively reads its own contact manager data, and as such uses similar functions.
 
-This feature implements the following operations, other than the ones it is overriding:
+This feature implements the following significant operations, other than the ones it is overriding:
 
 * `ImportCommand#retrievePersonsFromFile()`: Retrieves the `Person`s that are read from a given file and inserts them into a list of `JsonAdaptedPerson`.
 * `ImportCommand#readPersons()`: Reads the `Person`s currently inside the file to be read. This command succeeds only if the application is able to read the file and if the file is in the correct JSON format.
+* `ImportCommand#readPersonsFromCSV()`:  Reads the `Person`s currently inside the file to be read. This command succeeds only if the application is able to read the file and if the file is in the correct CSV format.
 
 This command is implemented in the above manner in order to follow OOP principles more closely, more specifically to prevent any one method from doing too many tasks. Moreover, the reuse of `JsonAddressBookStorage` and other related classes is done in order to aid future development of the feature. Following the same spirit, the logic of this feature is implemented in similar ways to how the application reads its own main save file.
 
