@@ -174,17 +174,25 @@ This command is implemented in the above manner in order to follow OOP principle
 
 There is initially an alternative considered to refit the entire logic of the model and saving mechanism to fit this import feature. However, the current implementation is chosen over this due to the possibility of rewriting many pieces of unrelated code and of unknowingly breaking other features in the process. Another alternative that was not followed was to only use Jackson-based features to implement the import feature, in order to have more control over the code itself. However, as this feature should integrate with the exporting feature of the application, it became apparent that code reuse should be prioritised.
 
+Below is a sequence diagram on how the import feature works:
+
+<puml src="diagrams/ImportSequenceDiagram.puml" width="550" />
+
 ### Edit schedule feature
 
 #### Implementation
 
-The edit schedule feature is implemented through the use of `EditScheduleDescriptor`. Given a valid index to edit, this command will be able to edit the details of the `Schedule` in such index. The implementation of the feature is similar to that of `EditCommand`.
+The edit schedule feature is implemented through the use of `EditScheduleDescriptor` and `EditScheduleCommand`. Given a valid index to edit, this command will be able to edit the details of the `Schedule` in such index. The implementation of the feature is similar to that of `EditCommand`.
 
 This feature implements the following operations, other than the methods that it is already overriding:
 
 * `EditScheduleCommand#createEditedSchedule()`: Creates a new `Schedule` given an old schedule to edit as well as an `EditScheduleDescriptor`.
 
 This command is implemented in the above manner to improve its adherence to OOP principles, as well as to allow it to have similarities to the implementation of `EditCommand`. This would allow it to be more extensible and supportive of further development.
+
+### Delete schedule feature
+
+The delete schedule feature is implemented through the use of `DeleteScheduleCommand`. Given a valid index found in the current list of filtered schedules, the command will be able to delete the `Schedule` in such index. The implementation of the feature is similar to that of `DeleteCommand`, in order to improve maintainability.
 
 ### Find schedule feature
 
